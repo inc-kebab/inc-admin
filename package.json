@@ -6,19 +6,34 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "format": "prettier --write src",
+    "lint": "eslint --fix src/**/*.{tsx,ts,jsx,js} --no-error-on-unmatched-pattern && stylelint --fix src/{,*/}*.{scss,css} --allow-empty-input",
+    "prepare": "husky"
   },
   "dependencies": {
+    "@hookform/resolvers": "^3.4.0",
+    "clsx": "^2.1.1",
+    "next": "14.2.3",
+    "nprogress": "^0.2.0",
     "react": "^18",
     "react-dom": "^18",
-    "next": "14.2.3"
+    "react-hook-form": "^7.51.4",
+    "react-toastify": "^10.0.5",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
-    "typescript": "^5",
+    "@it-incubator/eslint-config": "^1.0.2",
+    "@it-incubator/prettier-config": "^0.1.2",
+    "@it-incubator/stylelint-config": "^2.0.0",
     "@types/node": "^20",
+    "@types/nprogress": "^0.2.3",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "eslint": "^8",
-    "eslint-config-next": "14.2.3"
+    "eslint-config-next": "14.2.3",
+    "husky": "^9.0.11",
+    "sass": "^1.77.1",
+    "stylelint": "^16.5.0",
+    "typescript": "^5"
   }
 }
