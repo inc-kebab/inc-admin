@@ -3,16 +3,21 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "codegen:w": "graphql-codegen --watch",
     "dev": "next dev",
     "build": "next build",
+    "build:prod": "npm run build",
     "start": "next start",
     "format": "prettier --write src",
     "lint": "eslint --fix src/**/*.{tsx,ts,jsx,js} --no-error-on-unmatched-pattern && stylelint --fix src/{,*/}*.{scss,css} --allow-empty-input",
     "prepare": "husky"
   },
   "dependencies": {
+    "@apollo/client": "^3.10.4",
     "@hookform/resolvers": "^3.4.0",
+    "@tazalov/kebab-ui-kit": "^2.0.0",
     "clsx": "^2.1.1",
+    "graphql": "^16.8.1",
     "next": "14.2.3",
     "nprogress": "^0.2.0",
     "react": "^18",
@@ -22,9 +27,16 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "^5.0.2",
+    "@graphql-codegen/client-preset": "^4.2.6",
+    "@graphql-codegen/near-operation-file-preset": "^3.0.0",
+    "@graphql-codegen/typescript": "^4.0.7",
+    "@graphql-codegen/typescript-operations": "^4.2.1",
+    "@graphql-codegen/typescript-react-apollo": "^4.3.0",
     "@it-incubator/eslint-config": "^1.0.2",
     "@it-incubator/prettier-config": "^0.1.2",
     "@it-incubator/stylelint-config": "^2.0.0",
+    "@parcel/watcher": "^2.4.1",
     "@types/node": "^20",
     "@types/nprogress": "^0.2.3",
     "@types/react": "^18",
@@ -34,6 +46,7 @@
     "husky": "^9.0.11",
     "sass": "^1.77.1",
     "stylelint": "^16.5.0",
-    "typescript": "^5"
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.5"
   }
 }
