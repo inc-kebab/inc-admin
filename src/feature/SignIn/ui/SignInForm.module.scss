@@ -1,0 +1,20 @@
+.form {
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+  max-width: 378px;
+  padding: 23px 24px 36px;
+}
+
+.title {
+  margin-bottom: 37px;
+}
+
+.input {
+  margin-bottom: 24px;
+}
+
+.button {
+  margin-top: 12px;
+}
