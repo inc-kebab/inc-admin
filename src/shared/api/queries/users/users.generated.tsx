@@ -1,7 +1,6 @@
+import * as Types from '@/shared/types/apollo'
 import { gql } from '@apollo/client'
 import * as Apollo from '@apollo/client'
-
-import * as Types from '../../types/apollo'
 const defaultOptions = {} as const
 
 export type GetUserQueryVariables = Types.Exact<{
@@ -13,6 +12,7 @@ export type GetUserQuery = {
   getUser: {
     __typename?: 'ProfileModel'
     aboutMe?: null | string
+    city?: null | string
     firstname?: null | string
     lastname?: null | string
   }
@@ -24,6 +24,7 @@ export const GetUserDocument = gql`
       firstname
       lastname
       aboutMe
+      city
     }
   }
 `

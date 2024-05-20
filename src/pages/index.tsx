@@ -1,4 +1,4 @@
-import { useGetUserQuery } from '@/shared/api/queries/users.generated'
+import { useGetUserQuery } from '@/shared/api/queries/users/users.generated'
 import { Inter } from 'next/font/google'
 import Head from 'next/head'
 
