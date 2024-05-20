@@ -15,7 +15,7 @@
   "dependencies": {
     "@apollo/client": "^3.10.4",
     "@hookform/resolvers": "^3.4.0",
-    "@tazalov/kebab-ui-kit": "^2.0.0",
+    "@tazalov/kebab-ui-kit": "^2.1.2",
     "clsx": "^2.1.1",
     "graphql": "^16.8.1",
     "next": "14.2.3",

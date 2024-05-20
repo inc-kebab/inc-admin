@@ -1,0 +1,16 @@
+.wrapper {
+  display: flex;
+  width: 100%;
+  max-width: 1280px;
+  margin: var(--header-height) auto 0;
+}
+
+.main {
+  flex-grow: 1;
+  min-width: 0;
+  padding: 36px var(--container-padding) 36px 24px;
+}
+
+.sidebar {
+  height: calc(100dvh - var(--header-height));
+}
