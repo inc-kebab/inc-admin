@@ -1,6 +1,7 @@
-import * as Types from '@/shared/types/apollo'
 import { gql } from '@apollo/client'
 import * as Apollo from '@apollo/client'
+
+import * as Types from '../../../types/apollo'
 const defaultOptions = {} as const
 
 export type GetUserQueryVariables = Types.Exact<{

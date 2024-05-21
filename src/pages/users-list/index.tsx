@@ -1,10 +1,13 @@
 import { useMemo, useState } from 'react'
 
 import { useGetUsersQuery } from '@/shared/api/queries/get-users/get-useres.generated'
-import { BanIcon, MenuIcon, PersonRemoveIcon } from '@/shared/assets'
+import { MenuIcon } from '@/shared/assets'
 import { useTranslation } from '@/shared/hooks/useTranslation'
-import { DeleteUserDialog } from '@/widgets/get-users/ui/DeleteUserDialog'
-import { Button, Dropdown, Pagination, Select, Table, TextField, clsx } from '@tazalov/kebab-ui-kit'
+import { BanDialog } from '@/widgets/get-users/ui/BanDialog/BanDialog'
+import { DeleteUserDialog } from '@/widgets/get-users/ui/DeleteUserDialog/DeleteUserDialog'
+import { MoreInformationDialog } from '@/widgets/get-users/ui/MoreInformationDialog.tsx/MoreInformationDialog'
+import { Button, Dropdown, Pagination, Select, Table, TextField } from '@tazalov/kebab-ui-kit'
+import clsx from 'clsx'
 
 import s from './UsersList.module.scss'
 
@@ -37,7 +40,10 @@ const UsersList = () => {
     []
   )
 
-  const { data } = useGetUsersQuery({ variables: { pageNumber: 3, pageSize } })
+  const { data } = useGetUsersQuery({
+    fetchPolicy: 'no-cache',
+    variables: { pageNumber, pageSize },
+  })
 
   return (
     <div className={s.container}>
@@ -75,29 +81,21 @@ const UsersList = () => {
                   <Dropdown.Menu
                     align="end"
                     className={s.viewport}
-                    modal
-                    portal
+                    modal={false}
                     sideOffset={2}
                     trigger={
                       <Button
                         className={s.dropdownTrigger}
-                        startIcon={<MenuIcon className={s.menuIcon} />}
+                        startIcon={<MenuIcon className={clsx(s.menuIcon)} />}
                         variant="text"
                       />
                     }
                   >
+                    <DeleteUserDialog />
+                    <BanDialog />
+                    <MoreInformationDialog />
                     <Dropdown.Item>
-                      <DeleteUserDialog />
-                    </Dropdown.Item>
-                    <Dropdown.Item
-                      startIcon={<BanIcon className={clsx(s.menuIcon, s.dropdownItem)} />}
-                    >
-                      {t.banUser}
-                    </Dropdown.Item>
-                    <Dropdown.Item
-                      startIcon={<MenuIcon className={clsx(s.menuIcon, s.dropdownItem)} />}
-                    >
-                      {t.moreInformation}
+                      <MoreInformationDialog />
                     </Dropdown.Item>
                   </Dropdown.Menu>
                 </Table.Cell>
@@ -105,6 +103,7 @@ const UsersList = () => {
             ))}
         </Table.Body>
       </Table.Root>
+
       <Pagination
         className={s.pagination}
         currentPage={pageNumber}
@@ -115,8 +114,6 @@ const UsersList = () => {
         totalCount={data?.getUsers?.pagination?.totalCount ?? 0}
         value={String(pageSize)}
       />
-
-      <DeleteUserDialog />
     </div>
   )
 }
