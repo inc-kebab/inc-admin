@@ -40,80 +40,81 @@ const UsersList = () => {
     []
   )
 
-  const { data } = useGetUsersQuery({
+  const { data, loading } = useGetUsersQuery({
     fetchPolicy: 'no-cache',
     variables: { pageNumber, pageSize },
   })
 
   return (
     <div className={s.container}>
-      <div className={s.wrapper}>
-        <TextField className={s.textField} placeholder={t.search} type="search" />
-        <Select className={s.select} defaultValue="Not selected" options={defaultOptions} />
-      </div>
-      <Table.Root className={s.table}>
-        <Table.Head className={s.tableHead}>
-          <Table.Row>
-            <Table.TitleCell>{t.userID}</Table.TitleCell>
-            <Table.TitleCell>{t.username}</Table.TitleCell>
-            <Table.TitleCell>{t.profileLink}</Table.TitleCell>
-            <Table.TitleCell>{t.date}</Table.TitleCell>
-            <Table.TitleCell></Table.TitleCell>
-          </Table.Row>
-        </Table.Head>
-        <Table.Body>
-          {data?.getUsers?.users &&
-            data?.getUsers?.users.map(user => (
-              <Table.Row className={s.row} key={user.id}>
-                <Table.Cell className={s.cell} data-label="sssdf">
-                  {user.id}
-                </Table.Cell>
-                <Table.Cell className={s.cell} data-label="sddf">
-                  {user.username}
-                </Table.Cell>
-                <Table.Cell className={s.cell} data-label="sdddf">
-                  {user.profile?.firstname ?? 'profile'}
-                </Table.Cell>
-                <Table.Cell className={s.cell} data-label="t.pages.myPayments.paymentType">
-                  {user.createdAt}
-                </Table.Cell>
-                <Table.Cell className={s.cell} data-label="t.pages.myPayments.paymentType">
-                  <Dropdown.Menu
-                    align="end"
-                    className={s.viewport}
-                    modal={false}
-                    sideOffset={2}
-                    trigger={
-                      <Button
-                        className={s.dropdownTrigger}
-                        startIcon={<MenuIcon className={clsx(s.menuIcon)} />}
-                        variant="text"
-                      />
-                    }
-                  >
-                    <DeleteUserDialog />
-                    <BanDialog />
-                    <MoreInformationDialog />
-                    <Dropdown.Item>
-                      <MoreInformationDialog />
-                    </Dropdown.Item>
-                  </Dropdown.Menu>
-                </Table.Cell>
-              </Table.Row>
-            ))}
-        </Table.Body>
-      </Table.Root>
+      {loading && <div className={s.loading}>Loading...</div>}
+      {data?.getUsers?.users && (
+        <>
+          <div className={s.wrapper}>
+            <TextField className={s.textField} placeholder={t.search} type="search" />
+            <Select className={s.select} defaultValue="Not selected" options={defaultOptions} />
+          </div>
 
-      <Pagination
-        className={s.pagination}
-        currentPage={pageNumber}
-        onChangePage={handleChangePageNumber}
-        onValueChange={handleChangePageSize}
-        options={paginationOptions}
-        pageSize={pageSize}
-        totalCount={data?.getUsers?.pagination?.totalCount ?? 0}
-        value={String(pageSize)}
-      />
+          <Table.Root className={s.table}>
+            <Table.Head className={s.tableHead}>
+              <Table.Row>
+                <Table.TitleCell>{t.userID}</Table.TitleCell>
+                <Table.TitleCell>{t.username}</Table.TitleCell>
+                <Table.TitleCell>{t.profileLink}</Table.TitleCell>
+                <Table.TitleCell>{t.date}</Table.TitleCell>
+                <Table.TitleCell></Table.TitleCell>
+              </Table.Row>
+            </Table.Head>
+            <Table.Body className={s.body}>
+              {data?.getUsers?.users.map(user => (
+                <Table.Row className={s.row} key={user.id}>
+                  <Table.Cell className={s.cell} data-label={t.userID}>
+                    {user.id}
+                  </Table.Cell>
+                  <Table.Cell className={s.cell} data-label={t.username}>
+                    {user.username}
+                  </Table.Cell>
+                  <Table.Cell className={s.cell} data-label={t.profileLink}>
+                    {user.profile?.firstname ?? 'profile'}
+                  </Table.Cell>
+                  <Table.Cell className={s.cell} data-label={t.date}>
+                    {user.createdAt}
+                  </Table.Cell>
+                  <Table.Cell className={s.cell}>
+                    <Dropdown.Menu
+                      align="end"
+                      className={s.viewport}
+                      modal={false}
+                      sideOffset={2}
+                      trigger={
+                        <Button
+                          className={s.dropdownTrigger}
+                          startIcon={<MenuIcon className={clsx(s.menuIcon)} />}
+                          variant="text"
+                        />
+                      }
+                    >
+                      <DeleteUserDialog />
+                      <BanDialog />
+                      <MoreInformationDialog />
+                    </Dropdown.Menu>
+                  </Table.Cell>
+                </Table.Row>
+              ))}
+            </Table.Body>
+          </Table.Root>
+          <Pagination
+            className={s.pagination}
+            currentPage={pageNumber}
+            onChangePage={handleChangePageNumber}
+            onValueChange={handleChangePageSize}
+            options={paginationOptions}
+            pageSize={pageSize}
+            totalCount={data?.getUsers?.pagination?.totalCount ?? 0}
+            value={String(pageSize)}
+          />
+        </>
+      )}
     </div>
   )
 }
