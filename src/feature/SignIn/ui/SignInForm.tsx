@@ -1,16 +1,14 @@
-import { Ref, forwardRef } from 'react'
+import { Ref, forwardRef, useImperativeHandle } from 'react'
 import { useForm } from 'react-hook-form'
 
-import { UseFormRef } from '@/feature/SignIn/model/types/form'
-import {
-  SignInFormValues,
-  signInValidationSchema,
-} from '@/feature/SignIn/model/utils/ValidationSchema'
+import { UseFormRef } from '@/shared/types/form'
 import { ControlledTextField } from '@/shared/ui_controlled/ControlledTextField'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Button, Card, Typography } from '@tazalov/kebab-ui-kit'
 
 import s from './SignInForm.module.scss'
+
+import { SignInFormValues, signInValidationSchema } from '../model/utils/ValidationSchema'
 
 type Props = {
   disabled?: boolean
@@ -23,6 +21,8 @@ export const SignInForm = forwardRef(
       control,
       formState: { errors, isValid },
       handleSubmit,
+      reset,
+      setError,
     } = useForm<SignInFormValues>({
       defaultValues: {
         login: '',
@@ -31,6 +31,8 @@ export const SignInForm = forwardRef(
       mode: 'onTouched',
       resolver: zodResolver(signInValidationSchema),
     })
+
+    useImperativeHandle(ref, () => ({ reset, setError }))
 
     return (
       <Card asComponent="form" className={s.form} onSubmit={handleSubmit(onSubmit)}>
@@ -60,7 +62,7 @@ export const SignInForm = forwardRef(
           rules={{ required: true }}
           type="password"
         />
-        <Button className={s.button} disabled={disabled} fullWidth>
+        <Button className={s.button} disabled={disabled || !isValid} fullWidth>
           Sign In
         </Button>
       </Card>

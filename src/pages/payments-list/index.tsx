@@ -1,8 +1,8 @@
-import WithAuth from '@/feature/SignIn/hoc/WithAuth'
+import WithAuth from '@/shared/helpers/hoc/WithAuth'
 import { Page } from '@/shared/types/layout'
 import { MainLayout } from '@/widgets/layout'
 
-export const PaymentsListPage: Page = () => {
+const PaymentsListPage: Page = () => {
   return <div>PaymentsListPage</div>
 }
 

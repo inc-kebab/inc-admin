@@ -1,12 +1,14 @@
 import { useContext, useEffect } from 'react'
 
-import { AuthContext } from '@/shared/providers/Auth'
+import { AuthContext } from '@/shared/providers/auth'
 import { Page } from '@/shared/types/layout'
+import { AppProps } from 'next/app'
 import { useRouter } from 'next/router'
 
 const WithAuth = (WrappedComponent: Page) => {
-  function Component(props: any) {
+  function Component({ pageProps }: AppProps) {
     const router = useRouter()
+
     const { isAuth } = useContext(AuthContext)
 
     const getLayout = WrappedComponent.getLayout ?? (page => page)
@@ -23,7 +25,7 @@ const WithAuth = (WrappedComponent: Page) => {
       return <div>Loading...</div>
     }
 
-    return getLayout(<WrappedComponent {...props} />)
+    return getLayout(<WrappedComponent {...pageProps} />)
   }
 
   return Component
