@@ -3,6 +3,7 @@ import type { AppProps } from 'next/app'
 import { useLoader } from '@/shared/hooks/useLoader'
 import { ApolloClientProvider } from '@/shared/providers/apollo'
 import { AuthProvider } from '@/shared/providers/auth'
+import { ToastProvider } from '@/widgets/toast'
 import { Inter } from 'next/font/google'
 
 import 'react-toastify/dist/ReactToastify.css'
@@ -19,6 +20,7 @@ function App({ Component, pageProps }: AppProps) {
     <ApolloClientProvider>
       <AuthProvider>
         <Component className={inter.className} {...pageProps} />
+        <ToastProvider />
       </AuthProvider>
     </ApolloClientProvider>
   )

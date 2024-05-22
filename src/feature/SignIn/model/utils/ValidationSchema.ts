@@ -6,7 +6,7 @@ export const signInValidationSchema = z.object({
     .trim()
     .min(4, 'Minimum 4 characters')
     .max(20, 'Maximum 20 characters')
-    .regex(/^[A-Za-z0-9]+$/, '')
+    .regex(/^[A-Za-z0-9]+$/, 'Only char and numbers')
     .default(''),
   password: z
     .string()
