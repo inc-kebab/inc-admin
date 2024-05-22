@@ -1,7 +1,7 @@
 import { setContext } from '@apollo/client/link/context'
 
 export const authLinkBasic = setContext((_, { headers }) => {
-  const decodedToken = btoa('Here log:pass')
+  const decodedToken = 'YWRtaW46cXdlcnR5MTI'
 
   return {
     headers: {

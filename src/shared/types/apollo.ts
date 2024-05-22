@@ -142,7 +142,12 @@ export type QueryGetUsersArgs = {
   pageSize?: InputMaybe<Scalars['Int']['input']>
   searchTerm?: InputMaybe<Scalars['String']['input']>
   sortBy?: InputMaybe<Scalars['String']['input']>
-  sortDirection?: InputMaybe<Scalars['String']['input']>
+  sortDirection?: InputMaybe<SortDirection>
+}
+
+export enum SortDirection {
+  Asc = 'ASC',
+  Desc = 'DESC',
 }
 
 export type UserModel = {
