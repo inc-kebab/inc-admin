@@ -2,7 +2,8 @@ import type { AppProps } from 'next/app'
 
 import { useLoader } from '@/shared/hooks/useLoader'
 import { ApolloClientProvider } from '@/shared/providers/apollo'
-import { Page } from '@/shared/types/layout'
+import { AuthProvider } from '@/shared/providers/auth'
+import { ToastProvider } from '@/widgets/toast'
 import { Inter } from 'next/font/google'
 
 import 'react-toastify/dist/ReactToastify.css'
@@ -12,19 +13,20 @@ import '@/app/styles/index.scss'
 
 const inter = Inter({ subsets: ['latin'] })
 
-export default function App({ Component, pageProps }: AppProps) {
+function App({ Component, pageProps }: AppProps) {
   useLoader()
-
-  const Page = Component as Page
-
-  const getLayout = Page.getLayout ?? (page => page)
 
   return (
     <ApolloClientProvider>
-      {getLayout(<Component className={inter.className} {...pageProps} />)}
+      <AuthProvider>
+        <Component className={inter.className} {...pageProps} />
+        <ToastProvider />
+      </AuthProvider>
     </ApolloClientProvider>
   )
 }
+
+export default App
 
 /*
 * To fix

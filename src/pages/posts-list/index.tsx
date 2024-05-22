@@ -1,3 +1,4 @@
+import WithAuth from '@/shared/helpers/hoc/WithAuth'
 import { Page } from '@/shared/types/layout'
 import { MainLayout } from '@/widgets/layout'
 
@@ -9,4 +10,4 @@ PostsListPage.getLayout = page => {
   return <MainLayout>{page}</MainLayout>
 }
 
-export default PostsListPage
+export default WithAuth(PostsListPage)

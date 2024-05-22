@@ -1,3 +1,4 @@
+import WithAuth from '@/shared/helpers/hoc/WithAuth'
 import { useState } from 'react'
 
 import { UsersList } from '@/entities/user'
@@ -60,4 +61,4 @@ UsersListPage.getLayout = page => {
   return <MainLayout>{page}</MainLayout>
 }
 
-export default UsersListPage
+export default WithAuth(UsersListPage)

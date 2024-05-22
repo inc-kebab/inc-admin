@@ -1,6 +1,6 @@
 import { PropsWithChildren } from 'react'
 
-import { Header, Sidebar, Typography } from '@tazalov/kebab-ui-kit'
+import { Sidebar } from '@tazalov/kebab-ui-kit'
 import clsx from 'clsx'
 import Head from 'next/head'
 import Link from 'next/link'
@@ -9,6 +9,7 @@ import { usePathname } from 'next/navigation'
 import s from './MainLayout.module.scss'
 
 import { sidebarItems } from '../../model/const/sidebarItems'
+import { Header } from '../Header/Header'
 
 export const MainLayout = ({ children }: PropsWithChildren) => {
   const pathname = usePathname()
@@ -21,19 +22,7 @@ export const MainLayout = ({ children }: PropsWithChildren) => {
         <meta content="width=device-width, initial-scale=1" name="viewport" />
         <link href="/favicon.ico" rel="icon" />
       </Head>
-      <Header>
-        <Typography asComponent={Link} href="/">
-          <Typography asComponent="span" variant="large">
-            Inctagram
-          </Typography>
-          <Typography asComponent="span" variant="small">
-            Super
-          </Typography>
-          <Typography asComponent="span" variant="smallSemiBold">
-            Admin
-          </Typography>
-        </Typography>
-      </Header>
+      <Header />
       <div className={clsx(s.wrapper)}>
         <Sidebar.Root className={s.sidebar}>
           <Sidebar.List>
