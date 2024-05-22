@@ -6,11 +6,8 @@ export const GET_USERS = gql`
       users {
         username
         id
+        fullName
         createdAt
-        profile {
-          firstname
-          aboutMe
-        }
       }
       pagination {
         pagesCount

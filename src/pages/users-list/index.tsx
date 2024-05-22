@@ -1,13 +1,9 @@
-import { useMemo, useState } from 'react'
+import { useState } from 'react'
 
-import { useGetUsersQuery } from '@/shared/api/queries/get-users/get-useres.generated'
-import { MenuIcon } from '@/shared/assets'
+import { UsersList } from '@/entities/user'
+import { useGetUsersQuery } from '@/shared/api/queries/get-users/get-users.generated'
 import { useTranslation } from '@/shared/hooks/useTranslation'
-import { BanDialog } from '@/widgets/get-users/ui/BanDialog/BanDialog'
-import { DeleteUserDialog } from '@/widgets/get-users/ui/DeleteUserDialog/DeleteUserDialog'
-import { MoreInformationDialog } from '@/widgets/get-users/ui/MoreInformationDialog.tsx/MoreInformationDialog'
-import { Button, Dropdown, Pagination, Select, Table, TextField } from '@tazalov/kebab-ui-kit'
-import clsx from 'clsx'
+import { Pagination } from '@tazalov/kebab-ui-kit'
 
 import s from './UsersList.module.scss'
 
@@ -17,8 +13,9 @@ const paginationOptions = [
   { name: '8', value: '8' },
 ]
 
-const UsersList = () => {
+const UsersListPage = () => {
   const { t } = useTranslation()
+
   const [pageNumber, setPageNumber] = useState(1)
   const [pageSize, setPageSize] = useState(8)
 
@@ -31,15 +28,6 @@ const UsersList = () => {
     setPageNumber(1)
   }
 
-  const defaultOptions = useMemo(
-    () => [
-      { name: t.notSelected, value: 'Not selected' },
-      { name: t.blocked, value: 'Blocked' },
-      { name: t.notBlocked, value: 'Not blocked' },
-    ],
-    []
-  )
-
   const { data, loading } = useGetUsersQuery({
     fetchPolicy: 'no-cache',
     variables: { pageNumber, pageSize },
@@ -50,61 +38,8 @@ const UsersList = () => {
       {loading && <div className={s.loading}>Loading...</div>}
       {data?.getUsers?.users && (
         <>
-          <div className={s.wrapper}>
-            <TextField className={s.textField} placeholder={t.search} type="search" />
-            <Select className={s.select} defaultValue="Not selected" options={defaultOptions} />
-          </div>
-
-          <Table.Root className={s.table}>
-            <Table.Head className={s.tableHead}>
-              <Table.Row>
-                <Table.TitleCell>{t.userID}</Table.TitleCell>
-                <Table.TitleCell>{t.username}</Table.TitleCell>
-                <Table.TitleCell>{t.profileLink}</Table.TitleCell>
-                <Table.TitleCell>{t.date}</Table.TitleCell>
-                <Table.TitleCell></Table.TitleCell>
-              </Table.Row>
-            </Table.Head>
-            <Table.Body className={s.body}>
-              {data?.getUsers?.users.map(user => (
-                <Table.Row className={s.row} key={user.id}>
-                  <Table.Cell className={s.cell} data-label={t.userID}>
-                    {user.id}
-                  </Table.Cell>
-                  <Table.Cell className={s.cell} data-label={t.username}>
-                    {user.username}
-                  </Table.Cell>
-                  <Table.Cell className={s.cell} data-label={t.profileLink}>
-                    {user.profile?.firstname ?? 'profile'}
-                  </Table.Cell>
-                  <Table.Cell className={s.cell} data-label={t.date}>
-                    {user.createdAt}
-                  </Table.Cell>
-                  <Table.Cell className={s.cell}>
-                    <Dropdown.Menu
-                      align="end"
-                      className={s.viewport}
-                      modal={false}
-                      sideOffset={2}
-                      trigger={
-                        <Button
-                          className={s.dropdownTrigger}
-                          startIcon={<MenuIcon className={clsx(s.menuIcon)} />}
-                          variant="text"
-                        />
-                      }
-                    >
-                      <DeleteUserDialog />
-                      <BanDialog />
-                      <MoreInformationDialog />
-                    </Dropdown.Menu>
-                  </Table.Cell>
-                </Table.Row>
-              ))}
-            </Table.Body>
-          </Table.Root>
+          <UsersList list={data.getUsers.users} />
           <Pagination
-            className={s.pagination}
             currentPage={pageNumber}
             onChangePage={handleChangePageNumber}
             onValueChange={handleChangePageSize}
@@ -119,4 +54,4 @@ const UsersList = () => {
   )
 }
 
-export default UsersList
+export default UsersListPage
