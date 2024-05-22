@@ -60,7 +60,7 @@ export const SignInForm = forwardRef(
           rules={{ required: true }}
           type="password"
         />
-        <Button className={s.button} fullWidth>
+        <Button className={s.button} disabled={disabled} fullWidth>
           Sign In
         </Button>
       </Card>

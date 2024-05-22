@@ -1,3 +1,4 @@
+import WithAuth from '@/feature/SignIn/hoc/WithAuth'
 import { Page } from '@/shared/types/layout'
 import { MainLayout } from '@/widgets/layout'
 import { Inter } from 'next/font/google'
@@ -12,4 +13,4 @@ UsersListPage.getLayout = page => {
   return <MainLayout>{page}</MainLayout>
 }
 
-export default UsersListPage
+export default WithAuth(UsersListPage)

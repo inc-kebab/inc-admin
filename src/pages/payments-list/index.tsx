@@ -1,3 +1,4 @@
+import WithAuth from '@/feature/SignIn/hoc/WithAuth'
 import { Page } from '@/shared/types/layout'
 import { MainLayout } from '@/widgets/layout'
 
@@ -9,4 +10,4 @@ PaymentsListPage.getLayout = page => {
   return <MainLayout>{page}</MainLayout>
 }
 
-export default PaymentsListPage
+export default WithAuth(PaymentsListPage)

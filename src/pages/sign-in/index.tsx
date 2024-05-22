@@ -1,20 +1,27 @@
+import { useContext, useEffect } from 'react'
+
+import WithAuth from '@/feature/SignIn/hoc/WithAuth'
 import { SignInFormValues } from '@/feature/SignIn/model/utils/ValidationSchema'
 import { SignInForm } from '@/feature/SignIn/ui/SignInForm'
 import { useAuthMutation } from '@/shared/api/queries/auth.generated'
+import { AuthContext } from '@/shared/providers/Auth'
 import { Header, Typography } from '@tazalov/kebab-ui-kit'
 import Head from 'next/head'
 import Link from 'next/link'
 
 const SignIn = () => {
+  const { setIsAuth } = useContext(AuthContext)
   const [signIn, { data, loading }] = useAuthMutation()
 
   const onSubmitHandler = (form: SignInFormValues) => {
     signIn({ variables: form })
   }
 
-  if (loading) {
-    return <div>Loading...</div>
-  }
+  useEffect(() => {
+    if (data) {
+      setIsAuth(data.checkAdmin)
+    }
+  }, [data])
 
   return (
     <>
@@ -40,10 +47,10 @@ const SignIn = () => {
       <div
         style={{ alignItems: 'center', display: 'flex', height: '100vh', justifyContent: 'center' }}
       >
-        <SignInForm onSubmit={onSubmitHandler} />
+        <SignInForm disabled={loading} onSubmit={onSubmitHandler} />
       </div>
     </>
   )
 }
 
-export default SignIn
+export default WithAuth(SignIn)
