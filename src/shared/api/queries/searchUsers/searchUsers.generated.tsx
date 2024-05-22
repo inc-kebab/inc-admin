@@ -1,35 +1,52 @@
-import * as Types from '../../../types/apollo';
+import { gql } from '@apollo/client'
+import * as Apollo from '@apollo/client'
 
-import { gql } from '@apollo/client';
-import * as Apollo from '@apollo/client';
-const defaultOptions = {} as const;
+import * as Types from '../../../types/apollo'
+const defaultOptions = {} as const
+
 export type GetUserByNameQueryVariables = Types.Exact<{
-  searchTerm: Types.Scalars['String']['input'];
-}>;
+  searchTerm: Types.Scalars['String']['input']
+}>
 
-
-export type GetUserByNameQuery = { __typename?: 'Query', getUsers?: { __typename?: 'UserPaginationModel', users?: Array<{ __typename?: 'UserModel', id: number, fullName: string, username: string, email: string, profile?: { __typename?: 'ProfileModel', firstname?: string | null, lastname?: string | null } | null }> | null, pagination?: { __typename?: 'PaginationModel', totalCount: number } | null } | null };
-
+export type GetUserByNameQuery = {
+  __typename?: 'Query'
+  getUsers?: {
+    __typename?: 'UserPaginationModel'
+    pagination?: { __typename?: 'PaginationModel'; totalCount: number } | null
+    users?: Array<{
+      __typename?: 'UserModel'
+      email: string
+      fullName: string
+      id: number
+      profile?: {
+        __typename?: 'ProfileModel'
+        firstname?: null | string
+        lastname?: null | string
+      } | null
+      username: string
+    }> | null
+  } | null
+}
 
 export const GetUserByNameDocument = gql`
-    query GetUserByName($searchTerm: String!) {
-  getUsers(searchTerm: $searchTerm) {
-    users {
-      id
-      fullName
-      username
-      email
-      profile {
-        firstname
-        lastname
+  query GetUserByName($searchTerm: String!) {
+    getUsers(searchTerm: $searchTerm) {
+      users {
+        id
+        fullName
+        username
+        email
+        profile {
+          firstname
+          lastname
+        }
+      }
+      pagination {
+        totalCount
       }
     }
-    pagination {
-      totalCount
-    }
   }
-}
-    `;
+`
 
 /**
  * __useGetUserByNameQuery__
@@ -47,19 +64,41 @@ export const GetUserByNameDocument = gql`
  *   },
  * });
  */
-export function useGetUserByNameQuery(baseOptions: Apollo.QueryHookOptions<GetUserByNameQuery, GetUserByNameQueryVariables> & ({ variables: GetUserByNameQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<GetUserByNameQuery, GetUserByNameQueryVariables>(GetUserByNameDocument, options);
-      }
-export function useGetUserByNameLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetUserByNameQuery, GetUserByNameQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<GetUserByNameQuery, GetUserByNameQueryVariables>(GetUserByNameDocument, options);
-        }
-export function useGetUserByNameSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetUserByNameQuery, GetUserByNameQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useSuspenseQuery<GetUserByNameQuery, GetUserByNameQueryVariables>(GetUserByNameDocument, options);
-        }
-export type GetUserByNameQueryHookResult = ReturnType<typeof useGetUserByNameQuery>;
-export type GetUserByNameLazyQueryHookResult = ReturnType<typeof useGetUserByNameLazyQuery>;
-export type GetUserByNameSuspenseQueryHookResult = ReturnType<typeof useGetUserByNameSuspenseQuery>;
-export type GetUserByNameQueryResult = Apollo.QueryResult<GetUserByNameQuery, GetUserByNameQueryVariables>;
+export function useGetUserByNameQuery(
+  baseOptions: ({ skip: boolean } | { skip?: boolean; variables: GetUserByNameQueryVariables }) &
+    Apollo.QueryHookOptions<GetUserByNameQuery, GetUserByNameQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+
+  return Apollo.useQuery<GetUserByNameQuery, GetUserByNameQueryVariables>(
+    GetUserByNameDocument,
+    options
+  )
+}
+export function useGetUserByNameLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<GetUserByNameQuery, GetUserByNameQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+
+  return Apollo.useLazyQuery<GetUserByNameQuery, GetUserByNameQueryVariables>(
+    GetUserByNameDocument,
+    options
+  )
+}
+export function useGetUserByNameSuspenseQuery(
+  baseOptions?: Apollo.SuspenseQueryHookOptions<GetUserByNameQuery, GetUserByNameQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+
+  return Apollo.useSuspenseQuery<GetUserByNameQuery, GetUserByNameQueryVariables>(
+    GetUserByNameDocument,
+    options
+  )
+}
+export type GetUserByNameQueryHookResult = ReturnType<typeof useGetUserByNameQuery>
+export type GetUserByNameLazyQueryHookResult = ReturnType<typeof useGetUserByNameLazyQuery>
+export type GetUserByNameSuspenseQueryHookResult = ReturnType<typeof useGetUserByNameSuspenseQuery>
+export type GetUserByNameQueryResult = Apollo.QueryResult<
+  GetUserByNameQuery,
+  GetUserByNameQueryVariables
+>
