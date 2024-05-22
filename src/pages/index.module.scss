@@ -1,0 +1,18 @@
+@import '@/app/styles/mixins';
+
+.container {
+  padding: 60px 64px 48px 24px;
+}
+
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+@include tablet {
+  .container {
+    padding: 60px 24px 24px;
+  }
+}
