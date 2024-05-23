@@ -10,11 +10,11 @@ import {
   Trending,
 } from '@/shared/assets/icons'
 import { SidebarRoutes } from '@/shared/types/layout'
-import { SidebarElement } from '@tazalov/kebab-ui-kit'
+import { SidebarEl } from '@tazalov/kebab-ui/layout'
 
 type CustomSidebarElement = {
   href: UrlObject | string
-} & SidebarElement
+} & SidebarEl
 
 export const sidebarItems: CustomSidebarElement[] = [
   {

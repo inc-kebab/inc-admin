@@ -1,3 +1,5 @@
+@import '@/app/styles/mixins';
+
 .wrapper {
   display: flex;
   width: 100%;
@@ -11,6 +13,27 @@
   padding: 36px var(--container-padding) 36px 24px;
 }
 
-.sidebar {
-  height: calc(100dvh - var(--header-height));
+.mobileSidebar {
+  display: none;
+}
+
+@include mobile {
+  .main {
+    padding: 24px var(--container-padding);
+  }
+
+  .sidebar {
+    display: none;
+  }
+
+  .mobileSidebar {
+    position: fixed;
+    z-index: 10;
+    bottom: 0;
+    display: block;
+  }
+
+  .wrapper {
+    margin-bottom: var(--header-height);
+  }
 }

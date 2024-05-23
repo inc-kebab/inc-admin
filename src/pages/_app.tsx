@@ -7,7 +7,7 @@ import { ToastProvider } from '@/widgets/toast'
 import { Inter } from 'next/font/google'
 
 import 'react-toastify/dist/ReactToastify.css'
-import '@tazalov/kebab-ui-kit/dist/style.css'
+import '@tazalov/kebab-ui/dist/style.css'
 import '@/app/styles/nprogress.scss'
 import '@/app/styles/index.scss'
 
@@ -31,7 +31,7 @@ export default App
 /*
 * To fix
  import 'react-toastify/dist/ReactToastify.css'
- import '@tazalov/kebab-ui-kit/dist/style.css'
+ import '@tazalov/kebab-ui/dist/style.css'
  import '@/app/styles/nprogress.scss'
  import '@/app/styles/index.scss'
  */

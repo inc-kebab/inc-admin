@@ -1,14 +1,12 @@
-import WithAuth from '@/shared/helpers/hoc/WithAuth'
 import { useState } from 'react'
 
 import { UsersList } from '@/entities/user'
 import { useGetUsersQuery } from '@/shared/api/queries/get-users/get-users.generated'
+import WithAuth from '@/shared/helpers/hoc/WithAuth'
 import { useTranslation } from '@/shared/hooks/useTranslation'
 import { Page } from '@/shared/types/layout'
 import { MainLayout } from '@/widgets/layout'
-import { Pagination } from '@tazalov/kebab-ui-kit'
-
-import s from './index.module.scss'
+import { Pagination } from '@tazalov/kebab-ui/components'
 
 const paginationOptions = [
   { name: '3', value: '3' },
@@ -32,28 +30,22 @@ const UsersListPage: Page = () => {
   }
 
   const { data, loading } = useGetUsersQuery({
-    fetchPolicy: 'no-cache',
     variables: { pageNumber, pageSize },
   })
 
   return (
-    <div className={s.container}>
-      {loading && <div className={s.loading}>Loading...</div>}
-      {data?.getUsers?.users && (
-        <>
-          <UsersList list={data.getUsers.users} />
-          <Pagination
-            currentPage={pageNumber}
-            onChangePage={handleChangePageNumber}
-            onValueChange={handleChangePageSize}
-            options={paginationOptions}
-            pageSize={pageSize}
-            totalCount={data?.getUsers?.pagination?.totalCount ?? 0}
-            value={String(pageSize)}
-          />
-        </>
-      )}
-    </div>
+    <>
+      <UsersList isLoading={loading} list={data?.getUsers?.users} pageSize={pageSize} />
+      <Pagination
+        currentPage={pageNumber}
+        onChangePage={handleChangePageNumber}
+        onValueChange={handleChangePageSize}
+        options={paginationOptions}
+        pageSize={pageSize}
+        totalCount={data?.getUsers?.pagination?.totalCount ?? 0}
+        value={String(pageSize)}
+      />
+    </>
   )
 }
 

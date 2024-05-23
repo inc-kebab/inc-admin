@@ -1,0 +1,15 @@
+@import '@/app/styles/mixins';
+
+.header {
+  position: fixed;
+  z-index: 10;
+  top: 0;
+}
+
+@include tablet {
+  .header {
+    & > div {
+      padding: 0 var(--container-padding);
+    }
+  }
+}
