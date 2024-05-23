@@ -3,13 +3,11 @@ import { PropsWithChildren } from 'react'
 import clsx from 'clsx'
 import Head from 'next/head'
 
-import s from './MainLayout.module.scss'
+import s from './AuthLayout.module.scss'
 
-import { CustomMobileSidebar } from '../CustomMobileSidebar/CustomMobileSidebar'
-import { CustomSidebar } from '../CustomSidebar/CustomSidebar'
 import { Header } from '../Header/Header'
 
-export const MainLayout = ({ children }: PropsWithChildren) => {
+export const AuthLayout = ({ children }: PropsWithChildren) => {
   return (
     <>
       <Head>
@@ -20,8 +18,6 @@ export const MainLayout = ({ children }: PropsWithChildren) => {
       </Head>
       <Header />
       <div className={clsx(s.wrapper)}>
-        <CustomSidebar className={s.sidebar} />
-        <CustomMobileSidebar className={s.mobileSidebar} />
         <main className={s.main}>{children}</main>
       </div>
     </>

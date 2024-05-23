@@ -12,7 +12,6 @@ import {
 import { SidebarRoutes } from '@/shared/types/layout'
 import { SidebarEl } from '@tazalov/kebab-ui/layout'
 
-
 type CustomSidebarElement = {
   href: UrlObject | string
 } & SidebarEl
