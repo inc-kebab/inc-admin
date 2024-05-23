@@ -1,6 +1,6 @@
 import { PropsWithChildren } from 'react'
 
-import clsx from 'clsx'
+import { clsx } from '@tazalov/kebab-ui'
 import Head from 'next/head'
 
 import s from './AuthLayout.module.scss'

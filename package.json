@@ -16,7 +16,6 @@
     "@apollo/client": "^3.10.4",
     "@hookform/resolvers": "^3.4.0",
     "@tazalov/kebab-ui": "^1.0.2",
-    "clsx": "^2.1.1",
     "graphql": "^16.8.1",
     "next": "14.2.3",
     "nprogress": "^0.2.0",
