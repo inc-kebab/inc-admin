@@ -11,14 +11,14 @@
 
   font-size: 8px;
   color: var(--dark-100);
-  
+
   & .arrow {
     all: unset;
     cursor: pointer;
     line-height: 8px;
-    
+
     &.active {
-      color: var(--light-100)
+      color: var(--light-100);
     }
   }
 }

@@ -6,7 +6,7 @@ import { useGetUsersQuery } from '@/shared/api/queries/get-users/get-users.gener
 import WithAuth from '@/shared/helpers/hoc/WithAuth'
 import { Page } from '@/shared/types/layout'
 import { MainLayout } from '@/widgets/layout'
-import { Pagination, TextField, Typography } from '@tazalov/kebab-ui/components'
+import { Pagination, TextField } from '@tazalov/kebab-ui/components'
 
 import s from './index.module.scss'
 
