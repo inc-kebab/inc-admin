@@ -1,0 +1,13 @@
+.trigger {
+  padding: 0;
+  color: var(--light-100);
+  
+  &[data-state='open'] {
+    color: var(--primary-500)
+  }
+}
+
+
+.item {
+  gap: 12px;
+}

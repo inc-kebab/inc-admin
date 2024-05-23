@@ -1,3 +1,5 @@
+import { ActionsMenu } from '@/entities/user'
+import { DeletedUserData } from '@/feature/delete-user'
 import { getShortStr } from '@/shared/helpers/getShortStr'
 import { useTranslation } from '@/shared/hooks/useTranslation'
 import { clsx } from '@tazalov/kebab-ui'
@@ -15,12 +17,24 @@ type Props = {
   isLoading?: boolean
   list?: User[] | null
   onChangeSort?: (sort: Sort | null) => void
+  onChangeUserForDelete: (data: DeletedUserData) => void
   pageSize: number
   sort: Sort | null
 }
 
-export const UsersList = ({ isLoading, list, onChangeSort, pageSize, sort }: Props) => {
+export const UsersList = ({
+  isLoading,
+  list,
+  onChangeSort,
+  onChangeUserForDelete,
+  pageSize,
+  sort,
+}: Props) => {
   const { t } = useTranslation()
+
+  const handleChangeUserForDelete = (data: DeletedUserData) => () => {
+    onChangeUserForDelete(data)
+  }
 
   return (
     <Table.Root className={s.table}>
@@ -53,7 +67,14 @@ export const UsersList = ({ isLoading, list, onChangeSort, pageSize, sort }: Pro
               <Table.Cell className={clsx(s.cell, s.dateCell)} data-label={t.date}>
                 {format(new Date(+user.createdAt), 'dd.MM.yyyy')}
               </Table.Cell>
-              <Table.Cell className={clsx(s.cell, s.modalsCell)}>mod</Table.Cell>
+              <Table.Cell className={clsx(s.cell, s.modalsCell)}>
+                <ActionsMenu
+                  onDelete={handleChangeUserForDelete({
+                    id: user.id,
+                    name: user.fullName || `Not specified`,
+                  })}
+                />
+              </Table.Cell>
             </Table.Row>
           ))
         )}
