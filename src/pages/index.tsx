@@ -1,5 +1,5 @@
-import { useState } from 'react'
-
+import { usePaginationUsersList } from '@/entities/user'
+import { ConfirmDeleteDialog, useDeleteUser } from '@/feature/delete-user'
 import { useSearchUsers } from '@/feature/search-users'
 import { UsersList, useSortUsers } from '@/feature/sort-users'
 import { useGetUsersQuery } from '@/shared/api/queries/get-users/get-users.generated'
@@ -17,20 +17,13 @@ const paginationOptions = [
 ]
 
 const UsersListPage: Page = () => {
-  const [pageNumber, setPageNumber] = useState(1)
-  const [pageSize, setPageSize] = useState(8)
+  const { handleChangePage, handleChangePageSize, pageNumber, pageSize } = usePaginationUsersList()
 
-  const { debouncedSearchTerm, handleSearch, searchTerm } = useSearchUsers(setPageNumber)
-  const { handleChangeSort, sort } = useSortUsers(setPageNumber)
+  const { debouncedSearchTerm, handleSearch, searchTerm } = useSearchUsers(handleChangePage)
+  const { handleChangeSort, sort } = useSortUsers(handleChangePage)
 
-  const handleChangePageNumber = (page: number) => {
-    setPageNumber(page)
-  }
-
-  const handleChangePageSize = (size: string) => {
-    setPageSize(Number(size))
-    setPageNumber(1)
-  }
+  const { confirm, handleChangeUserForDelete, handleDeleteUser, loadingDelete, userForDelete } =
+    useDeleteUser()
 
   const { data, loading, previousData } = useGetUsersQuery({
     variables: {
@@ -60,17 +53,25 @@ const UsersListPage: Page = () => {
         isLoading={loading}
         list={data?.getUsers?.users}
         onChangeSort={handleChangeSort}
+        onChangeUserForDelete={handleChangeUserForDelete}
         pageSize={pageSize}
         sort={sort}
       />
       <Pagination
         currentPage={pageNumber}
-        onChangePage={handleChangePageNumber}
+        onChangePage={handleChangePage}
         onValueChange={handleChangePageSize}
         options={paginationOptions}
         pageSize={pageSize}
         totalCount={totalCount}
         value={String(pageSize)}
+      />
+      <ConfirmDeleteDialog
+        disabled={loadingDelete}
+        name={userForDelete?.name || 'Not specified'}
+        onDelete={handleDeleteUser}
+        onOpenChange={confirm.handleChangeOpenDelete}
+        open={confirm.open}
       />
     </div>
   )

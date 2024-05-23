@@ -19,7 +19,7 @@ export const Header = () => {
             Admin
           </Typography>
         </Typography>
-        <Button>asdasdasd</Button>
+        <Button>Здесь должен быть lang switcher</Button>
       </div>
     </KebabHeader>
   )

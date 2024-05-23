@@ -1,0 +1,49 @@
+@import '@/app/styles/mixins';
+
+.root {
+  z-index: 2;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+  max-width: 438px;
+  padding: 30px 24px 36px;
+}
+
+.content {
+  align-self: start;
+  margin-bottom: 30px;
+}
+
+.actions {
+  display: flex;
+  gap: 70px;
+  justify-content: space-between;
+}
+
+.btn {
+  width: 100%;
+}
+
+@include mobile {
+  .root {
+    width: 95%;
+  }
+
+  .wrapper {
+    max-width: unset;
+  }
+
+  .actions {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .btn {
+    padding: 12px 24px;
+  }
+}
