@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import { toast } from 'react-toastify'
 
-import { SignInForm, SignInFormValues } from '@/feature/SignIn'
+import { SignInForm, SignInFormValues } from '@/feature/sign-in'
 import { useSignInMutation } from '@/shared/api/queries/sign-in/signIn.generated'
 import WithAuth from '@/shared/helpers/hoc/WithAuth'
 import { AuthContext } from '@/shared/providers/auth'

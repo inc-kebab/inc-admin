@@ -12,4 +12,5 @@ export const en = {
   userID: 'User ID',
   username: 'Username',
 }
+
 export type LocaleType = typeof en

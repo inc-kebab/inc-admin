@@ -1,12 +1,14 @@
 import { useState } from 'react'
 
 import { UsersList } from '@/entities/user'
+import { useSearchUsers } from '@/feature/search-users'
 import { useGetUsersQuery } from '@/shared/api/queries/get-users/get-users.generated'
 import WithAuth from '@/shared/helpers/hoc/WithAuth'
-import { useTranslation } from '@/shared/hooks/useTranslation'
 import { Page } from '@/shared/types/layout'
 import { MainLayout } from '@/widgets/layout'
-import { Pagination } from '@tazalov/kebab-ui/components'
+import { Pagination, TextField } from '@tazalov/kebab-ui/components'
+
+import s from './index.module.scss'
 
 const paginationOptions = [
   { name: '3', value: '3' },
@@ -15,10 +17,10 @@ const paginationOptions = [
 ]
 
 const UsersListPage: Page = () => {
-  const { t } = useTranslation()
-
   const [pageNumber, setPageNumber] = useState(1)
   const [pageSize, setPageSize] = useState(8)
+
+  const { handleSearch, searchTerm } = useSearchUsers(setPageNumber)
 
   const handleChangePageNumber = (page: number) => {
     setPageNumber(page)
@@ -29,12 +31,24 @@ const UsersListPage: Page = () => {
     setPageNumber(1)
   }
 
-  const { data, loading } = useGetUsersQuery({
-    variables: { pageNumber, pageSize },
+  const { data, loading, previousData } = useGetUsersQuery({
+    variables: { pageNumber, pageSize, searchTerm },
   })
 
+  const totalCount =
+    (data?.getUsers?.pagination?.totalCount || previousData?.getUsers?.pagination?.totalCount) ?? 0
+
   return (
-    <>
+    <div className={s.container}>
+      <div className={s.filters}>
+        <TextField
+          className={s.search}
+          onChange={handleSearch}
+          placeholder="Search"
+          type="search"
+          value={searchTerm}
+        />
+      </div>
       <UsersList isLoading={loading} list={data?.getUsers?.users} pageSize={pageSize} />
       <Pagination
         currentPage={pageNumber}
@@ -42,10 +56,10 @@ const UsersListPage: Page = () => {
         onValueChange={handleChangePageSize}
         options={paginationOptions}
         pageSize={pageSize}
-        totalCount={data?.getUsers?.pagination?.totalCount ?? 0}
+        totalCount={totalCount}
         value={String(pageSize)}
       />
-    </>
+    </div>
   )
 }
 
