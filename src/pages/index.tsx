@@ -4,6 +4,7 @@ import { useSearchUsers } from '@/feature/search-users'
 import { UsersList, useSortUsers } from '@/feature/sort-users'
 import { useGetUsersQuery } from '@/shared/api/queries/get-users/get-users.generated'
 import WithAuth from '@/shared/helpers/hoc/WithAuth'
+import { useTranslation } from '@/shared/hooks'
 import { Page } from '@/shared/types/layout'
 import { MainLayout } from '@/widgets/layout'
 import { Pagination, TextField } from '@tazalov/kebab-ui/components'
@@ -17,6 +18,7 @@ const paginationOptions = [
 ]
 
 const UsersListPage: Page = () => {
+  const { t } = useTranslation()
   const { handleChangePage, handleChangePageSize, pageNumber, pageSize } = usePaginationUsersList()
 
   const { debouncedSearchTerm, handleSearch, searchTerm } = useSearchUsers(handleChangePage)
@@ -64,6 +66,7 @@ const UsersListPage: Page = () => {
         options={paginationOptions}
         pageSize={pageSize}
         totalCount={totalCount}
+        translates={{ onPage: t.label.onPage, show: t.label.show }}
         value={String(pageSize)}
       />
       <ConfirmDeleteDialog

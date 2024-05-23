@@ -1,3 +1,4 @@
+import { LangSwitcher } from '@/widgets/lang-switcher'
 import { Button, Typography } from '@tazalov/kebab-ui/components'
 import { Header as KebabHeader } from '@tazalov/kebab-ui/layout'
 import Link from 'next/link'
@@ -19,7 +20,7 @@ export const Header = () => {
             Admin
           </Typography>
         </Typography>
-        <Button>Здесь должен быть lang switcher</Button>
+        <LangSwitcher />
       </div>
     </KebabHeader>
   )

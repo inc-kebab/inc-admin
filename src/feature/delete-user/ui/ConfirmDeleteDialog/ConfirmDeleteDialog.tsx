@@ -1,3 +1,4 @@
+import { useTranslation } from '@/shared/hooks'
 import { ConfirmDialog } from '@/shared/ui/ConfirmDialog'
 
 type Props = {
@@ -9,13 +10,21 @@ type Props = {
 }
 
 export const ConfirmDeleteDialog = ({ name, onDelete, ...rest }: Props) => {
+  const { t } = useTranslation()
+
   const textContent = (
     <>
-      Are you sure to delete user <b>{name}</b>?
+      {t.dialog.deleteUser.description}
+      <b>{name}</b>?
     </>
   )
 
   return (
-    <ConfirmDialog confirmCallback={onDelete} content={textContent} title="Delete user" {...rest} />
+    <ConfirmDialog
+      confirmCallback={onDelete}
+      content={textContent}
+      title={t.dialog.deleteUser.title}
+      {...rest}
+    />
   )
 }

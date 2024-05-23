@@ -1,10 +1,11 @@
 import * as React from 'react'
-import { SVGProps, memo } from 'react'
+import { Ref, SVGProps, forwardRef, memo } from 'react'
 
-export const BanIcon = memo((props: SVGProps<SVGSVGElement>) => (
+export const SvgComponent = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
   <svg
     fill="none"
     height={24}
+    ref={ref}
     width={24}
     xmlns="http://www.w3.org/2000/svg"
     {...props}
@@ -23,4 +24,7 @@ export const BanIcon = memo((props: SVGProps<SVGSVGElement>) => (
       </clipPath>
     </defs>
   </svg>
-))
+)
+const ForwardRef = forwardRef(SvgComponent)
+
+export default memo(ForwardRef)
