@@ -1,6 +1,7 @@
 import { PropsWithChildren } from 'react'
 
-import { Header, Sidebar, Typography } from '@tazalov/kebab-ui-kit'
+import { Typography } from '@tazalov/kebab-ui/components'
+import { Header, Sidebar } from '@tazalov/kebab-ui/layout'
 import clsx from 'clsx'
 import Head from 'next/head'
 import Link from 'next/link'

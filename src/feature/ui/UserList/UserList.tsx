@@ -2,7 +2,7 @@ import { ChangeEvent, useState } from 'react'
 
 import { useGetUserByNameQuery } from '@/shared/api/queries/searchUsers/searchUsers.generated'
 import { useDebounce } from '@/shared/hooks/useDebounce'
-import { TextField } from '@tazalov/kebab-ui-kit'
+import { TextField } from '@tazalov/kebab-ui/components'
 
 import s from './UserList.module.scss'
 

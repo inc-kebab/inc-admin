@@ -6,7 +6,7 @@ import { Page } from '@/shared/types/layout'
 import { Inter } from 'next/font/google'
 
 import 'react-toastify/dist/ReactToastify.css'
-import '@tazalov/kebab-ui-kit/dist/style.css'
+import '@tazalov/kebab-ui/dist/style.css'
 import '@/app/styles/nprogress.scss'
 import '@/app/styles/index.scss'
 
