@@ -6,28 +6,26 @@ import { format } from 'date-fns'
 
 import s from './UsersList.module.scss'
 
-import { User } from '../../model/types'
+import { Sort, User } from '../../model/types'
+import { getColumnsForSort } from '../../model/utils/getColumnsForSort'
+import { SortableHead } from '../SortableHead/SortableHead'
 import { UsersListSkeleton } from './UsersListSkeleton'
 
 type Props = {
   isLoading?: boolean
   list?: User[] | null
+  onChangeSort?: (sort: Sort | null) => void
   pageSize: number
+  sort: Sort | null
 }
 
-export const UsersList = ({ isLoading, list, pageSize }: Props) => {
+export const UsersList = ({ isLoading, list, onChangeSort, pageSize, sort }: Props) => {
   const { t } = useTranslation()
 
   return (
     <Table.Root className={s.table}>
       <Table.Head className={s.tableHead}>
-        <Table.Row>
-          <Table.TitleCell>{t.userID}</Table.TitleCell>
-          <Table.TitleCell>{t.username}</Table.TitleCell>
-          <Table.TitleCell>{t.profileLink}</Table.TitleCell>
-          <Table.TitleCell>{t.date}</Table.TitleCell>
-          <Table.TitleCell></Table.TitleCell>
-        </Table.Row>
+        <SortableHead columns={getColumnsForSort(t)} onChangeSort={onChangeSort} sort={sort} />
       </Table.Head>
       <Table.Body className={s.body}>
         {isLoading ? (

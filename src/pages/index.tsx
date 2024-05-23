@@ -1,12 +1,12 @@
 import { useState } from 'react'
 
-import { UsersList } from '@/entities/user'
 import { useSearchUsers } from '@/feature/search-users'
+import { UsersList, useSortUsers } from '@/feature/sort-users'
 import { useGetUsersQuery } from '@/shared/api/queries/get-users/get-users.generated'
 import WithAuth from '@/shared/helpers/hoc/WithAuth'
 import { Page } from '@/shared/types/layout'
 import { MainLayout } from '@/widgets/layout'
-import { Pagination, TextField } from '@tazalov/kebab-ui/components'
+import { Pagination, TextField, Typography } from '@tazalov/kebab-ui/components'
 
 import s from './index.module.scss'
 
@@ -20,7 +20,8 @@ const UsersListPage: Page = () => {
   const [pageNumber, setPageNumber] = useState(1)
   const [pageSize, setPageSize] = useState(8)
 
-  const { handleSearch, searchTerm } = useSearchUsers(setPageNumber)
+  const { debouncedSearchTerm, handleSearch, searchTerm } = useSearchUsers(setPageNumber)
+  const { handleChangeSort, sort } = useSortUsers(setPageNumber)
 
   const handleChangePageNumber = (page: number) => {
     setPageNumber(page)
@@ -32,7 +33,13 @@ const UsersListPage: Page = () => {
   }
 
   const { data, loading, previousData } = useGetUsersQuery({
-    variables: { pageNumber, pageSize, searchTerm },
+    variables: {
+      pageNumber,
+      pageSize,
+      searchTerm: debouncedSearchTerm,
+      sortBy: sort ? sort.key : undefined,
+      sortDirection: sort ? sort.direction : undefined,
+    },
   })
 
   const totalCount =
@@ -43,13 +50,19 @@ const UsersListPage: Page = () => {
       <div className={s.filters}>
         <TextField
           className={s.search}
-          onChange={handleSearch}
+          onValueChange={handleSearch}
           placeholder="Search"
           type="search"
           value={searchTerm}
         />
       </div>
-      <UsersList isLoading={loading} list={data?.getUsers?.users} pageSize={pageSize} />
+      <UsersList
+        isLoading={loading}
+        list={data?.getUsers?.users}
+        onChangeSort={handleChangeSort}
+        pageSize={pageSize}
+        sort={sort}
+      />
       <Pagination
         currentPage={pageNumber}
         onChangePage={handleChangePageNumber}

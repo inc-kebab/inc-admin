@@ -1,0 +1,24 @@
+.content {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.buttons {
+  display: inline-flex;
+  flex-direction: column;
+  column-gap: 6px;
+
+  font-size: 8px;
+  color: var(--dark-100);
+  
+  & .arrow {
+    all: unset;
+    cursor: pointer;
+    line-height: 8px;
+    
+    &.active {
+      color: var(--light-100)
+    }
+  }
+}

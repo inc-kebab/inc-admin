@@ -7,13 +7,14 @@ export const useSearchUsers = (onChangePage: (page: number) => void) => {
 
   const debouncedSearchTerm = useDebounce({ delay: 500, value: searchTerm })
 
-  const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
-    setSearchTerm(e.target.value)
+  const handleSearch = (term: string) => {
+    setSearchTerm(term)
     onChangePage(1)
   }
 
   return {
+    debouncedSearchTerm,
     handleSearch,
-    searchTerm: debouncedSearchTerm,
+    searchTerm,
   }
 }
