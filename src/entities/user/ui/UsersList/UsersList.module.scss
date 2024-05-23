@@ -4,6 +4,30 @@
   margin-bottom: 36px;
 }
 
+.skeleton {
+  padding: 0;
+}
+
+.idCell {
+  width: 18%;
+}
+
+.userNameCell {
+  width: 24%;
+}
+
+.profileCell {
+  width: 28%;
+}
+
+.dateCell {
+  width: 20%;
+}
+
+.modalsCell {
+  width: 10%;
+}
+
 @include tablet {
   .tableHead {
     display: none;
@@ -36,5 +60,13 @@
       content: attr(data-label);
       font-weight: var(--font-weight-regular);
     }
+  }
+
+  .idCell,
+  .userNameCell,
+  .profileCell,
+  .dateCell,
+  .modalsCell {
+    width: unset;
   }
 }

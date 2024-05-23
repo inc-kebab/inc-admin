@@ -1,19 +1,15 @@
 import { PropsWithChildren } from 'react'
 
-import { Sidebar } from '@tazalov/kebab-ui-kit'
 import clsx from 'clsx'
 import Head from 'next/head'
-import Link from 'next/link'
-import { usePathname } from 'next/navigation'
 
 import s from './MainLayout.module.scss'
 
-import { sidebarItems } from '../../model/const/sidebarItems'
+import { CustomMobileSidebar } from '../CustomMobileSidebar/CustomMobileSidebar'
+import { CustomSidebar } from '../CustomSidebar/CustomSidebar'
 import { Header } from '../Header/Header'
 
 export const MainLayout = ({ children }: PropsWithChildren) => {
-  const pathname = usePathname()
-
   return (
     <>
       <Head>
@@ -24,26 +20,8 @@ export const MainLayout = ({ children }: PropsWithChildren) => {
       </Head>
       <Header />
       <div className={clsx(s.wrapper)}>
-        <Sidebar.Root className={s.sidebar}>
-          <Sidebar.List>
-            {sidebarItems.map((el, i) => {
-              const itemPath = typeof el.href === 'string' ? el.href : el.href.pathname
-
-              const isActive = pathname === itemPath
-
-              return (
-                <Sidebar.Item key={`sidebar-item-${i}`}>
-                  <Sidebar.ItemContent
-                    asComponent={Link}
-                    href={el.href}
-                    isActive={isActive}
-                    item={el}
-                  />
-                </Sidebar.Item>
-              )
-            })}
-          </Sidebar.List>
-        </Sidebar.Root>
+        <CustomSidebar className={s.sidebar} />
+        <CustomMobileSidebar className={s.mobileSidebar} />
         <main className={s.main}>{children}</main>
       </div>
     </>

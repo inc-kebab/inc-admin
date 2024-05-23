@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form'
 import { UseFormRef } from '@/shared/types/form'
 import { ControlledTextField } from '@/shared/ui_controlled/ControlledTextField'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Button, Card, Typography } from '@tazalov/kebab-ui-kit'
+import { Button, Card, Typography } from '@tazalov/kebab-ui/components'
 
 import s from './SignInForm.module.scss'
 
