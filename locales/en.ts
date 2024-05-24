@@ -9,6 +9,12 @@ export const en = {
   notSelected: 'Not selected',
   profileLink: 'Profile link',
   search: 'Search',
+  tabs: {
+    followers: 'Followers',
+    following: 'Following',
+    payments: 'Payments',
+    photos: 'Uploaded photos',
+  },
   userID: 'User ID',
   username: 'Username',
 }

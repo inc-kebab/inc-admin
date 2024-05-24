@@ -11,6 +11,12 @@ export const ru: LocaleType = {
   notSelected: 'Не выбрано',
   profileLink: 'Ссылка на профиль',
   search: 'Поиск',
+  tabs: {
+    followers: 'Подписчики',
+    following: 'Подписки',
+    payments: 'Платежи',
+    photos: 'Фотографии',
+  },
   userID: 'Идентификатор',
   username: 'Имя пользователя',
 }
