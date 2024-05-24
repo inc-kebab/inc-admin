@@ -1,0 +1,19 @@
+@import '@/app/styles/mixins';
+
+.container {
+  height: 100%;
+  margin-top: -20px;
+}
+
+.link {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 23px;
+}
+
+@include tablet {
+  .container {
+    padding: 0 10px;
+  }
+}

@@ -69,6 +69,7 @@ export const UsersList = ({
               </Table.Cell>
               <Table.Cell className={clsx(s.cell, s.modalsCell)}>
                 <ActionsMenu
+                  id={user.id}
                   onDelete={handleChangeUserForDelete({
                     id: user.id,
                     name: user.fullName || `Not specified`,

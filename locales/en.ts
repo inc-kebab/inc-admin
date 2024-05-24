@@ -1,7 +1,9 @@
 /* eslint-disable max-lines */
 export const en = {
+  back: 'Back to Users List',
   banUser: 'Ban in the system',
   blocked: 'Blocked',
+  creationDate: 'Profile creation date',
   date: 'Date added',
   deleteUser: 'Delete user',
   moreInformation: 'More information',
