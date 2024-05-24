@@ -17,6 +17,8 @@ export type GetUserQuery = {
       thumbnail?: { __typename?: 'AvatarModel'; url: string } | null
     } | null
     createdAt: string
+    firstname?: null | string
+    lastname?: null | string
     username: string
   }
 }
@@ -25,6 +27,8 @@ export const GetUserDocument = gql`
   query GetUser($id: Int!) {
     getUser(id: $id) {
       username
+      firstname
+      lastname
       createdAt
       avatars {
         thumbnail {
