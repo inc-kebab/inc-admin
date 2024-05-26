@@ -17,7 +17,6 @@ export const ImagePreview = forwardRef<HTMLDivElement, Props>(
         <Image
           alt={description || 'post'}
           fill
-          priority
           sizes="(max-width: 576px) 100vw, (max-width: 1200px) 50vw, 30vw"
           src={imageSrc}
           style={{ objectFit: 'cover' }} //? or contain
