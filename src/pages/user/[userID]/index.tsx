@@ -3,7 +3,7 @@ import { useGetUserQuery } from '@/shared/api/queries/get-user/get-user.generate
 import WithAuth from '@/shared/helpers/hoc/WithAuth'
 import { useTranslation } from '@/shared/hooks'
 import { Page } from '@/shared/types/layout'
-import { MainLayout } from '@/widgets/layout'
+import { AuthLayout } from '@/widgets/layout'
 import { UserInfoTabs } from '@/widgets/user-info-tabs'
 import { BackToPage } from '@tazalov/kebab-ui/components'
 import { useRouter } from 'next/router'
@@ -41,6 +41,6 @@ const UsersInfoPage: Page = () => {
 }
 
 UsersInfoPage.getLayout = page => {
-  return <MainLayout isHideSidebar>{page}</MainLayout>
+  return <AuthLayout>{page}</AuthLayout>
 }
 export default WithAuth(UsersInfoPage)

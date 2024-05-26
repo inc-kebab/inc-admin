@@ -16,6 +16,7 @@ export const en = {
     creationDate: 'Profile creation date',
     login: 'Login',
     nameNotSpecified: 'Name is not specified',
+    notFound: 'Not found',
     onPage: 'on page',
     password: 'Password',
     show: 'Show',
@@ -25,6 +26,15 @@ export const en = {
     ru: 'Russian',
   },
   page: {
+    user: {
+      payments: {
+        amount: 'Amount, $',
+        date: 'Date of Payment',
+        endDate: 'End date of subscription',
+        paytype: 'Payment Type',
+        subtype: 'Subscription type',
+      },
+    },
     usersList: {
       banUser: 'Ban in the system',
       blocked: 'Blocked',

@@ -18,6 +18,7 @@ export const ru: LocaleType = {
     creationDate: 'Дата создания профиля',
     login: 'Логин',
     nameNotSpecified: 'Имя не указано',
+    notFound: 'Не найдено',
     onPage: 'на странице',
     password: 'Пароль',
     show: 'Показать',
@@ -27,6 +28,15 @@ export const ru: LocaleType = {
     ru: 'Русский',
   },
   page: {
+    user: {
+      payments: {
+        amount: 'Сумма, $',
+        date: 'Дата платежна',
+        endDate: 'Дата окончания подписки',
+        paytype: 'Тип платежа',
+        subtype: 'Тип подписки',
+      },
+    },
     usersList: {
       banUser: 'Запрет на использование',
       blocked: 'Заблокирован',

@@ -1,15 +1,22 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 
 import { useTranslation } from '@/shared/hooks/useTranslation'
+import { UploadedPhotos } from '@/widgets/user-info-tabs/ui/UploadedPhotos/UploadedPhotos'
 import { Tabs } from '@tazalov/kebab-ui/components'
 import { useRouter } from 'next/router'
+
+import s from './UserInfoTabs.module.scss'
+
+import { Payments } from '../Payments/Payments'
+
+const valuesTabs = ['photos', 'payments', 'followers', 'following']
 
 export const UserInfoTabs = () => {
   const { t } = useTranslation()
 
   const { push, query } = useRouter()
 
-  const [activeTab, setActiveTab] = useState((query.tab as string) || 'photos')
+  const [activeTab, setActiveTab] = useState('photos')
 
   const tabs = useMemo(() => {
     return [
@@ -25,25 +32,41 @@ export const UserInfoTabs = () => {
     void push({ query: { tab: value, userID: query.userID } })
   }
 
+  useEffect(() => {
+    if (query.tab) {
+      if (valuesTabs.includes(query.tab as string)) {
+        setActiveTab(query.tab as string)
+      } else {
+        setActiveTab('photos')
+        void push({ query: { tab: 'photos', userID: query.userID } })
+      }
+    }
+  }, [query.tab, push, query.userID])
+
   return (
-    <Tabs.Root defaultValue={tabs[0].value} onValueChange={handleChangeTabValue} value={activeTab}>
-      <Tabs.List>
+    <Tabs.Root
+      className={s.root}
+      defaultValue={tabs[0].value}
+      onValueChange={handleChangeTabValue}
+      value={activeTab}
+    >
+      <Tabs.List className={s.tabs}>
         {tabs.map(tab => (
-          <Tabs.Item key={tab.value} value={tab.value}>
+          <Tabs.Item className={s.item} key={tab.value} value={tab.value}>
             {tab.children}
           </Tabs.Item>
         ))}
       </Tabs.List>
-      <Tabs.Content value={tabs[0].value}>
-        <div>Uploaded photos</div>
+      <Tabs.Content className={s.content} value={tabs[0].value}>
+        <UploadedPhotos id={query.userID as string} />
       </Tabs.Content>
-      <Tabs.Content value={tabs[1].value}>
-        <div>Payments</div>
+      <Tabs.Content className={s.content} value={tabs[1].value}>
+        <Payments id={query.userID as string} />
       </Tabs.Content>
-      <Tabs.Content value={tabs[2].value}>
+      <Tabs.Content className={s.content} value={tabs[2].value}>
         <div>Followers</div>
       </Tabs.Content>
-      <Tabs.Content value={tabs[3].value}>
+      <Tabs.Content className={s.content} value={tabs[3].value}>
         <div>Following</div>
       </Tabs.Content>
     </Tabs.Root>
