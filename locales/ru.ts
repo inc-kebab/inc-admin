@@ -2,51 +2,26 @@ import { LocaleType } from './en'
 
 /* eslint-disable max-lines */
 export const ru: LocaleType = {
-  title: {
-    signIn: 'Войти',
-  },
   button: {
+    no: 'Нет',
     signIn: 'Войти',
     yes: 'Да',
-    no: 'Нет',
+  },
+  dialog: {
+    deleteUser: {
+      description: 'Вы уверены, что хотите удалить пользователя ',
+      title: 'Удалить пользователя',
+    },
   },
   label: {
     login: 'Логин',
+    onPage: 'на странице',
     password: 'Пароль',
     show: 'Показать',
-    onPage: 'на странице',
   },
   lang: {
     en: 'Английский',
     ru: 'Русский',
-  },
-  sideBar: {
-    paymentsList: 'Платежи',
-    postsList: 'Посты',
-    statistics: 'Статистика',
-    usersList: 'Пользователи',
-  },
-  table: {
-    userID: 'Идентификатор',
-    username: 'Имя пользователя',
-    profileLink: 'Ссылка на профиль',
-    date: 'Дата добавления',
-  },
-  dialog: {
-    deleteUser: {
-      title: 'Удалить пользователя',
-      description: 'Вы уверены, что хотите удалить пользователя ',
-    },
-  },
-  validation: {
-    maxLength: (len: number) => `Максимальное количество символов ${len}`,
-    minLength: (len: number) => `Минимальное количество символов ${len}`,
-    passwordVerification: 'Пароль должен состоять из латинских букв и содержать хотя бы одну цифру',
-    loginVerification: 'Логин должен состоять из латинских букв и цифр',
-  },
-  placeholder: {
-    login: 'Введите логин',
-    password: 'Введите пароль',
   },
   page: {
     usersList: {
@@ -55,8 +30,39 @@ export const ru: LocaleType = {
       moreInformation: 'Дополнительная информация',
       notBlocked: 'Не заблокирован',
       notSelected: 'Не выбрано',
-      search: 'Поиск',
       notSpecified: 'Не указан',
+      search: 'Поиск',
     },
+  },
+  placeholder: {
+    login: 'Введите логин',
+    password: 'Введите пароль',
+  },
+  sideBar: {
+    paymentsList: 'Платежи',
+    postsList: 'Посты',
+    statistics: 'Статистика',
+    usersList: 'Пользователи',
+  },
+  table: {
+    date: 'Дата добавления',
+    profileLink: 'Ссылка на профиль',
+    userID: 'Идентификатор',
+    username: 'Имя пользователя',
+  },
+  tabs: {
+    followers: 'Подписчики',
+    following: 'Подписки',
+    payments: 'Платежи',
+    photos: 'Фотографии',
+  },
+  title: {
+    signIn: 'Войти',
+  },
+  validation: {
+    loginVerification: 'Логин должен состоять из латинских букв и цифр',
+    maxLength: (len: number) => `Максимальное количество символов ${len}`,
+    minLength: (len: number) => `Минимальное количество символов ${len}`,
+    passwordVerification: 'Пароль должен состоять из латинских букв и содержать хотя бы одну цифру',
   },
 }
