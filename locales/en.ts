@@ -1,6 +1,7 @@
 /* eslint-disable max-lines */
 export const en = {
   button: {
+    back: 'Back to Users List',
     no: 'No',
     signIn: 'Sign In',
     yes: 'Yes',
@@ -12,7 +13,9 @@ export const en = {
     },
   },
   label: {
+    creationDate: 'Profile creation date',
     login: 'Login',
+    nameNotSpecified: 'Name is not specified',
     onPage: 'on page',
     password: 'Password',
     show: 'Show',

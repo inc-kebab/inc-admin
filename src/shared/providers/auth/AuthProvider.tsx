@@ -1,12 +1,12 @@
 import { PropsWithChildren, createContext, useState } from 'react'
 
 export const AuthContext = createContext({
-  isAuth: false,
+  isAuth: true,
   setIsAuth: (isAuth: boolean) => {},
 })
 
 export const AuthProvider = ({ children }: PropsWithChildren) => {
-  const [isAuth, setIsAuth] = useState(false)
+  const [isAuth, setIsAuth] = useState(true)
 
   return <AuthContext.Provider value={{ isAuth, setIsAuth }}>{children}</AuthContext.Provider>
 }

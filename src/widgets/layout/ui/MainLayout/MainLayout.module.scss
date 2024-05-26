@@ -17,6 +17,10 @@
   display: none;
 }
 
+.hide {
+  visibility: hidden;
+}
+
 @include mobile {
   .main {
     padding: 24px var(--container-padding);

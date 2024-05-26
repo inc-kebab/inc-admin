@@ -9,7 +9,11 @@ import { CustomMobileSidebar } from '../CustomMobileSidebar/CustomMobileSidebar'
 import { CustomSidebar } from '../CustomSidebar/CustomSidebar'
 import { Header } from '../Header/Header'
 
-export const MainLayout = ({ children }: PropsWithChildren) => {
+type Props = {
+  isHideSidebar?: boolean
+} & PropsWithChildren
+
+export const MainLayout = ({ children, isHideSidebar }: Props) => {
   return (
     <>
       <Head>
@@ -20,7 +24,7 @@ export const MainLayout = ({ children }: PropsWithChildren) => {
       </Head>
       <Header />
       <div className={clsx(s.wrapper)}>
-        <CustomSidebar className={s.sidebar} />
+        <CustomSidebar className={clsx(s.sidebar, { [s.hide]: isHideSidebar })} />
         <CustomMobileSidebar className={s.mobileSidebar} />
         <main className={s.main}>{children}</main>
       </div>

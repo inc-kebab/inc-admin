@@ -3,6 +3,7 @@ import { LocaleType } from './en'
 /* eslint-disable max-lines */
 export const ru: LocaleType = {
   button: {
+    back: 'Назад к списку пользователей',
     no: 'Нет',
     signIn: 'Войти',
     yes: 'Да',
@@ -14,7 +15,9 @@ export const ru: LocaleType = {
     },
   },
   label: {
+    creationDate: 'Дата создания профиля',
     login: 'Логин',
+    nameNotSpecified: 'Имя не указано',
     onPage: 'на странице',
     password: 'Пароль',
     show: 'Показать',
