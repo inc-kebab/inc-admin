@@ -16,6 +16,7 @@ export const en = {
     creationDate: 'Profile creation date',
     login: 'Login',
     nameNotSpecified: 'Name is not specified',
+    notFound: 'Not found',
     onPage: 'on page',
     password: 'Password',
     show: 'Show',

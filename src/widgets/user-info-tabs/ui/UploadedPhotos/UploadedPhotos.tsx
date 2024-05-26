@@ -1,6 +1,7 @@
 import { ImagePreview } from '@/entities/image'
 import { useGetPhotosQuery } from '@/shared/api/queries/get-user-photos/get-user-photos.generated'
-import { Loader } from '@tazalov/kebab-ui/components'
+import { useTranslation } from '@/shared/hooks'
+import { Loader, Typography } from '@tazalov/kebab-ui/components'
 
 import s from './UploadedPhotos.module.scss'
 
@@ -9,6 +10,8 @@ type Props = {
 }
 
 export const UploadedPhotos = ({ id }: Props) => {
+  const { t } = useTranslation()
+
   const { data, loading } = useGetPhotosQuery({ variables: { id: Number(id) } })
 
   if (loading) {
@@ -17,9 +20,15 @@ export const UploadedPhotos = ({ id }: Props) => {
 
   return (
     <div className={s.list}>
-      {data?.getPhotosOfUser?.map(el => {
-        return el && <ImagePreview description={el.type + el.id} imageSrc={el.url} key={el.id} />
-      })}
+      {data?.getPhotosOfUser && data?.getPhotosOfUser.length ? (
+        data?.getPhotosOfUser.map(el => {
+          return el && <ImagePreview description={el.type + el.id} imageSrc={el.url} key={el.id} />
+        })
+      ) : (
+        <Typography asComponent="div" className={s.msg} textAlign="center" variant="large">
+          {t.label.notFound}
+        </Typography>
+      )}
     </div>
   )
 }

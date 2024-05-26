@@ -34,7 +34,7 @@ export const Payments = ({ id }: Props) => {
       <PaymentsList isLoading={loading} list={data?.getPaymentsOfUser.items} pageSize={pageSize} />
       <Pagination
         currentPage={pageNumber}
-        disabled={loading}
+        disabled={loading || data?.getPaymentsOfUser.items.length === 0}
         onChangePage={handleChangePage}
         onValueChange={handleChangePageSize}
         options={paginationOptions}
