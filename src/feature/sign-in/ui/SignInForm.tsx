@@ -1,6 +1,7 @@
 import { Ref, forwardRef, useImperativeHandle } from 'react'
 import { useForm } from 'react-hook-form'
 
+import { useFormRevalidateWithLocale, useTranslation } from '@/shared/hooks'
 import { UseFormRef } from '@/shared/types/form'
 import { ControlledTextField } from '@/shared/ui_controlled/ControlledTextField'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -17,27 +18,33 @@ type Props = {
 
 export const SignInForm = forwardRef(
   ({ disabled, onSubmit }: Props, ref: Ref<UseFormRef<SignInFormValues>>) => {
+    const { locale, t } = useTranslation()
+
     const {
       control,
       formState: { errors, isValid },
+      getValues,
       handleSubmit,
       reset,
       setError,
+      setValue,
     } = useForm<SignInFormValues>({
       defaultValues: {
         login: '',
         password: '',
       },
       mode: 'onTouched',
-      resolver: zodResolver(signInValidationSchema),
+      resolver: zodResolver(signInValidationSchema(t)),
     })
 
     useImperativeHandle(ref, () => ({ reset, setError }))
 
+    useFormRevalidateWithLocale({ errors, locale, setValue, values: getValues() })
+
     return (
       <Card asComponent="form" className={s.form} onSubmit={handleSubmit(onSubmit)}>
         <Typography asComponent="h1" className={s.title} textAlign="center" variant="h1">
-          Sign In
+          {t.title.signIn}
         </Typography>
         <ControlledTextField
           autoComplete="login"
@@ -45,9 +52,9 @@ export const SignInForm = forwardRef(
           control={control}
           disabled={disabled}
           error={errors.login?.message}
-          label="Login"
+          label={t.label.login}
           name="login"
-          placeholder="Login"
+          placeholder={t.placeholder.login}
           rules={{ required: true }}
         />
         <ControlledTextField
@@ -56,14 +63,14 @@ export const SignInForm = forwardRef(
           control={control}
           disabled={disabled}
           error={errors.password?.message}
-          label="Password"
+          label={t.label.password}
           name="password"
-          placeholder="Password"
+          placeholder={t.placeholder.password}
           rules={{ required: true }}
           type="password"
         />
         <Button className={s.button} disabled={disabled || !isValid} fullWidth>
-          Sign In
+          {t.button.signIn}
         </Button>
       </Card>
     )

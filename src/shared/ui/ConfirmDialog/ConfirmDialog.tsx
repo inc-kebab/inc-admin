@@ -1,5 +1,6 @@
 import { ReactNode } from 'react'
 
+import { useTranslation } from '@/shared/hooks'
 import { clsx } from '@tazalov/kebab-ui'
 import { Button, Dialog, DialogClose } from '@tazalov/kebab-ui/components'
 
@@ -28,6 +29,8 @@ export const ConfirmDialog = ({
   title,
   trigger,
 }: Props) => {
+  const { t } = useTranslation()
+
   return (
     <Dialog
       className={clsx(s.root, className)}
@@ -46,11 +49,11 @@ export const ConfirmDialog = ({
               onClick={confirmCallback}
               variant="outline"
             >
-              YES
+              {t.button.yes}
             </Button>
             <DialogClose>
               <Button className={s.btn} disabled={disabled}>
-                NO
+                {t.button.no}
               </Button>
             </DialogClose>
           </div>

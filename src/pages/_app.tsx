@@ -1,6 +1,6 @@
 import type { AppProps } from 'next/app'
 
-import { useLoader } from '@/shared/hooks/useLoader'
+import { useLoader } from '@/shared/hooks'
 import { ApolloClientProvider } from '@/shared/providers/apollo'
 import { AuthProvider } from '@/shared/providers/auth'
 import { ToastProvider } from '@/widgets/toast'

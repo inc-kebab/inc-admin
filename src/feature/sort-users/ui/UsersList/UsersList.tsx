@@ -47,31 +47,31 @@ export const UsersList = ({
         ) : (
           list?.map(user => (
             <Table.Row className={s.row} key={user.id}>
-              <Table.Cell className={clsx(s.cell, s.idCell)} data-label={t.userID}>
+              <Table.Cell className={clsx(s.cell, s.idCell)} data-label={t.table.userID}>
                 {user.id}
               </Table.Cell>
               <Table.Cell
                 className={clsx(s.cell, s.userNameCell)}
-                data-label={t.username}
+                data-label={t.table.username}
                 title={user.fullName || `Not specified`}
               >
-                {user.fullName ? getShortStr(user.fullName) : `Not specified`}
+                {user.fullName ? getShortStr(user.fullName) : t.page.usersList.notSpecified}
               </Table.Cell>
               <Table.Cell
                 className={clsx(s.cell, s.profileCell)}
-                data-label={t.profileLink}
+                data-label={t.table.profileLink}
                 title={user.username || `Not specified`}
               >
                 {user.username ? getShortStr(user.username, 18) : `Not specified`}
               </Table.Cell>
-              <Table.Cell className={clsx(s.cell, s.dateCell)} data-label={t.date}>
+              <Table.Cell className={clsx(s.cell, s.dateCell)} data-label={t.table.date}>
                 {format(new Date(+user.createdAt), 'dd.MM.yyyy')}
               </Table.Cell>
               <Table.Cell className={clsx(s.cell, s.modalsCell)}>
                 <ActionsMenu
                   onDelete={handleChangeUserForDelete({
                     id: user.id,
-                    name: user.fullName || `Not specified`,
+                    name: user.fullName || `"${t.page.usersList.notSpecified}"`,
                   })}
                 />
               </Table.Cell>
