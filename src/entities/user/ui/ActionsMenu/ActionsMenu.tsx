@@ -1,6 +1,6 @@
-import { Menu, PersonRemoveOutline } from '@/shared/assets/icons'
-import { useTranslation } from '@/shared/hooks/useTranslation'
+import { useTranslation } from '@/shared/hooks'
 import { Button, Dropdown } from '@tazalov/kebab-ui/components'
+import { Block, Menu, PersonRemoveOutline } from '@tazalov/kebab-ui/icons'
 import Link from 'next/link'
 
 import s from './ActionsMenu.module.scss'
@@ -21,12 +21,16 @@ export const ActionsMenu = ({ id, onDelete }: Props) => {
     >
       <Dropdown.Item className={s.item} onSelect={onDelete}>
         <PersonRemoveOutline />
-        {t.deleteUser}
+        {t.dialog.deleteUser.title}
       </Dropdown.Item>
-      <Dropdown.Item>
+      <Dropdown.Item className={s.item} onClick={() => {}}>
+        <Block />
+        {t.page.usersList.banUser}
+      </Dropdown.Item>
+      <Dropdown.Item className={s.item} onClick={() => {}}>
         <Link className={s.link} href={`/${id}`}>
           <Menu />
-          {t.moreInformation}
+          {t.page.usersList.moreInformation}
         </Link>
       </Dropdown.Item>
     </Dropdown.Menu>

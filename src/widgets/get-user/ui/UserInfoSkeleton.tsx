@@ -1,7 +1,6 @@
-import { BackIcon } from '@/shared/assets'
-import { Person } from '@/shared/assets/icons'
 import { useTranslation } from '@/shared/hooks/useTranslation'
 import { Skeleton, Typography } from '@tazalov/kebab-ui/components'
+import { Arrow, PersonFill } from '@tazalov/kebab-ui/icons'
 import Link from 'next/link'
 
 import s from './UserInfo.module.scss'
@@ -12,11 +11,11 @@ export const UserInfoSkeleton = () => {
   return (
     <>
       <Link className={s.link} href="/">
-        <BackIcon />
-        {t.back}
+        <Arrow />
+        {t.button.back}
       </Link>
       <div className={s.avatarWrapper}>
-        <Person className={s.unknownAvatar} />
+        <PersonFill className={s.unknownAvatar} />
         <div>
           <Skeleton border="5px" className={s.skeleton} height={20} width={150} />
           <div style={{ height: 3 }} />
@@ -26,13 +25,13 @@ export const UserInfoSkeleton = () => {
       <div className={s.infoWrapper}>
         <div>
           <Typography className={s.infoTitle} variant="regular14">
-            {t.userID}
+            {t.table.userID}
           </Typography>
           <Skeleton border="5px" className={s.skeleton} height={20} width="100%" />
         </div>
         <div>
           <Typography className={s.infoTitle} variant="regular14">
-            {t.creationDate}
+            {t.label.creationDate}
           </Typography>
           <Skeleton border="5px" className={s.skeleton} height={20} width="100%" />
         </div>

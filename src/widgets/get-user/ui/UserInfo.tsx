@@ -1,9 +1,8 @@
 import { useGetUserQuery } from '@/shared/api/queries/get-user/get-user.generated'
-import { BackIcon } from '@/shared/assets'
-import { Person } from '@/shared/assets/icons'
 import { useTranslation } from '@/shared/hooks/useTranslation'
 import { UserInfoSkeleton } from '@/widgets/get-user/ui/UserInfoSkeleton'
 import { Typography } from '@tazalov/kebab-ui/components'
+import { Arrow, PersonFill } from '@tazalov/kebab-ui/icons'
 import { format } from 'date-fns'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -25,8 +24,8 @@ export const UserInfo = ({ userID }: Props) => {
   ) : (
     <>
       <Link className={s.link} href="/">
-        <BackIcon />
-        {t.back}
+        <Arrow />
+        {t.button.back}
       </Link>
       <div className={s.avatarWrapper}>
         {data?.getUser.avatars?.thumbnail?.url ? (
@@ -38,7 +37,7 @@ export const UserInfo = ({ userID }: Props) => {
             width={60}
           />
         ) : (
-          <Person className={s.unknownAvatar} />
+          <PersonFill className={s.unknownAvatar} />
         )}
         <div>
           <Typography variant="h1">
@@ -50,13 +49,13 @@ export const UserInfo = ({ userID }: Props) => {
       <div className={s.infoWrapper}>
         <div>
           <Typography className={s.infoTitle} variant="regular14">
-            {t.userID}
+            {t.table.userID}
           </Typography>
           <Typography variant="regular16">{userID}</Typography>
         </div>
         <div>
           <Typography className={s.infoTitle} variant="regular14">
-            {t.creationDate}
+            {t.label.creationDate}
           </Typography>
           <Typography variant="regular16">
             {data?.getUser.createdAt && format(new Date(+data?.getUser.createdAt), 'dd.MM.yyyy')}
