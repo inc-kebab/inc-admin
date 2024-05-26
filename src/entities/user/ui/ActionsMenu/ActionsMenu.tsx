@@ -1,6 +1,6 @@
-import { BanIcon, Menu, PersonRemoveOutline } from '@/shared/assets/icons'
 import { useTranslation } from '@/shared/hooks'
 import { Button, Dropdown } from '@tazalov/kebab-ui/components'
+import { Block, Menu, PersonRemoveOutline } from '@tazalov/kebab-ui/icons'
 
 import s from './ActionsMenu.module.scss'
 
@@ -22,7 +22,7 @@ export const ActionsMenu = ({ onDelete }: Props) => {
         {t.dialog.deleteUser.title}
       </Dropdown.Item>
       <Dropdown.Item className={s.item} onClick={() => {}}>
-        <BanIcon />
+        <Block />
         {t.page.usersList.banUser}
       </Dropdown.Item>
       <Dropdown.Item className={s.item} onClick={() => {}}>

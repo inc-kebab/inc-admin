@@ -1,6 +1,6 @@
-import { RuIcon, UkIcon } from '@/shared/assets/icons'
 import { useTranslation } from '@/shared/hooks'
 import { Select } from '@tazalov/kebab-ui/components'
+import { RuFlag, UkFlag } from '@tazalov/kebab-ui/icons'
 import clsx from 'clsx'
 
 import s from './LangSwitcher.module.scss'
@@ -18,12 +18,12 @@ export const LangSwitcher = ({ className }: Props) => {
 
   const SELECT_OPTIONS = [
     {
-      icon: <RuIcon />,
+      icon: <RuFlag />,
       name: <span className={s.text}>{t.lang.ru}</span>,
       value: 'ru',
     },
     {
-      icon: <UkIcon />,
+      icon: <UkFlag />,
       name: <span className={s.text}>{t.lang.en}</span>,
       value: 'en',
     },
