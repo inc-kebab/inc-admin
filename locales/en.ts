@@ -25,6 +25,15 @@ export const en = {
     ru: 'Russian',
   },
   page: {
+    user: {
+      payments: {
+        amount: 'Amount, $',
+        date: 'Date of Payment',
+        endDate: 'End date of subscription',
+        paytype: 'Payment Type',
+        subtype: 'Subscription type',
+      },
+    },
     usersList: {
       banUser: 'Ban in the system',
       blocked: 'Blocked',

@@ -18,12 +18,12 @@ export const LangSwitcher = ({ className }: Props) => {
 
   const SELECT_OPTIONS = [
     {
-      icon: <RuFlag />,
+      icon: <RuFlag id="ru-flag" />,
       name: <span className={s.text}>{t.lang.ru}</span>,
       value: 'ru',
     },
     {
-      icon: <UkFlag />,
+      icon: <UkFlag id="uk-flag" />,
       name: <span className={s.text}>{t.lang.en}</span>,
       value: 'en',
     },
@@ -35,6 +35,7 @@ export const LangSwitcher = ({ className }: Props) => {
       classNames={{ icon: s.icon, trigger: s.trigger }}
       onValueChange={changeLocale}
       options={SELECT_OPTIONS}
+      portal={false}
       value={locale || defaultLocale}
     />
   )

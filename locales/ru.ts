@@ -27,6 +27,15 @@ export const ru: LocaleType = {
     ru: 'Русский',
   },
   page: {
+    user: {
+      payments: {
+        amount: 'Сумма, $',
+        date: 'Дата платежна',
+        endDate: 'Дата окончания подписки',
+        paytype: 'Тип платежа',
+        subtype: 'Тип подписки',
+      },
+    },
     usersList: {
       banUser: 'Запрет на использование',
       blocked: 'Заблокирован',

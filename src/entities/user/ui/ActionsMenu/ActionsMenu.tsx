@@ -1,4 +1,5 @@
 import { useTranslation } from '@/shared/hooks'
+import { clsx } from '@tazalov/kebab-ui'
 import { Button, Dropdown } from '@tazalov/kebab-ui/components'
 import { Block, Menu, PersonRemoveOutline } from '@tazalov/kebab-ui/icons'
 import Link from 'next/link'
@@ -27,7 +28,7 @@ export const ActionsMenu = ({ id, onDelete }: Props) => {
         <Block />
         {t.page.usersList.banUser}
       </Dropdown.Item>
-      <Dropdown.Item className={s.item} onClick={() => {}}>
+      <Dropdown.Item className={clsx(s.item, s.more)} onClick={() => {}}>
         <Link className={s.link} href={`/user/${id}`}>
           <Menu />
           {t.page.usersList.moreInformation}

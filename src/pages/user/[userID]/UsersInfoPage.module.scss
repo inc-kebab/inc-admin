@@ -1,7 +1,15 @@
+@import '@/app/styles/mixins';
+
 .container {
-  height: 100%;
+  padding: 0 var(--container-padding) 36px calc(var(--sidebar-width) + 24px);
 }
 
 .link {
   margin-bottom: 23px;
+}
+
+@include tablet {
+  .container {
+    padding: 0 var(--container-padding) 36px;
+  }
 }

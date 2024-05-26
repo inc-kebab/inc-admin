@@ -1,5 +1,9 @@
 @import '@/app/styles/mixins';
 
+.title {
+  font-size: var(--font-size-s);
+}
+
 .table {
   margin-bottom: 36px;
 }
@@ -8,24 +12,24 @@
   padding: 0;
 }
 
-.idCell {
-  width: 18%;
+.date {
+  width: 20%;
 }
 
-.userNameCell {
-  width: 24%;
+.endDate {
+  width: 25%;
 }
 
-.profileCell {
-  width: 28%;
+.amount {
+  width: 15%;
 }
 
-.dateCell {
-  width: 22%;
+.subtype {
+  width: 20%;
 }
 
-.modalsCell {
-  width: 8%;
+.paytype {
+  width: 20%;
 }
 
 @include tablet {
@@ -62,11 +66,11 @@
     }
   }
 
-  .idCell,
-  .userNameCell,
-  .profileCell,
-  .dateCell,
-  .modalsCell {
+  .date,
+  .endDate,
+  .amount,
+  .subtype,
+  .paytype {
     width: unset;
   }
 }
