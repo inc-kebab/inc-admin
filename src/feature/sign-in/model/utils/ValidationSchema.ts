@@ -1,23 +1,22 @@
+import { LocaleType } from '@/../locales'
 import { z } from 'zod'
 
-export const signInValidationSchema = z.object({
-  login: z
-    .string()
-    .trim()
-    .min(4, 'Minimum 4 characters')
-    .max(20, 'Maximum 20 characters')
-    .regex(/^[A-Za-z0-9]+$/, 'Only char and numbers')
-    .default(''),
-  password: z
-    .string()
-    .trim()
-    .min(6, 'Minimum 6 characters')
-    .max(20, 'Maximum 20 characters')
-    .regex(
-      /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]+$/,
-      'Password must consist of Latin letters and contain at least one number'
-    )
-    .default(''),
-})
+export const signInValidationSchema = (t: LocaleType) =>
+  z.object({
+    login: z
+      .string()
+      .trim()
+      .min(4, t.validation.minLength(4))
+      .max(20, t.validation.maxLength(20))
+      .regex(/^[A-Za-z0-9]+$/, t.validation.loginVerification)
+      .default(''),
+    password: z
+      .string()
+      .trim()
+      .min(6, t.validation.minLength(6))
+      .max(20, t.validation.maxLength(20))
+      .regex(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]+$/, t.validation.passwordVerification)
+      .default(''),
+  })
 
-export type SignInFormValues = z.infer<typeof signInValidationSchema>
+export type SignInFormValues = z.infer<ReturnType<typeof signInValidationSchema>>

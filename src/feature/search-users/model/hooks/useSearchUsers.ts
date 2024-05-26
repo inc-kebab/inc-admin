@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { useDebounce } from '@/shared/hooks/useDebounce'
+import { useDebounce } from '@/shared/hooks'
 
 export const useSearchUsers = (onChangePage: (page: number) => void) => {
   const [searchTerm, setSearchTerm] = useState('')

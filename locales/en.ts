@@ -1,22 +1,68 @@
 /* eslint-disable max-lines */
 export const en = {
-  banUser: 'Ban in the system',
-  blocked: 'Blocked',
-  date: 'Date added',
-  deleteUser: 'Delete user',
-  moreInformation: 'More information',
-  notBlocked: 'Not blocked',
-  notSelected: 'Not selected',
-  profileLink: 'Profile link',
-  search: 'Search',
+  button: {
+    no: 'No',
+    signIn: 'Sign In',
+    yes: 'Yes',
+  },
+  dialog: {
+    deleteUser: {
+      description: 'Are you sure to delete user ',
+      title: 'Delete user',
+    },
+  },
+  label: {
+    login: 'Login',
+    onPage: 'on page',
+    password: 'Password',
+    show: 'Show',
+  },
+  lang: {
+    en: 'English',
+    ru: 'Russian',
+  },
+  page: {
+    usersList: {
+      banUser: 'Ban in the system',
+      blocked: 'Blocked',
+      moreInformation: 'More information',
+      notBlocked: 'Not blocked',
+      notSelected: 'Not selected',
+      notSpecified: 'Not specified',
+      search: 'Search',
+    },
+  },
+  placeholder: {
+    login: 'Enter login',
+    password: 'Enter password',
+  },
+  sideBar: {
+    paymentsList: 'Payments list',
+    postsList: 'Posts list',
+    statistics: 'Statistics',
+    usersList: 'Users list',
+  },
+  table: {
+    date: 'Date added',
+    profileLink: 'Profile link',
+    userID: 'User ID',
+    username: 'Username',
+  },
   tabs: {
     followers: 'Followers',
     following: 'Following',
     payments: 'Payments',
     photos: 'Uploaded photos',
   },
-  userID: 'User ID',
-  username: 'Username',
+  title: {
+    signIn: 'Sign In',
+  },
+  validation: {
+    loginVerification: 'Login must consist of Latin letters and numbers',
+    maxLength: (len: number) => `Maximum ${len} characters`,
+    minLength: (len: number) => `Minimum ${len} characters`,
+    passwordVerification: 'Password must consist of Latin letters and contain at least one number',
+  },
 }
 
 export type LocaleType = typeof en

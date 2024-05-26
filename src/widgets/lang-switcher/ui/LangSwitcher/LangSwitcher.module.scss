@@ -1,0 +1,25 @@
+@import '@/app/styles/mixins';
+
+.root {
+  max-width: 10.25rem;
+}
+
+@include mobile {
+  .root {
+    max-width: 5rem;
+    padding: 4px 2px;
+  }
+
+  .trigger {
+    outline: 1px solid transparent;
+
+    & .icon {
+      width: 18px;
+      height: 18px;
+    }
+  }
+
+  .text {
+    display: none;
+  }
+}

@@ -1,7 +1,7 @@
 import React, { ComponentPropsWithoutRef } from 'react'
 import { Theme } from 'react-toastify'
 
-import { Close } from '@/shared/assets/icons'
+import { Close } from '@tazalov/kebab-ui/icons'
 
 import s from './ToastCloseButton.module.scss'
 
