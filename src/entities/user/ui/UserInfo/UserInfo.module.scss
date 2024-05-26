@@ -1,8 +1,5 @@
-.link {
-  display: flex;
-  gap: 12px;
-  align-items: center;
-  margin-bottom: 23px;
+.container {
+  margin-bottom: 30px;
 }
 
 .avatarWrapper {
@@ -20,7 +17,7 @@
   width: 60px;
   height: 60px;
   padding: 5px;
-
+  
   background-color: var(--dark-100);
   border-radius: 50%;
 }
@@ -29,6 +26,11 @@
   display: flex;
   gap: 60px;
   align-items: center;
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
 }
 
 .infoTitle {

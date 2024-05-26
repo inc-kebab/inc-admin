@@ -28,7 +28,7 @@ export const ActionsMenu = ({ id, onDelete }: Props) => {
         {t.page.usersList.banUser}
       </Dropdown.Item>
       <Dropdown.Item className={s.item} onClick={() => {}}>
-        <Link className={s.link} href={`/${id}`}>
+        <Link className={s.link} href={`/user/${id}`}>
           <Menu />
           {t.page.usersList.moreInformation}
         </Link>

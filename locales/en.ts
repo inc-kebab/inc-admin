@@ -15,6 +15,7 @@ export const en = {
   label: {
     creationDate: 'Profile creation date',
     login: 'Login',
+    nameNotSpecified: 'Name is not specified',
     onPage: 'on page',
     password: 'Password',
     show: 'Show',

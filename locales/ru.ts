@@ -17,6 +17,7 @@ export const ru: LocaleType = {
   label: {
     creationDate: 'Дата создания профиля',
     login: 'Логин',
+    nameNotSpecified: 'Имя не указано',
     onPage: 'на странице',
     password: 'Пароль',
     show: 'Показать',

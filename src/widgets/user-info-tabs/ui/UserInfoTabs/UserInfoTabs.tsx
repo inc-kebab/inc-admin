@@ -4,7 +4,7 @@ import { useTranslation } from '@/shared/hooks/useTranslation'
 import { Tabs } from '@tazalov/kebab-ui/components'
 import { useRouter } from 'next/router'
 
-export const InfoUser = () => {
+export const UserInfoTabs = () => {
   const { t } = useTranslation()
 
   const { push, query } = useRouter()
@@ -22,7 +22,7 @@ export const InfoUser = () => {
 
   const handleChangeTabValue = (value: string) => {
     setActiveTab(value)
-    void push({ query: { id: query.id, tab: value } })
+    void push({ query: { tab: value, userID: query.userID } })
   }
 
   return (
