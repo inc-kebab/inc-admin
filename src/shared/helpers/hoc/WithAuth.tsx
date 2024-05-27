@@ -2,6 +2,7 @@ import { useContext, useEffect } from 'react'
 
 import { AuthContext } from '@/shared/providers/auth'
 import { Page } from '@/shared/types/layout'
+import { Loader } from '@tazalov/kebab-ui/components'
 import { AppProps } from 'next/app'
 import { useRouter } from 'next/router'
 
@@ -22,7 +23,7 @@ const WithAuth = (WrappedComponent: Page) => {
     }, [isAuth, router])
 
     if (!isAuth && router.pathname !== '/sign-in') {
-      return <div>Loading...</div>
+      return <Loader fullHeight />
     }
 
     return getLayout(<WrappedComponent {...pageProps} />)
