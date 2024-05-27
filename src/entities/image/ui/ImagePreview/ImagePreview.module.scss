@@ -1,0 +1,25 @@
+@import '@/app/styles/mixins';
+
+.image {
+  position: relative;
+
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  height: 238px;
+  margin: 0 auto;
+
+  border-radius: 3px;
+}
+
+@include pc {
+  .image {
+    width: 100%;
+    height: 100%;
+    padding-top: 100%;
+    border-radius: 1px;
+  }
+}

@@ -1,0 +1,25 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.tabs {
+  scrollbar-width: none;
+  overflow-x: scroll;
+
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
+
+  & .item {
+    flex-shrink: 0;
+  }
+}
+
+.content {
+  margin-top: 36px;
+}

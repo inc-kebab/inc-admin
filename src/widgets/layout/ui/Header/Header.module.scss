@@ -1,0 +1,10 @@
+.header {
+  position: fixed;
+  z-index: 10;
+  top: 0;
+}
+
+.content {
+  display: flex;
+  justify-content: space-between;
+}

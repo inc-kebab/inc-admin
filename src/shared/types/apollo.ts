@@ -52,7 +52,13 @@ export type ImageModel = {
 
 export type Mutation = {
   __typename?: 'Mutation'
+  checkAdmin: Scalars['Boolean']['output']
   deleteUser: Scalars['String']['output']
+}
+
+export type MutationCheckAdminArgs = {
+  login: Scalars['String']['input']
+  password: Scalars['String']['input']
 }
 
 export type MutationDeleteUserArgs = {
@@ -114,7 +120,7 @@ export type Query = {
   getPaymentsOfUser: UserPaymentsPaginationModel
   getPhotosOfUser?: Maybe<Array<Maybe<ImageModel>>>
   getUser: ProfileModel
-  getUsers: UserPaginationModel
+  getUsers?: Maybe<UserPaginationModel>
 }
 
 export type QueryGetPaymentsOfUserArgs = {
@@ -136,7 +142,12 @@ export type QueryGetUsersArgs = {
   pageSize?: InputMaybe<Scalars['Int']['input']>
   searchTerm?: InputMaybe<Scalars['String']['input']>
   sortBy?: InputMaybe<Scalars['String']['input']>
-  sortDirection?: InputMaybe<Scalars['String']['input']>
+  sortDirection?: InputMaybe<SortDirection>
+}
+
+export enum SortDirection {
+  Asc = 'ASC',
+  Desc = 'DESC',
 }
 
 export type UserModel = {
@@ -157,9 +168,10 @@ export type UserModel = {
 
 export type UserPaginationModel = {
   __typename?: 'UserPaginationModel'
-  pagination: PaginationModel
   /** users */
-  users: Array<UserModel>
+  pagination?: Maybe<PaginationModel>
+  /** users */
+  users?: Maybe<Array<UserModel>>
 }
 
 export type UserPaymentsPaginationModel = {

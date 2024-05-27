@@ -1,0 +1,22 @@
+@import '@/app/styles/mixins';
+
+.list {
+  display: grid;
+  grid-auto-rows: min-content;
+  grid-template-areas: 'msg msg msg msg';
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+
+  margin-top: 12px;
+}
+
+.msg {
+  grid-area: msg;
+}
+
+@include pc {
+  .list {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+  }
+}

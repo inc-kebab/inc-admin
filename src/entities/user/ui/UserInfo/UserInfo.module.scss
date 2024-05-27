@@ -1,0 +1,38 @@
+.container {
+  margin-bottom: 30px;
+}
+
+.avatarWrapper {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  margin-bottom: 19px;
+}
+
+.avatar {
+  border-radius: 50%;
+}
+
+.unknownAvatar {
+  width: 60px;
+  height: 60px;
+  padding: 5px;
+
+  background-color: var(--dark-100);
+  border-radius: 50%;
+}
+
+.infoWrapper {
+  display: flex;
+  gap: 60px;
+  align-items: center;
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+}
+
+.infoTitle {
+  color: var(--kebab-light-900);
+}

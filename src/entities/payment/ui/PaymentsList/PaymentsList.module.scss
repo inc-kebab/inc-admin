@@ -1,0 +1,80 @@
+@import '@/app/styles/mixins';
+
+.title {
+  font-size: var(--font-size-s);
+}
+
+.table {
+  margin-bottom: 36px;
+}
+
+.msg {
+  padding: 1rem;
+}
+
+.skeleton {
+  padding: 0;
+}
+
+.date {
+  width: 20%;
+}
+
+.endDate {
+  width: 25%;
+}
+
+.amount {
+  width: 15%;
+}
+
+.subtype {
+  width: 20%;
+}
+
+.paytype {
+  width: 20%;
+}
+
+@include tablet {
+  .tableHead {
+    display: none;
+  }
+
+  .body {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    & .row {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+
+      padding: 19px 12px 17px;
+
+      background-color: var(--dark-500);
+      border: 1px solid var(--dark-300);
+    }
+  }
+
+  .cell {
+    display: flex;
+    justify-content: space-between;
+    padding: 0;
+    font-weight: var(--font-weight-bold);
+
+    &::before {
+      content: attr(data-label);
+      font-weight: var(--font-weight-regular);
+    }
+  }
+
+  .date,
+  .endDate,
+  .amount,
+  .subtype,
+  .paytype {
+    width: unset;
+  }
+}
