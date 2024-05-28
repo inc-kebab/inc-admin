@@ -17,6 +17,7 @@ type Props = {
   isLoading?: boolean
   list?: User[] | null
   onChangeSort?: (sort: Sort | null) => void
+  onChangeUserForBan: (data: DeletedUserData) => void
   onChangeUserForDelete: (data: DeletedUserData) => void
   pageSize: number
   sort: Sort | null
@@ -26,6 +27,7 @@ export const UsersList = ({
   isLoading,
   list,
   onChangeSort,
+  onChangeUserForBan,
   onChangeUserForDelete,
   pageSize,
   sort,
@@ -34,6 +36,9 @@ export const UsersList = ({
 
   const handleChangeUserForDelete = (data: DeletedUserData) => () => {
     onChangeUserForDelete(data)
+  }
+  const handleChangeUserForBan = (data: DeletedUserData) => () => {
+    onChangeUserForBan(data)
   }
 
   return (
@@ -70,6 +75,10 @@ export const UsersList = ({
               <Table.Cell className={clsx(s.cell, s.modalsCell)}>
                 <ActionsMenu
                   id={user.id}
+                  onBan={handleChangeUserForBan({
+                    id: user.id,
+                    name: user.fullName || `"${t.page.usersList.notSpecified}"`,
+                  })}
                   onDelete={handleChangeUserForDelete({
                     id: user.id,
                     name: user.fullName || `"${t.page.usersList.notSpecified}"`,

@@ -1,5 +1,10 @@
 import { usePaginationUsersList } from '@/entities/user'
-import { ConfirmDeleteDialog, useDeleteUser } from '@/feature/delete-user'
+import {
+  ConfirmBanDialog,
+  ConfirmDeleteDialog,
+  useBanUser,
+  useDeleteUser,
+} from '@/feature/delete-user'
 import { useSearchUsers } from '@/feature/search-users'
 import { UsersList, useSortUsers } from '@/feature/sort-users'
 import { useGetUsersQuery } from '@/shared/api/queries/get-users/get-users.generated'
@@ -26,6 +31,8 @@ const UsersListPage: Page = () => {
 
   const { confirm, handleChangeUserForDelete, handleDeleteUser, loadingDelete, userForDelete } =
     useDeleteUser()
+
+  const { banConfirm, handleBanUser, handleChangeUserForBan, loadingBan, userForBan } = useBanUser()
 
   const { data, loading, previousData } = useGetUsersQuery({
     variables: {
@@ -55,6 +62,7 @@ const UsersListPage: Page = () => {
         isLoading={loading}
         list={data?.getUsers?.users}
         onChangeSort={handleChangeSort}
+        onChangeUserForBan={handleChangeUserForBan}
         onChangeUserForDelete={handleChangeUserForDelete}
         pageSize={pageSize}
         sort={sort}
@@ -75,6 +83,13 @@ const UsersListPage: Page = () => {
         onDelete={handleDeleteUser}
         onOpenChange={confirm.handleChangeOpenDelete}
         open={confirm.open}
+      />
+      <ConfirmBanDialog
+        disabled={loadingBan}
+        name={userForBan?.name || 'Not specified'}
+        onDelete={handleBanUser}
+        onOpenChange={banConfirm.handleChangeOpenBan}
+        open={banConfirm.open}
       />
     </div>
   )

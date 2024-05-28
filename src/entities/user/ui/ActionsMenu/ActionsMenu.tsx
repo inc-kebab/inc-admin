@@ -8,10 +8,11 @@ import s from './ActionsMenu.module.scss'
 
 type Props = {
   id: number
+  onBan: () => void
   onDelete: () => void
 }
 
-export const ActionsMenu = ({ id, onDelete }: Props) => {
+export const ActionsMenu = ({ id, onBan, onDelete }: Props) => {
   const { t } = useTranslation()
 
   return (
@@ -24,7 +25,7 @@ export const ActionsMenu = ({ id, onDelete }: Props) => {
         <PersonRemoveOutline />
         {t.dialog.deleteUser.title}
       </Dropdown.Item>
-      <Dropdown.Item className={s.item} onClick={() => {}}>
+      <Dropdown.Item className={s.item} onClick={onBan}>
         <Block />
         {t.page.usersList.banUser}
       </Dropdown.Item>
