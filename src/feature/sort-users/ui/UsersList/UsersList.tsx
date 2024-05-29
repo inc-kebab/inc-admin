@@ -70,6 +70,7 @@ export const UsersList = ({
               <Table.Cell className={clsx(s.cell, s.modalsCell)}>
                 <ActionsMenu
                   id={user.id}
+                  isBlocked={user.id % 10 === 0} // TODO
                   onDelete={handleChangeUserForDelete({
                     id: user.id,
                     name: user.fullName || `"${t.page.usersList.notSpecified}"`,

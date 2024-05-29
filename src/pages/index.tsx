@@ -1,4 +1,5 @@
 import { usePaginationUsersList } from '@/entities/user'
+import { useSortBlockUsers } from '@/feature/block-users'
 import { ConfirmDeleteDialog, useDeleteUser } from '@/feature/delete-user'
 import { useSearchUsers } from '@/feature/search-users'
 import { UsersList, useSortUsers } from '@/feature/sort-users'
@@ -7,7 +8,7 @@ import WithAuth from '@/shared/helpers/hoc/WithAuth'
 import { useTranslation } from '@/shared/hooks'
 import { Page } from '@/shared/types/layout'
 import { MainLayout } from '@/widgets/layout'
-import { Pagination, TextField } from '@tazalov/kebab-ui/components'
+import { Pagination, Select, TextField } from '@tazalov/kebab-ui/components'
 
 import s from './index.module.scss'
 
@@ -22,6 +23,7 @@ const UsersListPage: Page = () => {
   const { handleChangePage, handleChangePageSize, pageNumber, pageSize } = usePaginationUsersList()
 
   const { debouncedSearchTerm, handleSearch, searchTerm } = useSearchUsers(handleChangePage)
+  const { blocked, handleChangeBlocked, options } = useSortBlockUsers(handleChangePage)
   const { handleChangeSort, sort } = useSortUsers(handleChangePage)
 
   const { confirm, handleChangeUserForDelete, handleDeleteUser, loadingDelete, userForDelete } =
@@ -49,6 +51,13 @@ const UsersListPage: Page = () => {
           placeholder="Search"
           type="search"
           value={searchTerm}
+        />
+        <Select
+          className={s.select}
+          onValueChange={handleChangeBlocked}
+          options={options}
+          placeholder="Not selected"
+          value={blocked}
         />
       </div>
       <UsersList

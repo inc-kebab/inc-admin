@@ -43,6 +43,7 @@ export const en = {
       notSelected: 'Not selected',
       notSpecified: 'Not specified',
       search: 'Search',
+      unbanUser: 'Unban in the system',
     },
   },
   placeholder: {

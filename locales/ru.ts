@@ -38,13 +38,14 @@ export const ru: LocaleType = {
       },
     },
     usersList: {
-      banUser: 'Запрет на использование',
+      banUser: 'Забанить в системе',
       blocked: 'Заблокирован',
       moreInformation: 'Дополнительная информация',
       notBlocked: 'Не заблокирован',
       notSelected: 'Не выбрано',
       notSpecified: 'Не указан',
       search: 'Поиск',
+      unbanUser: 'Разбанить в системе',
     },
   },
   placeholder: {
