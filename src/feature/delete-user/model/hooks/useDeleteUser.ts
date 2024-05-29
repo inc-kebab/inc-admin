@@ -14,7 +14,7 @@ export const useDeleteUser = () => {
     variables: { userId: userForDelete?.id ?? 0 },
   })
 
-  const handleChangeOpenDelete = (open: boolean) => {
+  const handleChangeOpen = (open: boolean) => {
     if (!open) {
       setUserForDelete(null)
     }
@@ -39,7 +39,7 @@ export const useDeleteUser = () => {
   }
 
   return {
-    confirm: { handleChangeOpenDelete, open },
+    confirm: { handleChangeOpen, open },
     handleChangeUserForDelete,
     handleDeleteUser,
     loadingDelete,

@@ -1,8 +1,8 @@
 import { usePaginationUsersList } from '@/entities/user'
-import { useSortBlockUsers } from '@/feature/block-users'
 import { ConfirmDeleteDialog, useDeleteUser } from '@/feature/delete-user'
 import { useSearchUsers } from '@/feature/search-users'
 import { UsersList, useSortUsers } from '@/feature/sort-users'
+import { ConfirmUnbanDialog, useUnbanUser } from '@/feature/unban-user'
 import { useGetUsersQuery } from '@/shared/api/queries/get-users/get-users.generated'
 import WithAuth from '@/shared/helpers/hoc/WithAuth'
 import { useTranslation } from '@/shared/hooks'
@@ -23,11 +23,11 @@ const UsersListPage: Page = () => {
   const { handleChangePage, handleChangePageSize, pageNumber, pageSize } = usePaginationUsersList()
 
   const { debouncedSearchTerm, handleSearch, searchTerm } = useSearchUsers(handleChangePage)
-  const { blocked, handleChangeBlocked, options } = useSortBlockUsers(handleChangePage)
-  const { handleChangeSort, sort } = useSortUsers(handleChangePage)
+  const { handleChangeSort, select, sort } = useSortUsers(handleChangePage)
 
   const { confirm, handleChangeUserForDelete, handleDeleteUser, loadingDelete, userForDelete } =
     useDeleteUser()
+  const { confirm: confirmUnban } = useUnbanUser()
 
   const { data, loading, previousData } = useGetUsersQuery({
     variables: {
@@ -54,10 +54,9 @@ const UsersListPage: Page = () => {
         />
         <Select
           className={s.select}
-          onValueChange={handleChangeBlocked}
-          options={options}
-          placeholder="Not selected"
-          value={blocked}
+          onValueChange={select.handleChangeBlocked}
+          options={select.options}
+          value={select.blocked}
         />
       </div>
       <UsersList
@@ -82,8 +81,15 @@ const UsersListPage: Page = () => {
         disabled={loadingDelete}
         name={userForDelete?.name || 'Not specified'}
         onDelete={handleDeleteUser}
-        onOpenChange={confirm.handleChangeOpenDelete}
+        onOpenChange={confirm.handleChangeOpen}
         open={confirm.open}
+      />
+      <ConfirmUnbanDialog
+        disabled={loadingDelete}
+        name={userForDelete?.name || 'Not specified'}
+        onOpenChange={confirmUnban.handleChangeOpen}
+        onUnban={handleDeleteUser}
+        open={confirmUnban.open}
       />
     </div>
   )

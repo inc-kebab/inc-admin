@@ -11,6 +11,10 @@ export const en = {
       description: 'Are you sure to delete user ',
       title: 'Delete user',
     },
+    unbanUser: {
+      description: 'Are you sure to unban user ',
+      title: 'Unban user',
+    },
   },
   label: {
     creationDate: 'Profile creation date',
