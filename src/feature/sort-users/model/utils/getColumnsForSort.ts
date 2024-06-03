@@ -11,3 +11,14 @@ export const getColumnsForSort = (t: LocaleType): Column[] => {
     { key: 'modals', sortable: false },
   ]
 }
+
+export const getUserPaymentsColumns = (t: LocaleType): Column[] => {
+  return [
+    { key: 'username', sortable: true, title: t.table.username },
+    { key: 'date', sortable: true, title: t.table.date },
+    { key: 'amount', sortable: true, title: t.table.amount },
+    { key: 'subscriptionType', sortable: false, title: t.table.subscriptionType },
+    { key: 'paymentType', sortable: true, title: t.table.paymentType },
+    { key: 'modals', sortable: false },
+  ]
+}

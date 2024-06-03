@@ -56,8 +56,13 @@ export const en = {
     usersList: 'Users list',
   },
   table: {
+    amount: 'Amount, $',
+    checkbox: 'Autoubdate',
     date: 'Date added',
+    endDateOfSubscription: 'End date of subscription',
+    paymentType: 'Payment Type',
     profileLink: 'Profile link',
+    subscriptionType: 'Subscription Type',
     userID: 'User ID',
     username: 'Username',
   },

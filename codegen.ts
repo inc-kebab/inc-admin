@@ -17,7 +17,8 @@ const config: CodegenConfig = {
     'src/shared/types/apollo.ts': { plugins: ['typescript'] },
   },
   ignoreNoDocuments: true,
-  schema: 'https://inctagram-4mqb.onrender.com/api/v1/graphql',
+  schema: 'https://main.inctagram.fun/api/v1/graphql',
+  // schema: 'https://inctagram-4mqb.onrender.com/api/v1/graphql',
 }
 
 export default config
