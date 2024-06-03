@@ -9,7 +9,7 @@ import s from './ActionsMenu.module.scss'
 type Props = {
   id: number
   isBlocked?: boolean
-  onDelete: () => void
+  onDelete?: () => void
   onUnblock?: () => void
 }
 

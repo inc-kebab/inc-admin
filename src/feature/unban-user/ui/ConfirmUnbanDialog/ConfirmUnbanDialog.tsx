@@ -14,7 +14,7 @@ export const ConfirmUnbanDialog = ({ name, onUnban, ...rest }: Props) => {
 
   const textContent = (
     <>
-      {t.dialog.deleteUser.description}
+      {t.dialog.unbanUser.description}
       <b>{name}</b>?
     </>
   )
@@ -23,7 +23,7 @@ export const ConfirmUnbanDialog = ({ name, onUnban, ...rest }: Props) => {
     <ConfirmDialog
       confirmCallback={onUnban}
       content={textContent}
-      title={t.dialog.deleteUser.title}
+      title={t.dialog.unbanUser.title}
       {...rest}
     />
   )

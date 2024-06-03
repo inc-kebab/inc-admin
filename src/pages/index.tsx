@@ -25,9 +25,21 @@ const UsersListPage: Page = () => {
   const { debouncedSearchTerm, handleSearch, searchTerm } = useSearchUsers(handleChangePage)
   const { handleChangeSort, select, sort } = useSortUsers(handleChangePage)
 
-  const { confirm, handleChangeUserForDelete, handleDeleteUser, loadingDelete, userForDelete } =
-    useDeleteUser()
-  const { confirm: confirmUnban } = useUnbanUser()
+  const {
+    confirm: confirmDelete,
+    handleChangeUserForDelete,
+    handleDeleteUser,
+    loadingDelete,
+    userForDelete,
+  } = useDeleteUser()
+
+  const {
+    confirm: confirmUnban,
+    handleChangeUserUnban,
+    handleUnbanUser,
+    loadingUnban,
+    userUnban,
+  } = useUnbanUser()
 
   const { data, loading, previousData } = useGetUsersQuery({
     variables: {
@@ -36,6 +48,7 @@ const UsersListPage: Page = () => {
       searchTerm: debouncedSearchTerm,
       sortBy: sort ? sort.key : undefined,
       sortDirection: sort ? sort.direction : undefined,
+      statusFilter: select.blocked === 'none' ? undefined : select.blocked,
     },
   })
 
@@ -64,6 +77,7 @@ const UsersListPage: Page = () => {
         list={data?.getUsers?.users}
         onChangeSort={handleChangeSort}
         onChangeUserForDelete={handleChangeUserForDelete}
+        onChangeUserForUnban={handleChangeUserUnban}
         pageSize={pageSize}
         sort={sort}
       />
@@ -81,14 +95,14 @@ const UsersListPage: Page = () => {
         disabled={loadingDelete}
         name={userForDelete?.name || 'Not specified'}
         onDelete={handleDeleteUser}
-        onOpenChange={confirm.handleChangeOpen}
-        open={confirm.open}
+        onOpenChange={confirmDelete.handleChangeOpen}
+        open={confirmDelete.open}
       />
       <ConfirmUnbanDialog
-        disabled={loadingDelete}
-        name={userForDelete?.name || 'Not specified'}
+        disabled={loadingUnban}
+        name={userUnban?.name || 'Not specified'}
         onOpenChange={confirmUnban.handleChangeOpen}
-        onUnban={handleDeleteUser}
+        onUnban={handleUnbanUser}
         open={confirmUnban.open}
       />
     </div>

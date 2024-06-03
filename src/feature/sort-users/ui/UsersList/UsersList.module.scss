@@ -12,6 +12,16 @@
   width: 18%;
 }
 
+.idWrapper {
+  position: relative;
+  padding-left: 36px;
+}
+
+.idIcon {
+  position: absolute;
+  left: 0;
+}
+
 .userNameCell {
   width: 24%;
 }
