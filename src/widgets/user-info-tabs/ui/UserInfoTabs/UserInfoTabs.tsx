@@ -14,7 +14,7 @@ const valuesTabs = ['photos', 'payments', 'followers', 'following']
 export const UserInfoTabs = () => {
   const { t } = useTranslation()
 
-  const { push, query } = useRouter()
+  const { query, replace } = useRouter()
 
   const [activeTab, setActiveTab] = useState('photos')
 
@@ -29,7 +29,7 @@ export const UserInfoTabs = () => {
 
   const handleChangeTabValue = (value: string) => {
     setActiveTab(value)
-    void push({ query: { tab: value, userID: query.userID } })
+    void replace({ query: { tab: value, userID: query.userID } })
   }
 
   useEffect(() => {
@@ -38,10 +38,10 @@ export const UserInfoTabs = () => {
         setActiveTab(query.tab as string)
       } else {
         setActiveTab('photos')
-        void push({ query: { tab: 'photos', userID: query.userID } })
+        void replace({ query: { tab: 'photos', userID: query.userID } })
       }
     }
-  }, [query.tab, push, query.userID])
+  }, [query.tab, replace, query.userID])
 
   return (
     <Tabs.Root
