@@ -26,7 +26,7 @@ export type GetUsersQuery = {
     users?: Array<{
       __typename?: 'UserModel'
       createdAt: string
-      fullName: string
+      fullName?: null | string
       id: number
       username: string
     }> | null

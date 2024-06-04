@@ -1,5 +1,3 @@
-export { useBanUser } from './model/hooks/useBanUser'
 export { useDeleteUser } from './model/hooks/useDeleteUser'
 export type { DeletedUserData } from './model/types'
-export { ConfirmBanDialog } from './ui/ConfirmBanDialog/ConfirmBanDialog'
 export { ConfirmDeleteDialog } from './ui/ConfirmDeleteDialog/ConfirmDeleteDialog'

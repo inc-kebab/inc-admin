@@ -1,10 +1,6 @@
 import { usePaginationUsersList } from '@/entities/user'
-import {
-  ConfirmBanDialog,
-  ConfirmDeleteDialog,
-  useBanUser,
-  useDeleteUser,
-} from '@/feature/delete-user'
+import { ConfirmBanDialog, useBanUser } from '@/feature/ban-user'
+import { ConfirmDeleteDialog, useDeleteUser } from '@/feature/delete-user'
 import { useSearchUsers } from '@/feature/search-users'
 import { UsersList, useSortUsers } from '@/feature/sort-users'
 import { useGetUsersQuery } from '@/shared/api/queries/get-users/get-users.generated'

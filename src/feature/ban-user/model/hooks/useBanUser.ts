@@ -1,35 +1,40 @@
 import { useState } from 'react'
 import { toast } from 'react-toastify'
 
-import { useDeleteMutation } from '@/shared/api/queries/delete-user/deleteUser.generated'
-
-import { DeletedUserData } from '../types'
+import { BanUserData } from '@/feature/ban-user'
+import { useBanMutation } from '@/shared/api/queries/ban-user/banUser.generated'
 
 export const useBanUser = () => {
   const [open, setOpen] = useState(false)
-  const [userForBan, setUserForDelete] = useState<DeletedUserData | null>(null)
+  const [userForBan, setUserForBan] = useState<BanUserData | null>(null)
 
-  const [deleteUser, { loading: loadingBan }] = useDeleteMutation({
+  console.log(userForBan)
+
+  const [banUser, { loading: loadingBan }] = useBanMutation({
     refetchQueries: ['GetUsers'],
-    variables: { userId: userForBan?.id ?? 0 },
+    variables: {
+      reason: userForBan?.reason ?? '',
+      status: userForBan?.status,
+      userId: userForBan?.id ?? 0,
+    },
   })
 
   const handleChangeOpenBan = (open: boolean) => {
     if (!open) {
-      setUserForDelete(null)
+      setUserForBan(null)
     }
     setOpen(open)
   }
 
-  const handleChangeUserForBan = (data: DeletedUserData) => {
-    setUserForDelete(data)
+  const handleChangeUserForBan = (data: BanUserData) => {
+    setUserForBan(data)
     setOpen(true)
   }
 
   const handleBanUser = () => {
     if (userForBan) {
-      deleteUser().then(res => {
-        if (res.data?.deleteUser === 'deleted') {
+      banUser().then(res => {
+        if (res.data?.banUser === 'changed') {
           setOpen(false)
         } else {
           toast.error('Please try later')

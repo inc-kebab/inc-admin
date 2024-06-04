@@ -1,4 +1,5 @@
 import { ActionsMenu } from '@/entities/user'
+import { BanUserData } from '@/feature/ban-user'
 import { DeletedUserData } from '@/feature/delete-user'
 import { getShortStr } from '@/shared/helpers/getShortStr'
 import { useTranslation } from '@/shared/hooks/useTranslation'
@@ -17,7 +18,7 @@ type Props = {
   isLoading?: boolean
   list?: User[] | null
   onChangeSort?: (sort: Sort | null) => void
-  onChangeUserForBan: (data: DeletedUserData) => void
+  onChangeUserForBan: (data: BanUserData) => void
   onChangeUserForDelete: (data: DeletedUserData) => void
   pageSize: number
   sort: Sort | null
@@ -37,7 +38,7 @@ export const UsersList = ({
   const handleChangeUserForDelete = (data: DeletedUserData) => () => {
     onChangeUserForDelete(data)
   }
-  const handleChangeUserForBan = (data: DeletedUserData) => () => {
+  const handleChangeUserForBan = (data: BanUserData) => () => {
     onChangeUserForBan(data)
   }
 
@@ -78,6 +79,8 @@ export const UsersList = ({
                   onBan={handleChangeUserForBan({
                     id: user.id,
                     name: user.fullName || `"${t.page.usersList.notSpecified}"`,
+                    reason: 'reason1',
+                    status: 'BANNED',
                   })}
                   onDelete={handleChangeUserForDelete({
                     id: user.id,
