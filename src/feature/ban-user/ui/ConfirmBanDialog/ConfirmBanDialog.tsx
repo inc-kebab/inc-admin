@@ -1,9 +1,9 @@
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
 
 import { useTranslation } from '@/shared/hooks'
 import { BanStatus } from '@/shared/types/apollo'
 import { ConfirmDialog } from '@/shared/ui/ConfirmDialog'
-import { Select } from '@tazalov/kebab-ui/components'
+import { Select, TextField } from '@tazalov/kebab-ui/components'
 
 import s from './ConfirmBanDialog.module.scss'
 
@@ -20,6 +20,7 @@ type Props = {
 
 export const ConfirmBanDialog = ({ name, onBan, onDelete, reason, setReason, ...rest }: Props) => {
   const { t } = useTranslation()
+  const [showTextArea, setShowTextArea] = useState(false)
 
   const SELECT_OPTIONS = useMemo(
     () => [
@@ -55,6 +56,13 @@ export const ConfirmBanDialog = ({ name, onBan, onDelete, reason, setReason, ...
         portal={false}
         value={reason}
       />
+      {reason !== 'badBehavior' && reason !== 'advertising' && reason && (
+        <TextField // заменить на textarea
+          className={s.textArea}
+          label={t.dialog.banUser.reasonForBan}
+          onChange={e => setReason(e.currentTarget.value)}
+        />
+      )}
     </>
   )
 

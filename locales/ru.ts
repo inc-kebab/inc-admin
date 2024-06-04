@@ -14,6 +14,8 @@ export const ru: LocaleType = {
       anotherReason: 'Другая причина',
       badBehavior: 'Неприемлемое поведение',
       description: 'Вы уверены, что хотите запретить доступ пользователю',
+      pleaseSelectTheReason: 'Пожалуйста, выберите причину',
+      pleaseTryLater: 'Пожалуйста, попробуйте позже',
       reasonForBan: 'Причина запрета',
       title: 'Запретить доступ пользователю',
     },

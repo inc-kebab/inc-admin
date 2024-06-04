@@ -3,9 +3,11 @@ import { toast } from 'react-toastify'
 
 import { BanUserData } from '@/feature/ban-user'
 import { useBanMutation } from '@/shared/api/queries/ban-user/banUser.generated'
+import { useTranslation } from '@/shared/hooks'
 import { BanStatus } from '@/shared/types/apollo'
 
 export const useBanUser = () => {
+  const { t } = useTranslation()
   const [open, setOpen] = useState(false)
   const [userForBan, setUserForBan] = useState<BanUserData | null>(null)
   const [reason, setReason] = useState<string>('')
@@ -37,11 +39,11 @@ export const useBanUser = () => {
         if (res.data?.banUser === 'changed') {
           setOpen(false)
         } else {
-          toast.error('Please try later')
+          toast.error(t.dialog.banUser.pleaseTryLater)
         }
       })
     } else {
-      toast.error('Please try later2')
+      toast.error(t.dialog.banUser.pleaseSelectTheReason)
     }
   }
 
