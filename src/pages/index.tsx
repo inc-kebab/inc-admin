@@ -28,7 +28,15 @@ const UsersListPage: Page = () => {
   const { confirm, handleChangeUserForDelete, handleDeleteUser, loadingDelete, userForDelete } =
     useDeleteUser()
 
-  const { banConfirm, handleBanUser, handleChangeUserForBan, loadingBan, userForBan } = useBanUser()
+  const {
+    banConfirm,
+    handleBanUser,
+    handleChangeUserForBan,
+    loadingBan,
+    reason,
+    setReason,
+    userForBan,
+  } = useBanUser()
 
   const { data, loading, previousData } = useGetUsersQuery({
     variables: {
@@ -83,9 +91,11 @@ const UsersListPage: Page = () => {
       <ConfirmBanDialog
         disabled={loadingBan}
         name={userForBan?.name || 'Not specified'}
-        onDelete={handleBanUser}
+        onBan={handleBanUser}
         onOpenChange={banConfirm.handleChangeOpenBan}
         open={banConfirm.open}
+        reason={reason ?? ''}
+        setReason={setReason}
       />
     </div>
   )

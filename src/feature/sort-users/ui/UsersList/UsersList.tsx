@@ -79,8 +79,6 @@ export const UsersList = ({
                   onBan={handleChangeUserForBan({
                     id: user.id,
                     name: user.fullName || `"${t.page.usersList.notSpecified}"`,
-                    reason: 'reason1',
-                    status: 'BANNED',
                   })}
                   onDelete={handleChangeUserForDelete({
                     id: user.id,

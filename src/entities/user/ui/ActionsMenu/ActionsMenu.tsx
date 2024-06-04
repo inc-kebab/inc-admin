@@ -29,7 +29,7 @@ export const ActionsMenu = ({ id, onBan, onDelete }: Props) => {
         <Block />
         {t.page.usersList.banUser}
       </Dropdown.Item>
-      <Dropdown.Item className={clsx(s.item, s.more)} onClick={() => {}}>
+      <Dropdown.Item className={clsx(s.item, s.more)}>
         <Link className={s.link} href={`/user/${id}`}>
           <Menu />
           {t.page.usersList.moreInformation}

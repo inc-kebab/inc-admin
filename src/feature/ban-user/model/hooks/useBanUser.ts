@@ -3,21 +3,14 @@ import { toast } from 'react-toastify'
 
 import { BanUserData } from '@/feature/ban-user'
 import { useBanMutation } from '@/shared/api/queries/ban-user/banUser.generated'
+import { BanStatus } from '@/shared/types/apollo'
 
 export const useBanUser = () => {
   const [open, setOpen] = useState(false)
   const [userForBan, setUserForBan] = useState<BanUserData | null>(null)
+  const [reason, setReason] = useState<string>('')
 
-  console.log(userForBan)
-
-  const [banUser, { loading: loadingBan }] = useBanMutation({
-    refetchQueries: ['GetUsers'],
-    variables: {
-      reason: userForBan?.reason ?? '',
-      status: userForBan?.status,
-      userId: userForBan?.id ?? 0,
-    },
-  })
+  const [banUser, { loading: loadingBan }] = useBanMutation()
 
   const handleChangeOpenBan = (open: boolean) => {
     if (!open) {
@@ -31,15 +24,24 @@ export const useBanUser = () => {
     setOpen(true)
   }
 
-  const handleBanUser = () => {
-    if (userForBan) {
-      banUser().then(res => {
+  const handleBanUser = (status: BanStatus) => {
+    if (userForBan && reason && status) {
+      banUser({
+        refetchQueries: ['GetUsers'],
+        variables: {
+          reason: reason,
+          status: status,
+          userId: userForBan?.id ?? 0,
+        },
+      }).then(res => {
         if (res.data?.banUser === 'changed') {
           setOpen(false)
         } else {
           toast.error('Please try later')
         }
       })
+    } else {
+      toast.error('Please try later2')
     }
   }
 
@@ -48,6 +50,8 @@ export const useBanUser = () => {
     handleBanUser,
     handleChangeUserForBan,
     loadingBan,
+    reason,
+    setReason,
     userForBan,
   }
 }
