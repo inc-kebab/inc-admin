@@ -13,17 +13,15 @@ import s from './UsersInfoPage.module.scss'
 const UsersInfoPage: Page = () => {
   const { t } = useTranslation()
 
-  const { push, query } = useRouter()
+  const { back, query } = useRouter()
 
   const { data, loading } = useGetUserQuery({
     variables: { id: Number(query.userID as string) },
   })
 
-  const handleNavigate = () => push('/')
-
   return (
     <div className={s.container}>
-      <BackToPage className={s.link} onNavigate={handleNavigate} title={t.button.back} />
+      <BackToPage className={s.link} onNavigate={back} title={t.button.back} />
       <UserInfo
         isLoading={loading}
         userData={{
