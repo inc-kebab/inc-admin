@@ -21,6 +21,10 @@ export const en = {
       description: 'Are you sure to delete user ',
       title: 'Delete user',
     },
+    unbanUser: {
+      description: 'Are you sure to unban user ',
+      title: 'Unban user',
+    },
   },
   label: {
     creationDate: 'Profile creation date',
@@ -53,6 +57,7 @@ export const en = {
       notSelected: 'Not selected',
       notSpecified: 'Not specified',
       search: 'Search',
+      unbanUser: 'Unban in the system',
     },
   },
   placeholder: {

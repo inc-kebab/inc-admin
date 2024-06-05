@@ -1,8 +1,27 @@
 import { useState } from 'react'
 
+import { useTranslation } from '@/shared/hooks'
+import { BanStatus } from '@/shared/types/apollo'
+import { Options } from '@tazalov/kebab-ui/components'
+
 import { Sort } from '../types'
 
+type BlockedValue = 'none' | BanStatus
+
+type BlockedOptions = {
+  value: BlockedValue
+} & Options
+
 export const useSortUsers = (onChangePage: (page: number) => void) => {
+  const { t } = useTranslation()
+
+  const selectOptions: BlockedOptions[] = [
+    { name: t.page.usersList.notSelected, value: 'none' },
+    { name: t.page.usersList.blocked, value: BanStatus.Banned },
+    { name: t.page.usersList.notBlocked, value: BanStatus.Unbanned },
+  ]
+
+  const [blocked, setBlocked] = useState<BlockedValue>(selectOptions[0].value)
   const [sort, setSort] = useState<Sort | null>(null)
 
   const handleChangeSort = (sort: Sort | null) => {
@@ -10,8 +29,14 @@ export const useSortUsers = (onChangePage: (page: number) => void) => {
     onChangePage(1)
   }
 
+  const handleChangeBlocked = (value: string) => {
+    setBlocked(value as BlockedValue)
+    onChangePage(1)
+  }
+
   return {
     handleChangeSort,
+    select: { blocked, handleChangeBlocked, options: selectOptions },
     sort,
   }
 }

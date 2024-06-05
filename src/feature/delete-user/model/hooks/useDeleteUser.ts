@@ -1,27 +1,26 @@
 import { useState } from 'react'
 import { toast } from 'react-toastify'
 
+import { DialogUserData } from '@/entities/user'
 import { useDeleteMutation } from '@/shared/api/queries/delete-user/deleteUser.generated'
-
-import { DeletedUserData } from '../types'
 
 export const useDeleteUser = () => {
   const [open, setOpen] = useState(false)
-  const [userForDelete, setUserForDelete] = useState<DeletedUserData | null>(null)
+  const [userForDelete, setUserForDelete] = useState<DialogUserData | null>(null)
 
   const [deleteUser, { loading: loadingDelete }] = useDeleteMutation({
     refetchQueries: ['GetUsers'],
     variables: { userId: userForDelete?.id ?? 0 },
   })
 
-  const handleChangeOpenDelete = (open: boolean) => {
+  const handleChangeOpen = (open: boolean) => {
     if (!open) {
       setUserForDelete(null)
     }
     setOpen(open)
   }
 
-  const handleChangeUserForDelete = (data: DeletedUserData) => {
+  const handleChangeUserForDelete = (data: DialogUserData) => {
     setUserForDelete(data)
     setOpen(true)
   }
@@ -39,7 +38,7 @@ export const useDeleteUser = () => {
   }
 
   return {
-    confirm: { handleChangeOpenDelete, open },
+    confirm: { handleChangeOpen, open },
     handleChangeUserForDelete,
     handleDeleteUser,
     loadingDelete,
