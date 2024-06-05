@@ -13,6 +13,10 @@ export const ru: LocaleType = {
       description: 'Вы уверены, что хотите удалить пользователя ',
       title: 'Удалить пользователя',
     },
+    unbanUser: {
+      description: 'Вы уверены, что хотите разбанить пользователя ',
+      title: 'Разбанить пользователя',
+    },
   },
   label: {
     creationDate: 'Дата создания профиля',
@@ -38,13 +42,14 @@ export const ru: LocaleType = {
       },
     },
     usersList: {
-      banUser: 'Запрет на использование',
+      banUser: 'Забанить в системе',
       blocked: 'Заблокирован',
       moreInformation: 'Дополнительная информация',
       notBlocked: 'Не заблокирован',
       notSelected: 'Не выбрано',
       notSpecified: 'Не указан',
       search: 'Поиск',
+      unbanUser: 'Разбанить в системе',
     },
   },
   placeholder: {
