@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 export type Maybe<T> = T | null
 export type InputMaybe<T> = Maybe<T>
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] }
@@ -181,9 +182,12 @@ export type Query = {
 }
 
 export type QueryGetAllPaymentsArgs = {
+  isAutoUpdate?: InputMaybe<Scalars['Boolean']['input']>
   pageNumber?: InputMaybe<Scalars['Int']['input']>
   pageSize?: InputMaybe<Scalars['Int']['input']>
   searchTerm?: InputMaybe<Scalars['String']['input']>
+  sortBy?: InputMaybe<Scalars['String']['input']>
+  sortDirection?: InputMaybe<SortDirection>
 }
 
 export type QueryGetAllPostsArgs = {

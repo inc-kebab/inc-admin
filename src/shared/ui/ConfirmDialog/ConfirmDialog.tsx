@@ -1,6 +1,7 @@
 import { ReactNode } from 'react'
 
 import { useTranslation } from '@/shared/hooks'
+import { BanStatus } from '@/shared/types/apollo'
 import { clsx } from '@tazalov/kebab-ui'
 import { Button, Dialog, DialogClose } from '@tazalov/kebab-ui/components'
 
@@ -8,7 +9,7 @@ import s from './ConfirmDialog.module.scss'
 
 type Props = {
   className?: string
-  confirmCallback?: () => void
+  confirmCallback?: (status: BanStatus) => void
   content: ReactNode
   customActions?: ReactNode
   disabled?: boolean
@@ -46,13 +47,17 @@ export const ConfirmDialog = ({
             <Button
               className={s.btn}
               disabled={disabled}
-              onClick={confirmCallback}
+              onClick={() => confirmCallback?.(BanStatus.Banned)}
               variant="outline"
             >
               {t.button.yes}
             </Button>
             <DialogClose>
-              <Button className={s.btn} disabled={disabled}>
+              <Button
+                className={s.btn}
+                disabled={disabled}
+                onClick={() => confirmCallback?.(BanStatus.Unbanned)}
+              >
                 {t.button.no}
               </Button>
             </DialogClose>

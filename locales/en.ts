@@ -7,6 +7,16 @@ export const en = {
     yes: 'Yes',
   },
   dialog: {
+    banUser: {
+      advertising: 'Advertising placement',
+      anotherReason: 'Another reason',
+      badBehavior: 'Bad behavior',
+      description: 'Are you sure to ban user ',
+      pleaseSelectTheReason: 'Please select the reason',
+      pleaseTryLater: 'Please try later',
+      reasonForBan: 'Reason for ban',
+      title: 'Ban user',
+    },
     deleteUser: {
       description: 'Are you sure to delete user ',
       title: 'Delete user',

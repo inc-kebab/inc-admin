@@ -8,12 +8,14 @@ import s from './ActionsMenu.module.scss'
 
 type Props = {
   id: number
+  onBan?: () => void
   isBlocked?: boolean
   onDelete?: () => void
   onUnblock?: () => void
 }
 
-export const ActionsMenu = ({ id, isBlocked, onDelete, onUnblock }: Props) => {
+export const ActionsMenu = ({ id, isBlocked, onDelete, onUnblock, onBan }: Props) => {
+
   const { t } = useTranslation()
 
   return (
@@ -32,7 +34,7 @@ export const ActionsMenu = ({ id, isBlocked, onDelete, onUnblock }: Props) => {
           {t.page.usersList.unbanUser}
         </Dropdown.Item>
       ) : (
-        <Dropdown.Item className={s.item} onSelect={() => {}}>
+        <Dropdown.Item className={s.item} onSelect={onBan}>
           <Block />
           {t.page.usersList.banUser}
         </Dropdown.Item>

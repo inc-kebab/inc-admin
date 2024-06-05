@@ -9,6 +9,16 @@ export const ru: LocaleType = {
     yes: 'Да',
   },
   dialog: {
+    banUser: {
+      advertising: 'Размещение рекламы',
+      anotherReason: 'Другая причина',
+      badBehavior: 'Неприемлемое поведение',
+      description: 'Вы уверены, что хотите запретить доступ пользователю',
+      pleaseSelectTheReason: 'Пожалуйста, выберите причину',
+      pleaseTryLater: 'Пожалуйста, попробуйте позже',
+      reasonForBan: 'Причина запрета',
+      title: 'Запретить доступ пользователю',
+    },
     deleteUser: {
       description: 'Вы уверены, что хотите удалить пользователя ',
       title: 'Удалить пользователя',

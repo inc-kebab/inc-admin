@@ -1,3 +1,5 @@
+
+import { BanUserData } from '@/feature/ban-user'
 import { ActionsMenu, DialogUserData } from '@/entities/user'
 import { getShortStr } from '@/shared/helpers/getShortStr'
 import { useTranslation } from '@/shared/hooks/useTranslation'
@@ -18,6 +20,7 @@ type Props = {
   isLoading?: boolean
   list?: User[] | null
   onChangeSort?: (sort: Sort | null) => void
+  onChangeUserForBan: (data: BanUserData) => void
   onChangeUserForDelete: (data: DialogUserData) => void
   onChangeUserForUnban: (data: DialogUserData) => void
   pageSize: number
@@ -28,6 +31,7 @@ export const UsersList = ({
   isLoading,
   list,
   onChangeSort,
+  onChangeUserForBan,
   onChangeUserForDelete,
   onChangeUserForUnban,
   pageSize,
@@ -37,6 +41,9 @@ export const UsersList = ({
 
   const handleChangeUserForDelete = (data: DialogUserData) => () => {
     onChangeUserForDelete(data)
+  }
+  const handleChangeUserForBan = (data: BanUserData) => () => {
+    onChangeUserForBan(data)
   }
 
   const handleChangeUserForUnban = (data: DialogUserData) => () => {
@@ -89,6 +96,7 @@ export const UsersList = ({
                   <ActionsMenu
                     id={user.id}
                     isBlocked={isBlocked}
+                    onBan={handleChangeUserForBan(dialogUserData)}
                     onDelete={handleChangeUserForDelete(dialogUserData)}
                     onUnblock={handleChangeUserForUnban(dialogUserData)}
                   />
