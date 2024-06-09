@@ -1,9 +1,9 @@
-import { usePaginationUsersList } from '@/entities/user'
-import { ConfirmBanDialog, useBanUser } from '@/feature/ban-user'
+import { useBanUnbanUser, usePaginationUsersList } from '@/entities/user'
+import { ConfirmBanDialog } from '@/feature/ban-user'
 import { ConfirmDeleteDialog, useDeleteUser } from '@/feature/delete-user'
 import { useSearchUsers } from '@/feature/search-users'
 import { UsersList, useSortUsers } from '@/feature/sort-users'
-import { ConfirmUnbanDialog, useUnbanUser } from '@/feature/unban-user'
+import { ConfirmUnbanDialog } from '@/feature/unban-user'
 import { useGetUsersQuery } from '@/shared/api/queries/get-users/get-users.generated'
 import WithAuth from '@/shared/helpers/hoc/WithAuth'
 import { useTranslation } from '@/shared/hooks'
@@ -35,22 +35,15 @@ const UsersListPage: Page = () => {
   } = useDeleteUser()
 
   const {
-    confirm: confirmUnban,
-    handleChangeUserUnban,
-    handleUnbanUser,
-    loadingUnban,
-    userUnban,
-  } = useUnbanUser()
-
-  const {
-    banConfirm,
     handleBanUser,
-    handleChangeUserForBan,
-    loadingBan,
-    reason,
-    setReason,
-    userForBan,
-  } = useBanUser()
+    handleChangeOpen,
+    handleChangeUserStatus,
+    handleUnbanUser,
+    loadingChangeStatus,
+    openBanDialog,
+    openUnbanDialog,
+    userToModify,
+  } = useBanUnbanUser()
 
   const { data, loading, previousData } = useGetUsersQuery({
     variables: {
@@ -87,9 +80,8 @@ const UsersListPage: Page = () => {
         isLoading={loading}
         list={data?.getUsers?.users}
         onChangeSort={handleChangeSort}
-        onChangeUserForBan={handleChangeUserForBan}
         onChangeUserForDelete={handleChangeUserForDelete}
-        onChangeUserForUnban={handleChangeUserUnban}
+        onChangeUserStatus={handleChangeUserStatus}
         pageSize={pageSize}
         sort={sort}
       />
@@ -111,20 +103,18 @@ const UsersListPage: Page = () => {
         open={confirmDelete.open}
       />
       <ConfirmUnbanDialog
-        disabled={loadingUnban}
-        name={userUnban?.name || 'Not specified'}
-        onOpenChange={confirmUnban.handleChangeOpen}
+        disabled={loadingChangeStatus}
+        name={userToModify?.name || 'Not specified'}
+        onOpenChange={handleChangeOpen}
         onUnban={handleUnbanUser}
-        open={confirmUnban.open}
+        open={openUnbanDialog}
       />
       <ConfirmBanDialog
-        disabled={loadingBan}
-        name={userForBan?.name || 'Not specified'}
+        disabled={loadingChangeStatus}
+        name={userToModify?.name || 'Not specified'}
         onBan={handleBanUser}
-        onOpenChange={banConfirm.handleChangeOpenBan}
-        open={banConfirm.open}
-        reason={reason ?? ''}
-        setReason={setReason}
+        onOpenChange={handleChangeOpen}
+        open={openBanDialog}
       />
     </div>
   )

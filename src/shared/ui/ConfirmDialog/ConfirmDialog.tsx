@@ -56,7 +56,7 @@ export const ConfirmDialog = ({
               <Button
                 className={s.btn}
                 disabled={disabled}
-                onClick={() => confirmCallback?.(BanStatus.Unbanned)}
+                onClick={() => onOpenChange(false)}
               >
                 {t.button.no}
               </Button>
