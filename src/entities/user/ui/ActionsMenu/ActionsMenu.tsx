@@ -8,14 +8,12 @@ import s from './ActionsMenu.module.scss'
 
 type Props = {
   id: number
-  onBan?: () => void
   isBlocked?: boolean
+  onChangeStatus?: () => void
   onDelete?: () => void
-  onUnblock?: () => void
 }
 
-export const ActionsMenu = ({ id, isBlocked, onDelete, onUnblock, onBan }: Props) => {
-
+export const ActionsMenu = ({ id, isBlocked, onChangeStatus, onDelete }: Props) => {
   const { t } = useTranslation()
 
   return (
@@ -28,17 +26,10 @@ export const ActionsMenu = ({ id, isBlocked, onDelete, onUnblock, onBan }: Props
         <PersonRemoveOutline />
         {t.dialog.deleteUser.title}
       </Dropdown.Item>
-      {isBlocked ? (
-        <Dropdown.Item className={s.item} onSelect={onUnblock}>
-          <Block />
-          {t.page.usersList.unbanUser}
-        </Dropdown.Item>
-      ) : (
-        <Dropdown.Item className={s.item} onSelect={onBan}>
-          <Block />
-          {t.page.usersList.banUser}
-        </Dropdown.Item>
-      )}
+      <Dropdown.Item className={s.item} onSelect={onChangeStatus}>
+        <Block />
+        {isBlocked ? t.page.usersList.unbanUser : t.page.usersList.banUser}
+      </Dropdown.Item>
       <Dropdown.Item className={clsx(s.item, s.more)} onSelect={() => {}}>
         <Link className={s.link} href={`/user/${id}`}>
           <Menu />

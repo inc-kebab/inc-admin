@@ -1,5 +1,6 @@
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
 
+import { BanUserParams } from '@/entities/user'
 import { useTranslation } from '@/shared/hooks'
 import { BanStatus } from '@/shared/types/apollo'
 import { ConfirmDialog } from '@/shared/ui/ConfirmDialog'
@@ -10,16 +11,15 @@ import s from './ConfirmBanDialog.module.scss'
 type Props = {
   disabled?: boolean
   name: null | string
-  onBan?: (status: BanStatus) => void
+  onBan?: (value: BanUserParams) => void
   onDelete?: () => void
   onOpenChange: (open: boolean) => void
   open: boolean
-  reason: string
-  setReason: (reason: string) => void
 }
 
-export const ConfirmBanDialog = ({ name, onBan, onDelete, reason, setReason, ...rest }: Props) => {
+export const ConfirmBanDialog = ({ name, onBan, onDelete, onOpenChange, ...rest }: Props) => {
   const { t } = useTranslation()
+  const [reason, setReason] = useState('')
 
   const SELECT_OPTIONS = useMemo(
     () => [
@@ -39,6 +39,15 @@ export const ConfirmBanDialog = ({ name, onBan, onDelete, reason, setReason, ...
     [t]
   )
 
+  const handleOnBan = (status: BanStatus) => {
+    onBan?.({ reason, status })
+  }
+
+  const handleOpenChange = (open: boolean) => {
+    onOpenChange(open)
+    !open && setReason('')
+  }
+
   const textContent = (
     <>
       <p>
@@ -55,7 +64,7 @@ export const ConfirmBanDialog = ({ name, onBan, onDelete, reason, setReason, ...
         portal={false}
         value={reason}
       />
-      {reason !== 'badBehavior' && reason !== 'advertising' && reason && (
+      {reason === 'anotherReason' && (
         <TextArea
           className={s.textArea}
           label={t.dialog.banUser.reasonForBan}
@@ -68,9 +77,10 @@ export const ConfirmBanDialog = ({ name, onBan, onDelete, reason, setReason, ...
   return (
     <ConfirmDialog
       content={textContent}
+      onOpenChange={handleOpenChange}
       title={t.dialog.banUser.title}
       {...rest}
-      confirmCallback={onBan}
+      confirmCallback={handleOnBan}
     />
   )
 }

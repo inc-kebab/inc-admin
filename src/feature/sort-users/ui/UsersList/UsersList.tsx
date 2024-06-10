@@ -1,5 +1,3 @@
-
-import { BanUserData } from '@/feature/ban-user'
 import { ActionsMenu, DialogUserData } from '@/entities/user'
 import { getShortStr } from '@/shared/helpers/getShortStr'
 import { useTranslation } from '@/shared/hooks/useTranslation'
@@ -20,9 +18,8 @@ type Props = {
   isLoading?: boolean
   list?: User[] | null
   onChangeSort?: (sort: Sort | null) => void
-  onChangeUserForBan: (data: BanUserData) => void
   onChangeUserForDelete: (data: DialogUserData) => void
-  onChangeUserForUnban: (data: DialogUserData) => void
+  onChangeUserStatus: (data: DialogUserData) => void
   pageSize: number
   sort: Sort | null
 }
@@ -31,9 +28,8 @@ export const UsersList = ({
   isLoading,
   list,
   onChangeSort,
-  onChangeUserForBan,
   onChangeUserForDelete,
-  onChangeUserForUnban,
+  onChangeUserStatus,
   pageSize,
   sort,
 }: Props) => {
@@ -41,13 +37,6 @@ export const UsersList = ({
 
   const handleChangeUserForDelete = (data: DialogUserData) => () => {
     onChangeUserForDelete(data)
-  }
-  const handleChangeUserForBan = (data: BanUserData) => () => {
-    onChangeUserForBan(data)
-  }
-
-  const handleChangeUserForUnban = (data: DialogUserData) => () => {
-    onChangeUserForUnban(data)
   }
 
   return (
@@ -65,6 +54,7 @@ export const UsersList = ({
             const dialogUserData = {
               id: user.id,
               name: user.fullName || `"${t.page.usersList.notSpecified}"`,
+              status: user.status,
             }
 
             return (
@@ -96,9 +86,8 @@ export const UsersList = ({
                   <ActionsMenu
                     id={user.id}
                     isBlocked={isBlocked}
-                    onBan={handleChangeUserForBan(dialogUserData)}
+                    onChangeStatus={() => onChangeUserStatus(dialogUserData)}
                     onDelete={handleChangeUserForDelete(dialogUserData)}
-                    onUnblock={handleChangeUserForUnban(dialogUserData)}
                   />
                 </Table.Cell>
               </Table.Row>
