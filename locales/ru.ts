@@ -9,9 +9,23 @@ export const ru: LocaleType = {
     yes: 'Да',
   },
   dialog: {
+    banUser: {
+      advertising: 'Размещение рекламы',
+      anotherReason: 'Другая причина',
+      badBehavior: 'Неприемлемое поведение',
+      description: 'Вы уверены, что хотите запретить доступ пользователю',
+      pleaseSelectTheReason: 'Пожалуйста, выберите причину',
+      pleaseTryLater: 'Пожалуйста, попробуйте позже',
+      reasonForBan: 'Причина запрета',
+      title: 'Запретить доступ пользователю',
+    },
     deleteUser: {
       description: 'Вы уверены, что хотите удалить пользователя ',
       title: 'Удалить пользователя',
+    },
+    unbanUser: {
+      description: 'Вы уверены, что хотите разбанить пользователя ',
+      title: 'Разбанить пользователя',
     },
   },
   label: {
@@ -38,13 +52,14 @@ export const ru: LocaleType = {
       },
     },
     usersList: {
-      banUser: 'Запрет на использование',
+      banUser: 'Забанить в системе',
       blocked: 'Заблокирован',
       moreInformation: 'Дополнительная информация',
       notBlocked: 'Не заблокирован',
       notSelected: 'Не выбрано',
       notSpecified: 'Не указан',
       search: 'Поиск',
+      unbanUser: 'Разбанить в системе',
     },
   },
   placeholder: {

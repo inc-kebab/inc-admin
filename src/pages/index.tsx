@@ -1,13 +1,15 @@
-import { usePaginationUsersList } from '@/entities/user'
+import { useBanUnbanUser, usePaginationUsersList } from '@/entities/user'
+import { ConfirmBanDialog } from '@/feature/ban-user'
 import { ConfirmDeleteDialog, useDeleteUser } from '@/feature/delete-user'
 import { useSearchUsers } from '@/feature/search-users'
 import { UsersList, useSortUsers } from '@/feature/sort-users'
+import { ConfirmUnbanDialog } from '@/feature/unban-user'
 import { useGetUsersQuery } from '@/shared/api/queries/get-users/get-users.generated'
 import WithAuth from '@/shared/helpers/hoc/WithAuth'
 import { useTranslation } from '@/shared/hooks'
 import { Page } from '@/shared/types/layout'
 import { MainLayout } from '@/widgets/layout'
-import { Pagination, TextField } from '@tazalov/kebab-ui/components'
+import { Pagination, Select, TextField } from '@tazalov/kebab-ui/components'
 
 import s from './index.module.scss'
 
@@ -22,10 +24,26 @@ const UsersListPage: Page = () => {
   const { handleChangePage, handleChangePageSize, pageNumber, pageSize } = usePaginationUsersList()
 
   const { debouncedSearchTerm, handleSearch, searchTerm } = useSearchUsers(handleChangePage)
-  const { handleChangeSort, sort } = useSortUsers(handleChangePage)
+  const { handleChangeSort, select, sort } = useSortUsers(handleChangePage)
 
-  const { confirm, handleChangeUserForDelete, handleDeleteUser, loadingDelete, userForDelete } =
-    useDeleteUser()
+  const {
+    confirm: confirmDelete,
+    handleChangeUserForDelete,
+    handleDeleteUser,
+    loadingDelete,
+    userForDelete,
+  } = useDeleteUser()
+
+  const {
+    handleBanUser,
+    handleChangeOpen,
+    handleChangeUserStatus,
+    handleUnbanUser,
+    loadingChangeStatus,
+    openBanDialog,
+    openUnbanDialog,
+    userToModify,
+  } = useBanUnbanUser()
 
   const { data, loading, previousData } = useGetUsersQuery({
     variables: {
@@ -34,6 +52,7 @@ const UsersListPage: Page = () => {
       searchTerm: debouncedSearchTerm,
       sortBy: sort ? sort.key : undefined,
       sortDirection: sort ? sort.direction : undefined,
+      statusFilter: select.blocked === 'none' ? undefined : select.blocked,
     },
   })
 
@@ -50,12 +69,19 @@ const UsersListPage: Page = () => {
           type="search"
           value={searchTerm}
         />
+        <Select
+          className={s.select}
+          onValueChange={select.handleChangeBlocked}
+          options={select.options}
+          value={select.blocked}
+        />
       </div>
       <UsersList
         isLoading={loading}
         list={data?.getUsers?.users}
         onChangeSort={handleChangeSort}
         onChangeUserForDelete={handleChangeUserForDelete}
+        onChangeUserStatus={handleChangeUserStatus}
         pageSize={pageSize}
         sort={sort}
       />
@@ -73,8 +99,22 @@ const UsersListPage: Page = () => {
         disabled={loadingDelete}
         name={userForDelete?.name || 'Not specified'}
         onDelete={handleDeleteUser}
-        onOpenChange={confirm.handleChangeOpenDelete}
-        open={confirm.open}
+        onOpenChange={confirmDelete.handleChangeOpen}
+        open={confirmDelete.open}
+      />
+      <ConfirmUnbanDialog
+        disabled={loadingChangeStatus}
+        name={userToModify?.name || 'Not specified'}
+        onOpenChange={handleChangeOpen}
+        onUnban={handleUnbanUser}
+        open={openUnbanDialog}
+      />
+      <ConfirmBanDialog
+        disabled={loadingChangeStatus}
+        name={userToModify?.name || 'Not specified'}
+        onBan={handleBanUser}
+        onOpenChange={handleChangeOpen}
+        open={openBanDialog}
       />
     </div>
   )
