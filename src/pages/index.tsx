@@ -42,6 +42,8 @@ const UsersListPage: Page = () => {
     loadingChangeStatus,
     openBanDialog,
     openUnbanDialog,
+    reason,
+    setReason,
     userToModify,
   } = useBanUnbanUser()
 
@@ -115,6 +117,8 @@ const UsersListPage: Page = () => {
         onBan={handleBanUser}
         onOpenChange={handleChangeOpen}
         open={openBanDialog}
+        reason={reason}
+        setReason={setReason}
       />
     </div>
   )

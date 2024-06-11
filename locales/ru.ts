@@ -73,8 +73,13 @@ export const ru: LocaleType = {
     usersList: 'Пользователи',
   },
   table: {
+    amount: 'Стоимость, $',
+    autoubdate: 'Автопродление',
     date: 'Дата добавления',
+    endDateOfSubscription: 'Дата окончания подписки',
+    paymentType: 'Способ оплаты',
     profileLink: 'Ссылка на профиль',
+    subscriptionType: 'Тип подписки',
     userID: 'Идентификатор',
     username: 'Имя пользователя',
   },

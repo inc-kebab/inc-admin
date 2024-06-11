@@ -23,16 +23,22 @@ const paginationOptions = [
 const PaymentsListPage: Page = () => {
   const { t } = useTranslation()
   const { handleChangePage, handleChangePageSize, pageNumber, pageSize } = usePaginationUsersList()
-  const { handleChangeSort, sort } = useSortUsers(handleChangePage)
-  const { handleSearch, searchTerm } = useSearchUsers(handleChangePage)
+  const { handleChangeIsAutoUpdate, handleChangeSort, isAutoUpdate, sort } =
+    useSortUsers(handleChangePage)
+  const { debouncedSearchTerm, handleSearch, searchTerm } = useSearchUsers(handleChangePage)
+
   const {
     data,
     loading: isLoading,
     previousData,
   } = useGetAllPaymentsQuery({
     variables: {
-      pageNumber: pageNumber,
-      searchTerm: searchTerm,
+      isAutoUpdate,
+      pageNumber,
+      pageSize,
+      searchTerm: debouncedSearchTerm,
+      sortBy: sort ? sort.key : undefined,
+      sortDirection: sort ? sort.direction : undefined,
     },
   })
   const totalCount =
@@ -42,7 +48,11 @@ const PaymentsListPage: Page = () => {
     <>
       <div className={s.position}>
         <div>
-          <Checkbox label={t.table.checkbox} />
+          <Checkbox
+            checked={isAutoUpdate}
+            label={t.table.autoubdate}
+            onCheckedChange={handleChangeIsAutoUpdate}
+          />
         </div>
       </div>
       <TextField

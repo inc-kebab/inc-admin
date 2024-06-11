@@ -72,7 +72,7 @@ export const en = {
   },
   table: {
     amount: 'Amount, $',
-    checkbox: 'Autoubdate',
+    autoubdate: 'Auto update',
     date: 'Date added',
     endDateOfSubscription: 'End date of subscription',
     paymentType: 'Payment Type',

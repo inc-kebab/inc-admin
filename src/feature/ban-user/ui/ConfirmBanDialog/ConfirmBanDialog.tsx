@@ -15,11 +15,20 @@ type Props = {
   onDelete?: () => void
   onOpenChange: (open: boolean) => void
   open: boolean
+  reason: string
+  setReason: (reason: string) => void
 }
 
-export const ConfirmBanDialog = ({ name, onBan, onDelete, onOpenChange, ...rest }: Props) => {
+export const ConfirmBanDialog = ({
+  name,
+  onBan,
+  onDelete,
+  onOpenChange,
+  reason,
+  setReason,
+  ...rest
+}: Props) => {
   const { t } = useTranslation()
-  const [reason, setReason] = useState('')
 
   const SELECT_OPTIONS = useMemo(
     () => [
@@ -39,8 +48,8 @@ export const ConfirmBanDialog = ({ name, onBan, onDelete, onOpenChange, ...rest 
     [t]
   )
 
-  const handleOnBan = (status: BanStatus) => {
-    onBan?.({ reason, status })
+  const handleBan = () => {
+    onBan?.({ reason, status: BanStatus.Banned })
   }
 
   const handleOpenChange = (open: boolean) => {
@@ -76,11 +85,11 @@ export const ConfirmBanDialog = ({ name, onBan, onDelete, onOpenChange, ...rest 
 
   return (
     <ConfirmDialog
+      confirmCallback={handleBan}
       content={textContent}
       onOpenChange={handleOpenChange}
       title={t.dialog.banUser.title}
       {...rest}
-      confirmCallback={handleOnBan}
     />
   )
 }
