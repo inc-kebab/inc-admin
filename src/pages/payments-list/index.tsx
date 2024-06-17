@@ -29,7 +29,7 @@ const PaymentsListPage: Page = () => {
     previousData,
   } = useGetAllPaymentsQuery({
     variables: {
-      // isAutoUpdate,
+      isAutoUpdate,
       pageNumber,
       pageSize,
       searchTerm: debouncedSearchTerm,
@@ -42,14 +42,12 @@ const PaymentsListPage: Page = () => {
 
   return (
     <>
-      <div className={s.position}>
-        <div>
-          <Checkbox
-            checked={isAutoUpdate}
-            label={t.table.autoubdate}
-            onCheckedChange={handleChangeIsAutoUpdate}
-          />
-        </div>
+      <div className={s.checkbox}>
+        <Checkbox
+          checked={isAutoUpdate}
+          label={t.table.autoubdate}
+          onCheckedChange={handleChangeIsAutoUpdate}
+        />
       </div>
       <TextField
         className={s.search}

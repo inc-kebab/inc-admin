@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { toast } from 'react-toastify'
 
-import { BanUserParams, DialogUserData } from '@/entities/user'
 import { useBanMutation } from '@/shared/api/queries/ban-user/banUser.generated'
 import {
   UnbanUserMutation,
@@ -10,6 +9,8 @@ import {
 import { useTranslation } from '@/shared/hooks'
 import { BanStatus } from '@/shared/types/apollo'
 import { FetchResult } from '@apollo/client'
+
+import { BanUserParams, DialogUserData } from '../types/index'
 
 export const useBanUnbanUser = () => {
   const { t } = useTranslation()

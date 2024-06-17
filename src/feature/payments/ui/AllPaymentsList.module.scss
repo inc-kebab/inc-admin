@@ -1,0 +1,54 @@
+@import '@/app/styles/mixins';
+
+.table {
+  margin-bottom: 36px;
+}
+
+.username {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.avatar {
+  background-color: var(--dark-500);
+  border-radius: 50%;
+}
+
+@include tablet {
+  .tableHead {
+    display: none;
+  }
+
+  .tableBody {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    & .row {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+
+      padding: 19px 12px 17px;
+
+      background-color: var(--dark-500);
+      border: 1px solid var(--dark-300);
+    }
+  }
+
+  .cell {
+    display: flex;
+    justify-content: space-between;
+
+    width: 100%;
+    padding: 0;
+
+    font-weight: var(--font-weight-bold);
+
+    &::before {
+      content: attr(data-label);
+      font-weight: var(--font-weight-regular);
+    }
+  }
+}
