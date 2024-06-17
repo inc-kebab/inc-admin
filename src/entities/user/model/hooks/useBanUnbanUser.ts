@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { toast } from 'react-toastify'
 
-import { BanUserParams, DialogUserData } from '@/entities/user'
 import { useBanMutation } from '@/shared/api/queries/ban-user/banUser.generated'
 import {
   UnbanUserMutation,
@@ -11,6 +10,8 @@ import { useTranslation } from '@/shared/hooks'
 import { BanStatus } from '@/shared/types/apollo'
 import { FetchResult } from '@apollo/client'
 
+import { BanUserParams, DialogUserData } from '../types/index'
+
 export const useBanUnbanUser = () => {
   const { t } = useTranslation()
   const [openUnbanDialog, setOpenUnbanDialog] = useState(false)
@@ -19,14 +20,9 @@ export const useBanUnbanUser = () => {
   const [userToModify, setUserToModify] = useState<DialogUserData | null>()
 
   const [banUser, { loading: loadingBan }] = useBanMutation()
-  const [unban, { loading: loadingUnban }] = useUnbanUserMutation({
-    refetchQueries: ['GetUsers'],
-    variables: {
-      reason: '',
-      status: BanStatus.Unbanned,
-      userId: userToModify?.id ?? 0,
-    },
-  })
+  const [unban, { loading: loadingUnban }] = useUnbanUserMutation()
+
+  const [reason, setReason] = useState('')
 
   const isBanned = Boolean(userToModify?.status === 'BANNED')
 
@@ -53,7 +49,14 @@ export const useBanUnbanUser = () => {
 
   const handleUnbanUser = () => {
     if (userToModify) {
-      unban().then(handleUserBanUnbanResponse)
+      unban({
+        refetchQueries: ['GetUsers'],
+        variables: {
+          reason: '',
+          status: BanStatus.Unbanned,
+          userId: userToModify?.id ?? 0,
+        },
+      }).then(handleUserBanUnbanResponse)
     }
   }
 
@@ -66,7 +69,10 @@ export const useBanUnbanUser = () => {
           status: status,
           userId: userToModify?.id ?? 0,
         },
-      }).then(handleUserBanUnbanResponse)
+      }).then(res => {
+        handleUserBanUnbanResponse(res)
+        setReason('')
+      })
     } else {
       toast.error(t.dialog.banUser.pleaseSelectTheReason)
     }
@@ -81,6 +87,8 @@ export const useBanUnbanUser = () => {
     loadingChangeStatus: loadingBan || loadingUnban,
     openBanDialog,
     openUnbanDialog,
+    reason,
+    setReason,
     userToModify,
   }
 }

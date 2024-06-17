@@ -18,10 +18,10 @@ function App({ Component, pageProps }: AppProps) {
 
   return (
     <ApolloClientProvider>
-      <AuthProvider>
-        <Component className={inter.className} {...pageProps} />
-        <ToastProvider />
-      </AuthProvider>
+      {/* <AuthProvider> */}
+      <Component className={inter.className} {...pageProps} />
+      <ToastProvider />
+      {/* </AuthProvider> */}
     </ApolloClientProvider>
   )
 }

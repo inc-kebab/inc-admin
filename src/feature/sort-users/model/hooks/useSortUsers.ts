@@ -23,6 +23,7 @@ export const useSortUsers = (onChangePage: (page: number) => void) => {
 
   const [blocked, setBlocked] = useState<BlockedValue>(selectOptions[0].value)
   const [sort, setSort] = useState<Sort | null>(null)
+  const [isAutoUpdate, setIsAutoUpdate] = useState(false)
 
   const handleChangeSort = (sort: Sort | null) => {
     setSort(sort)
@@ -33,9 +34,15 @@ export const useSortUsers = (onChangePage: (page: number) => void) => {
     setBlocked(value as BlockedValue)
     onChangePage(1)
   }
+  const handleChangeIsAutoUpdate = (value: boolean) => {
+    setIsAutoUpdate(value)
+    onChangePage(1)
+  }
 
   return {
+    handleChangeIsAutoUpdate,
     handleChangeSort,
+    isAutoUpdate,
     select: { blocked, handleChangeBlocked, options: selectOptions },
     sort,
   }

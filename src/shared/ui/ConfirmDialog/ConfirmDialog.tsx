@@ -9,7 +9,7 @@ import s from './ConfirmDialog.module.scss'
 
 type Props = {
   className?: string
-  confirmCallback?: (status: BanStatus) => void
+  confirmCallback?: () => void
   content: ReactNode
   customActions?: ReactNode
   disabled?: boolean
@@ -47,17 +47,13 @@ export const ConfirmDialog = ({
             <Button
               className={s.btn}
               disabled={disabled}
-              onClick={() => confirmCallback?.(BanStatus.Banned)}
+              onClick={confirmCallback}
               variant="outline"
             >
               {t.button.yes}
             </Button>
             <DialogClose>
-              <Button
-                className={s.btn}
-                disabled={disabled}
-                onClick={() => onOpenChange(false)}
-              >
+              <Button className={s.btn} disabled={disabled}>
                 {t.button.no}
               </Button>
             </DialogClose>
