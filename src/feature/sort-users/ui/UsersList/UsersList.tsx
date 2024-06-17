@@ -79,7 +79,7 @@ export const UsersList = ({
                 >
                   {user.username ? getShortStr(user.username, 18) : `Not specified`}
                 </Table.Cell>
-                <Table.Cell className={clsx(s.cell, s.dateCell)} data-label={t.table.date}>
+                <Table.Cell className={clsx(s.cell, s.dateCell)} data-label={t.table.dateAdded}>
                   {format(new Date(+user.createdAt), 'dd.MM.yyyy')}
                 </Table.Cell>
                 <Table.Cell className={clsx(s.cell, s.modalsCell)}>

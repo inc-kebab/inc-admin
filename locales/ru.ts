@@ -75,7 +75,7 @@ export const ru: LocaleType = {
   table: {
     amount: 'Стоимость, $',
     autoubdate: 'Автопродление',
-    date: 'Дата добавления',
+    dateAdded: 'Дата добавления',
     endDateOfSubscription: 'Дата окончания подписки',
     paymentType: 'Способ оплаты',
     profileLink: 'Ссылка на профиль',
