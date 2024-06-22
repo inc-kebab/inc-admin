@@ -1,4 +1,3 @@
-/* eslint-disable max-lines */
 export type Maybe<T> = T | null
 export type InputMaybe<T> = Maybe<T>
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] }
@@ -47,12 +46,10 @@ export enum BanStatus {
 
 export type ImageModel = {
   __typename?: 'ImageModel'
-  /** file createdAt */
-  createdAt: Scalars['String']['output']
-  /** file id */
-  id: Scalars['String']['output']
   /** file type */
-  type: Scalars['String']['output']
+  type?: Maybe<Scalars['String']['output']>
+  /** file id */
+  uploadId?: Maybe<Scalars['String']['output']>
   /** file url */
   url: Scalars['String']['output']
 }

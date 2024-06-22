@@ -1,35 +1,62 @@
+import { useBanUnbanUser } from '@/entities/user'
+import { ConfirmBanDialog } from '@/feature/ban-user'
 import { Post } from '@/feature/posts-list'
+import { ConfirmUnbanDialog } from '@/feature/unban-user'
+import { useGetAllPostsQuery } from '@/shared/api/queries/get-all-posts/get-all-posts.generated'
 import WithAuth from '@/shared/helpers/hoc/WithAuth'
 import { Page } from '@/shared/types/layout'
 import { MainLayout } from '@/widgets/layout'
 
-export type PostType = {
-  avatarOwner: null | string
-  createdAt: string
-  description: null | string
-  id: number
-  ownerId: number
-  updatedAt: string
-  username: string
-}
-
-const post: PostType = {
-  avatarOwner:
-    'https://storage.yandexcloud.net/kebab-inctagram/media/users/2/avatars/2-1715665706178-avatar-thumbnail.webp',
-  createdAt: '2024-06-17T18:58:48.084Z',
-  description:
-    'Add publication descriptions фывывфы фв фв фв фаываыыав fsfsfsf sfsdfsdf sdfsdfs ffs assadasd asdasdasd asdasd',
-  id: 372,
-  ownerId: 2,
-  updatedAt: '2024-06-17T18:58:48.084Z',
-  username: 'art___',
-}
+import s from './PostsList.module.scss'
 
 const PostsListPage: Page = () => {
+  const { data, loading } = useGetAllPostsQuery({
+    variables: {
+      pageSize: 8,
+    },
+  })
+
+  const {
+    handleBanUser,
+    handleChangeOpen,
+    handleChangeUserStatus,
+    handleUnbanUser,
+    loadingChangeStatus,
+    openBanDialog,
+    openUnbanDialog,
+    reason,
+    setReason,
+    userToModify,
+  } = useBanUnbanUser()
+
   return (
-    <div>
-      <Post post={post} />
-    </div>
+    <>
+      <div className={s.container}>
+        {loading ? (
+          <div>LOADING...</div>
+        ) : (
+          data?.getAllPosts.items.map(post => (
+            <Post key={post.id} onChangeUserStatus={handleChangeUserStatus} post={post} />
+          ))
+        )}
+      </div>
+      <ConfirmUnbanDialog
+        disabled={loadingChangeStatus}
+        name={userToModify?.name || 'Not specified'}
+        onOpenChange={handleChangeOpen}
+        onUnban={handleUnbanUser}
+        open={openUnbanDialog}
+      />
+      <ConfirmBanDialog
+        disabled={loadingChangeStatus}
+        name={userToModify?.name || 'Not specified'}
+        onBan={handleBanUser}
+        onOpenChange={handleChangeOpen}
+        open={openBanDialog}
+        reason={reason}
+        setReason={setReason}
+      />
+    </>
   )
 }
 

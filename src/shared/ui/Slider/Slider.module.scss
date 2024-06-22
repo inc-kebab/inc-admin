@@ -15,9 +15,17 @@
   right: 14px;
   color: var(--light-100);
 
+  &.hide {
+    display: none;
+  }
+
   &:hover {
     color: var(--primary-500);
   }
+}
+
+.hide {
+  display: none;
 }
 
 .prevArrow {

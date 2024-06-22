@@ -12,8 +12,7 @@ export type GetPhotosQuery = {
   __typename?: 'Query'
   getPhotosOfUser?: Array<{
     __typename?: 'ImageModel'
-    id: string
-    type: string
+    type?: null | string
     url: string
   } | null> | null
 }
@@ -21,7 +20,6 @@ export type GetPhotosQuery = {
 export const GetPhotosDocument = gql`
   query getPhotos($id: Int!) {
     getPhotosOfUser(id: $id) {
-      id
       url
       type
     }

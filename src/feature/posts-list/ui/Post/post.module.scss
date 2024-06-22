@@ -28,7 +28,7 @@
 }
 
 .wrapper {
-  z-index: 100;
+  z-index: 1;
   background-color: var(--dark-700);
 }
 
@@ -41,4 +41,12 @@
   height: 240px;
 
   background-color: var(--dark-500);
+}
+
+.block {
+  cursor: pointer;
+}
+
+.banned {
+  color: var(--danger-500);
 }

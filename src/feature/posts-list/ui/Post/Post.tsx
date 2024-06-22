@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 
 import { UserBanner } from '@/entities/posts-list'
-import { PostType } from '@/pages/posts-list'
+import { DialogUserData } from '@/entities/user'
+import { PostType } from '@/feature/posts-list'
 import { useTranslation } from '@/shared/hooks'
+import { BanStatus } from '@/shared/types/apollo'
 import { SlickSlider } from '@/shared/ui/Slider/Slider'
 import { Typography } from '@tazalov/kebab-ui/components'
 import { Block } from '@tazalov/kebab-ui/icons'
@@ -13,16 +15,13 @@ import { useRouter } from 'next/router'
 
 import s from './post.module.scss'
 
-type ImageType = {
-  url: string
-}
-
 type Props = {
   className?: string
+  onChangeUserStatus: (data: DialogUserData) => void
   post: PostType
 }
 
-export const Post = ({ className, post }: Props) => {
+export const Post = ({ className, onChangeUserStatus, post }: Props) => {
   const { t } = useTranslation()
   const { locale } = useRouter()
   const currentMaxLength = 80
@@ -33,17 +32,6 @@ export const Post = ({ className, post }: Props) => {
     addSuffix: true,
     locale: locale === 'ru' ? ru : enUS,
   })
-  const images: ImageType[] = [
-    {
-      url: 'https://storage.yandexcloud.net/kebab-inctagram/media/users/2/posts/2-1711365227421.webp',
-    },
-    {
-      url: 'https://storage.yandexcloud.net/kebab-inctagram/media/users/2/posts/2-1711366432949.webp',
-    },
-    {
-      url: 'https://storage.yandexcloud.net/kebab-inctagram/media/users/2/posts/2-1711366432949.webp',
-    },
-  ]
 
   const onShowHandler = () => {
     setIsExpanded(!isExpanded)
@@ -54,16 +42,31 @@ export const Post = ({ className, post }: Props) => {
     }
   }
 
+  const dialogUserData = {
+    id: post.id,
+    name: post.username,
+    status: BanStatus.Banned,
+  }
+
   if (!post) {
     return null
   }
 
   return (
     <div className={clsx(s.post, className)}>
-      {images.length ? <SlickSlider images={images} /> : <div className={s.noImage}>no image</div>}
+      {post?.images?.length ? (
+        <SlickSlider images={post.images} />
+      ) : (
+        <div className={s.noImage}>no image</div>
+      )}
       <div className={s.wrapper}>
         <UserBanner
-          actions={<Block />}
+          actions={
+            <Block
+              className={clsx(s.block, dialogUserData.status === BanStatus.Banned && s.banned)}
+              onClick={() => onChangeUserStatus(dialogUserData)}
+            />
+          }
           avatar={post.avatarOwner}
           className={s.banner}
           name={post.username}

@@ -1,21 +1,22 @@
 import React, { useState } from 'react'
 import Slider from 'react-slick'
 
+import { ImageType } from '@/feature/posts-list'
 import { ArrowLeft, ArrowRight } from '@tazalov/kebab-ui/icons'
 import clsx from 'clsx'
 import Image from 'next/image'
 
 import s from './Slider.module.scss'
 
-type ImageType = {
-  url: string
-}
 type Props = {
-  images: ImageType[]
+  images: ImageType[] | null | undefined
 }
 export function SlickSlider({ images }: Props) {
   const [currentSlide, setCurrentSlide] = useState(0)
 
+  if (!images) {
+    return null
+  }
   const settings = {
     adaptiveHeight: true,
     appendDots: (dots: any) => (
@@ -31,8 +32,8 @@ export function SlickSlider({ images }: Props) {
     ),
     dots: true,
     infinite: false,
-    nextArrow: <NextArrow />,
-    prevArrow: <PrevArrow />,
+    nextArrow: <NextArrow customClassName={clsx(s.nextArrow, images.length === 1 && s.hide)} />,
+    prevArrow: <PrevArrow customClassName={clsx(s.prevArrow, images.length === 1 && s.hide)} />,
     slidesToScroll: 1,
     slidesToShow: 1,
     speed: 300,
@@ -55,10 +56,15 @@ export function SlickSlider({ images }: Props) {
   )
 }
 
-function NextArrow({ className, onClick }: { className?: string; onClick?: any }) {
-  return <ArrowRight className={clsx(className, s.nextArrow)} onClick={onClick} />
+type Arrow = {
+  className?: string
+  customClassName?: string
+  onClick?: any
+}
+function NextArrow({ className, customClassName, onClick }: Arrow) {
+  return <ArrowRight className={clsx(className, customClassName)} onClick={onClick} />
 }
 
-function PrevArrow({ className, onClick }: { className?: string; onClick?: any }) {
-  return <ArrowLeft className={clsx(className, s.prevArrow)} onClick={onClick} />
+function PrevArrow({ className, customClassName, onClick }: Arrow) {
+  return <ArrowLeft className={clsx(className, customClassName)} onClick={onClick} />
 }
