@@ -5,6 +5,8 @@ export const ru: LocaleType = {
   button: {
     back: 'Назад к списку пользователей',
     no: 'Нет',
+    showLess: 'Показать меньше',
+    showMore: 'Показать больше',
     signIn: 'Войти',
     yes: 'Да',
   },

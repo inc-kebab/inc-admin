@@ -1,0 +1,44 @@
+.post {
+  display: flex;
+  flex-direction: column;
+
+  width: 234px;
+  height: 391px;
+  margin: 0 auto;
+}
+
+.banner {
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+
+.timeAgo {
+  margin-bottom: 3px;
+  color: var(--light-900);
+}
+
+.descriptionWrapper {
+  position: relative;
+}
+
+.showButton {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+
+.wrapper {
+  z-index: 100;
+  background-color: var(--dark-700);
+}
+
+.noImage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 234px;
+  height: 240px;
+
+  background-color: var(--dark-500);
+}
