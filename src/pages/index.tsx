@@ -35,6 +35,7 @@ const UsersListPage: Page = () => {
   } = useDeleteUser()
 
   const {
+    customReason,
     handleBanUser,
     handleChangeOpen,
     handleChangeUserStatus,
@@ -43,6 +44,7 @@ const UsersListPage: Page = () => {
     openBanDialog,
     openUnbanDialog,
     reason,
+    setCustomReason,
     setReason,
     userToModify,
   } = useBanUnbanUser()
@@ -112,12 +114,14 @@ const UsersListPage: Page = () => {
         open={openUnbanDialog}
       />
       <ConfirmBanDialog
+        customReason={customReason}
         disabled={loadingChangeStatus}
         name={userToModify?.name || 'Not specified'}
         onBan={handleBanUser}
         onOpenChange={handleChangeOpen}
         open={openBanDialog}
         reason={reason}
+        setCustomReason={setCustomReason}
         setReason={setReason}
       />
     </div>
