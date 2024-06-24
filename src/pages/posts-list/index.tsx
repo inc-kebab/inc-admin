@@ -12,7 +12,7 @@ import s from './PostsList.module.scss'
 const PostsListPage: Page = () => {
   const { data, loading } = useGetAllPostsQuery({
     variables: {
-      pageSize: 8,
+      pageSize: 4,
     },
   })
 

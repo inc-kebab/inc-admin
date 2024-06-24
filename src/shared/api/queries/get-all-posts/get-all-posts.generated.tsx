@@ -20,6 +20,7 @@ export type GetAllPostsQuery = {
       id: number
       images?: Array<{ __typename?: 'ImageModel'; url: string }> | null
       ownerId: number
+      status: Types.BanStatus
       updatedAt: any
       username: string
     }>
@@ -37,6 +38,7 @@ export const GetAllPostsDocument = gql`
         }
         ownerId
         description
+        status
         createdAt
         updatedAt
         avatarOwner

@@ -50,7 +50,7 @@ export const useBanUnbanUser = () => {
   const handleUnbanUser = () => {
     if (userToModify) {
       unban({
-        refetchQueries: ['GetUsers'],
+        refetchQueries: ['GetUsers', 'GetAllPosts'],
         variables: {
           reason: '',
           status: BanStatus.Unbanned,
@@ -63,7 +63,7 @@ export const useBanUnbanUser = () => {
   const handleBanUser = ({ reason, status }: BanUserParams) => {
     if (userToModify && reason && status) {
       banUser({
-        refetchQueries: ['GetUsers'],
+        refetchQueries: ['GetUsers', 'GetAllPosts'],
         variables: {
           reason: reason,
           status: status,

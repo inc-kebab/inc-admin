@@ -43,9 +43,9 @@ export const Post = ({ className, onChangeUserStatus, post }: Props) => {
   }
 
   const dialogUserData = {
-    id: post.id,
+    id: post.ownerId,
     name: post.username,
-    status: BanStatus.Banned,
+    status: post.status,
   }
 
   if (!post) {

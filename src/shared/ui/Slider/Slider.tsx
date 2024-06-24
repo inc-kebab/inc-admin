@@ -32,8 +32,8 @@ export function SlickSlider({ images }: Props) {
     ),
     dots: true,
     infinite: false,
-    nextArrow: <NextArrow customClassName={clsx(s.nextArrow, images.length === 1 && s.hide)} />,
-    prevArrow: <PrevArrow customClassName={clsx(s.prevArrow, images.length === 1 && s.hide)} />,
+    nextArrow: <NextArrow customClassName={clsx(s.nextArrow, images.length === 1 && s.hide)} />, //TODO: цвет иконок не меняется
+    prevArrow: <PrevArrow customClassName={clsx(s.prevArrow, images.length === 1 && s.hide)} />, //TODO: цвет иконок не меняется
     slidesToScroll: 1,
     slidesToShow: 1,
     speed: 300,

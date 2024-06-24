@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 export type Maybe<T> = T | null
 export type InputMaybe<T> = Maybe<T>
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] }
@@ -128,6 +129,8 @@ export type PostModel = {
   owner: OwnerModel
   /** post ownerId */
   ownerId: Scalars['Int']['output']
+  /** user ban status */
+  status: BanStatus
   /** post createdAt */
   updatedAt: Scalars['DateTime']['output']
   /** username */

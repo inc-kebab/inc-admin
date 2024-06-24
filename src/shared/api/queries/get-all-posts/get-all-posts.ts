@@ -10,6 +10,7 @@ export const GET_ALL_POSTS = gql`
         }
         ownerId
         description
+        status
         createdAt
         updatedAt
         avatarOwner
