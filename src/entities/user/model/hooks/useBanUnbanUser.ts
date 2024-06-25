@@ -10,19 +10,18 @@ import { useTranslation } from '@/shared/hooks'
 import { BanStatus } from '@/shared/types/apollo'
 import { FetchResult } from '@apollo/client'
 
-import { BanUserParams, DialogUserData } from '../types/index'
+import { BanUserParams, DialogUserData, Reason } from '../types/index'
 
 export const useBanUnbanUser = () => {
   const { t } = useTranslation()
   const [openUnbanDialog, setOpenUnbanDialog] = useState(false)
   const [openBanDialog, setOpenBanDialog] = useState(false)
-
+  const [reason, setReason] = useState<Reason>('')
+  const [customReason, setCustomReason] = useState('')
   const [userToModify, setUserToModify] = useState<DialogUserData | null>()
 
   const [banUser, { loading: loadingBan }] = useBanMutation()
   const [unban, { loading: loadingUnban }] = useUnbanUserMutation()
-
-  const [reason, setReason] = useState('')
 
   const isBanned = Boolean(userToModify?.status === 'BANNED')
 
@@ -65,13 +64,14 @@ export const useBanUnbanUser = () => {
       banUser({
         refetchQueries: ['GetUsers', 'GetAllPosts'],
         variables: {
-          reason: reason,
+          reason: reason === 'anotherReason' ? customReason : reason,
           status: status,
           userId: userToModify?.id ?? 0,
         },
       }).then(res => {
         handleUserBanUnbanResponse(res)
         setReason('')
+        setCustomReason('')
       })
     } else {
       toast.error(t.dialog.banUser.pleaseSelectTheReason)
@@ -79,6 +79,7 @@ export const useBanUnbanUser = () => {
   }
 
   return {
+    customReason,
     handleBanUser,
     handleChangeOpen,
     handleChangeUserStatus,
@@ -88,6 +89,7 @@ export const useBanUnbanUser = () => {
     openBanDialog,
     openUnbanDialog,
     reason,
+    setCustomReason,
     setReason,
     userToModify,
   }
