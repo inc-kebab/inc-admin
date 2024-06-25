@@ -7,6 +7,7 @@ export const GET_USERS = gql`
     $searchTerm: String
     $sortBy: String
     $sortDirection: SortDirection
+    $statusFilter: BanStatus
   ) {
     getUsers(
       pageSize: $pageSize
@@ -14,12 +15,14 @@ export const GET_USERS = gql`
       searchTerm: $searchTerm
       sortBy: $sortBy
       sortDirection: $sortDirection
+      statusFilter: $statusFilter
     ) {
       users {
         username
         id
         fullName
         createdAt
+        status
       }
       pagination {
         pagesCount

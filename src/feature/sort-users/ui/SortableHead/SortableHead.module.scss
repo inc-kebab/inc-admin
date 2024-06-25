@@ -16,11 +16,10 @@
     all: unset;
     cursor: pointer;
     transition: all 0.2s linear;
-    
+
     &:hover {
       color: var(--light-900);
     }
-
 
     &.active {
       color: var(--light-100);

@@ -1,6 +1,7 @@
 import { ReactNode } from 'react'
 
 import { useTranslation } from '@/shared/hooks'
+import { BanStatus } from '@/shared/types/apollo'
 import { clsx } from '@tazalov/kebab-ui'
 import { Button, Dialog, DialogClose } from '@tazalov/kebab-ui/components'
 

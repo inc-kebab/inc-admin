@@ -1,7 +1,7 @@
 import { PropsWithChildren, createContext, useState } from 'react'
 
 export const AuthContext = createContext({
-  isAuth: true,
+  isAuth: false,
   setIsAuth: (isAuth: boolean) => {},
 })
 

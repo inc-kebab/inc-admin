@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 export type Maybe<T> = T | null
 export type InputMaybe<T> = Maybe<T>
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] }
@@ -12,6 +13,7 @@ export type Incremental<T> =
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   Boolean: { input: boolean; output: boolean }
+  DateTime: { input: any; output: any }
   Float: { input: number; output: number }
   ID: { input: string; output: string }
   Int: { input: number; output: number }
@@ -38,6 +40,11 @@ export type AvatarsModel = {
   thumbnail?: Maybe<AvatarModel>
 }
 
+export enum BanStatus {
+  Banned = 'BANNED',
+  Unbanned = 'UNBANNED',
+}
+
 export type ImageModel = {
   __typename?: 'ImageModel'
   /** file createdAt */
@@ -52,8 +59,15 @@ export type ImageModel = {
 
 export type Mutation = {
   __typename?: 'Mutation'
+  banUser: Scalars['String']['output']
   checkAdmin: Scalars['Boolean']['output']
   deleteUser: Scalars['String']['output']
+}
+
+export type MutationBanUserArgs = {
+  reason: Scalars['String']['input']
+  status: BanStatus
+  userId: Scalars['Int']['input']
 }
 
 export type MutationCheckAdminArgs = {
@@ -63,6 +77,16 @@ export type MutationCheckAdminArgs = {
 
 export type MutationDeleteUserArgs = {
   userId: Scalars['Int']['input']
+}
+
+export type OwnerModel = {
+  __typename?: 'OwnerModel'
+  /** user firstname */
+  firstname?: Maybe<Scalars['String']['output']>
+  /** user id */
+  id: Scalars['Int']['output']
+  /** user firstname */
+  lastname?: Maybe<Scalars['String']['output']>
 }
 
 export type PaginationModel = {
@@ -91,6 +115,38 @@ export type PaymentModel = {
   userId: Scalars['Int']['output']
 }
 
+export type PostModel = {
+  __typename?: 'PostModel'
+  /** user avatar */
+  avatarOwner?: Maybe<Scalars['String']['output']>
+  /** post createdAt */
+  createdAt: Scalars['DateTime']['output']
+  /** post description */
+  description?: Maybe<Scalars['String']['output']>
+  /** user id */
+  id: Scalars['Int']['output']
+  /** post images */
+  images?: Maybe<Array<ImageModel>>
+  /** post owner */
+  owner: OwnerModel
+  /** post ownerId */
+  ownerId: Scalars['Int']['output']
+  /** post createdAt */
+  updatedAt: Scalars['DateTime']['output']
+  /** username */
+  username: Scalars['String']['output']
+}
+
+export type PostsPaginationModel = {
+  __typename?: 'PostsPaginationModel'
+  cursor: Scalars['Int']['output']
+  hasMore: Scalars['Boolean']['output']
+  /** posts */
+  items: Array<PostModel>
+  pageSize: Scalars['Int']['output']
+  totalCount: Scalars['Int']['output']
+}
+
 export type ProfileModel = {
   __typename?: 'ProfileModel'
   /** about user */
@@ -117,10 +173,29 @@ export type ProfileModel = {
 
 export type Query = {
   __typename?: 'Query'
+  getAllPayments: UsersPaymentsPaginationModel
+  getAllPosts: PostsPaginationModel
   getPaymentsOfUser: UserPaymentsPaginationModel
   getPhotosOfUser?: Maybe<Array<Maybe<ImageModel>>>
   getUser: ProfileModel
   getUsers?: Maybe<UserPaginationModel>
+}
+
+export type QueryGetAllPaymentsArgs = {
+  isAutoUpdate?: InputMaybe<Scalars['Boolean']['input']>
+  pageNumber?: InputMaybe<Scalars['Int']['input']>
+  pageSize?: InputMaybe<Scalars['Int']['input']>
+  searchTerm?: InputMaybe<Scalars['String']['input']>
+  sortBy?: InputMaybe<Scalars['String']['input']>
+  sortDirection?: InputMaybe<SortDirection>
+}
+
+export type QueryGetAllPostsArgs = {
+  cursor?: InputMaybe<Scalars['String']['input']>
+  pageSize?: InputMaybe<Scalars['Int']['input']>
+  searchTerm?: InputMaybe<Scalars['String']['input']>
+  sortBy?: InputMaybe<Scalars['String']['input']>
+  sortDirection?: InputMaybe<SortDirection>
 }
 
 export type QueryGetPaymentsOfUserArgs = {
@@ -143,11 +218,17 @@ export type QueryGetUsersArgs = {
   searchTerm?: InputMaybe<Scalars['String']['input']>
   sortBy?: InputMaybe<Scalars['String']['input']>
   sortDirection?: InputMaybe<SortDirection>
+  statusFilter?: InputMaybe<BanStatus>
 }
 
 export enum SortDirection {
   Asc = 'ASC',
   Desc = 'DESC',
+}
+
+export type Subscription = {
+  __typename?: 'Subscription'
+  postAdded: PostModel
 }
 
 export type UserModel = {
@@ -157,11 +238,15 @@ export type UserModel = {
   /** user email */
   email: Scalars['String']['output']
   /** user full name */
-  fullName: Scalars['String']['output']
+  fullName?: Maybe<Scalars['String']['output']>
   /** user id */
   id: Scalars['Int']['output']
   /** user profile */
   profile?: Maybe<ProfileModel>
+  /** user ban reason */
+  reason: Scalars['String']['output']
+  /** user ban status */
+  status: BanStatus
   /** username */
   username: Scalars['String']['output']
 }
@@ -178,6 +263,38 @@ export type UserPaymentsPaginationModel = {
   __typename?: 'UserPaymentsPaginationModel'
   /** user payments */
   items: Array<PaymentModel>
+  pageNumber: Scalars['Int']['output']
+  pageSize: Scalars['Int']['output']
+  pagesCount: Scalars['Int']['output']
+  totalCount: Scalars['Int']['output']
+}
+
+export type UsersPaymentsModel = {
+  __typename?: 'UsersPaymentsModel'
+  /** user avatar */
+  avatar?: Maybe<Scalars['String']['output']>
+  /** payment dateOfPayments */
+  dateOfPayments: Scalars['String']['output']
+  /** payment endDateOfSubscription */
+  endDateOfSubscription: Scalars['String']['output']
+  /** payment id */
+  id: Scalars['Int']['output']
+  /** Payment Types */
+  paymentType: Scalars['String']['output']
+  /** payment price */
+  price: Scalars['Int']['output']
+  /** subscription Type */
+  subscriptionType: Scalars['String']['output']
+  /** payment userId */
+  userId: Scalars['Int']['output']
+  /** username */
+  username: Scalars['String']['output']
+}
+
+export type UsersPaymentsPaginationModel = {
+  __typename?: 'UsersPaymentsPaginationModel'
+  /** users payments */
+  items: Array<UsersPaymentsModel>
   pageNumber: Scalars['Int']['output']
   pageSize: Scalars['Int']['output']
   pagesCount: Scalars['Int']['output']

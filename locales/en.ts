@@ -7,9 +7,23 @@ export const en = {
     yes: 'Yes',
   },
   dialog: {
+    banUser: {
+      advertising: 'Advertising placement',
+      anotherReason: 'Another reason',
+      badBehavior: 'Bad behavior',
+      description: 'Are you sure to ban user ',
+      pleaseSelectTheReason: 'Please select the reason',
+      pleaseTryLater: 'Please try later',
+      reasonForBan: 'Reason for ban',
+      title: 'Ban user',
+    },
     deleteUser: {
       description: 'Are you sure to delete user ',
       title: 'Delete user',
+    },
+    unbanUser: {
+      description: 'Are you sure to unban user ',
+      title: 'Unban user',
     },
   },
   label: {
@@ -43,6 +57,7 @@ export const en = {
       notSelected: 'Not selected',
       notSpecified: 'Not specified',
       search: 'Search',
+      unbanUser: 'Unban in the system',
     },
   },
   placeholder: {
@@ -56,8 +71,13 @@ export const en = {
     usersList: 'Users list',
   },
   table: {
-    date: 'Date added',
+    amount: 'Amount, $',
+    autoubdate: 'Auto update',
+    dateAdded: 'Date added',
+    endDateOfSubscription: 'End date of subscription',
+    paymentType: 'Payment Type',
     profileLink: 'Profile link',
+    subscriptionType: 'Subscription Type',
     userID: 'User ID',
     username: 'Username',
   },

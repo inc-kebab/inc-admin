@@ -1,4 +1,4 @@
-import { SortDirection } from '@/shared/types/apollo'
+import { BanStatus, SortDirection } from '@/shared/types/apollo'
 
 export type Column = {
   key: string
@@ -15,5 +15,6 @@ export type User = {
   createdAt: string
   fullName?: null | string
   id: number
+  status: BanStatus
   username?: null | string
 }
