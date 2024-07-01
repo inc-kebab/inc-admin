@@ -1,0 +1,19 @@
+@import '@/app/styles/mixins';
+
+.userBanner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.userInfo {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+@include mobile {
+  .name {
+    font-size: 12px;
+  }
+}
