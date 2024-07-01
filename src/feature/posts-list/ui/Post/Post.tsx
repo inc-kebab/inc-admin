@@ -24,7 +24,7 @@ type Props = {
 export const Post = ({ className, onChangeUserStatus, post }: Props) => {
   const { t } = useTranslation()
   const { locale } = useRouter()
-  const currentMaxLength = 80
+  const currentMaxLength = 70
   const [maxLength, setMaxLength] = useState(currentMaxLength)
   const [isExpanded, setIsExpanded] = useState(false)
 
@@ -79,9 +79,9 @@ export const Post = ({ className, onChangeUserStatus, post }: Props) => {
             {post.description.length > maxLength ? (
               <Typography variant="regular14">{post.description.slice(0, maxLength)}...</Typography>
             ) : (
-              <Typography variant="regular14">
+              <Typography className={s.description} variant="regular14">
                 {post.description}
-                <span style={{ visibility: 'hidden' }}>_____</span>
+                <span style={{ visibility: 'hidden' }}>________________</span>
               </Typography>
             )}
             {(post.description.length > maxLength || isExpanded) && (

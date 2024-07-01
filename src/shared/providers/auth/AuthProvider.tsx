@@ -6,7 +6,7 @@ export const AuthContext = createContext({
 })
 
 export const AuthProvider = ({ children }: PropsWithChildren) => {
-  const [isAuth, setIsAuth] = useState(true)
+  const [isAuth, setIsAuth] = useState(false)
 
   return <AuthContext.Provider value={{ isAuth, setIsAuth }}>{children}</AuthContext.Provider>
 }

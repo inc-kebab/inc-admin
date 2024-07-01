@@ -12,11 +12,12 @@ import s from './PostsList.module.scss'
 const PostsListPage: Page = () => {
   const { data, loading } = useGetAllPostsQuery({
     variables: {
-      pageSize: 4,
+      pageSize: 8,
     },
   })
 
   const {
+    customReason,
     handleBanUser,
     handleChangeOpen,
     handleChangeUserStatus,
@@ -25,6 +26,7 @@ const PostsListPage: Page = () => {
     openBanDialog,
     openUnbanDialog,
     reason,
+    setCustomReason,
     setReason,
     userToModify,
   } = useBanUnbanUser()
@@ -48,12 +50,14 @@ const PostsListPage: Page = () => {
         open={openUnbanDialog}
       />
       <ConfirmBanDialog
+        customReason={customReason}
         disabled={loadingChangeStatus}
         name={userToModify?.name || 'Not specified'}
         onBan={handleBanUser}
         onOpenChange={handleChangeOpen}
         open={openBanDialog}
         reason={reason}
+        setCustomReason={setCustomReason}
         setReason={setReason}
       />
     </>

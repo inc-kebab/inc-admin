@@ -1,4 +1,6 @@
 .container {
   display: flex;
   flex-wrap: wrap;
+  row-gap: 29px;
+  justify-content: space-between;
 }
