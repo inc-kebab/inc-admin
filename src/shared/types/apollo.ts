@@ -1,4 +1,3 @@
-/* eslint-disable max-lines */
 export type Maybe<T> = T | null
 export type InputMaybe<T> = Maybe<T>
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] }
@@ -47,12 +46,12 @@ export enum BanStatus {
 
 export type ImageModel = {
   __typename?: 'ImageModel'
-  /** file createdAt */
-  createdAt: Scalars['String']['output']
-  /** file id */
-  id: Scalars['String']['output']
+  /** file created at date */
+  createdAt?: Maybe<Scalars['String']['output']>
   /** file type */
-  type: Scalars['String']['output']
+  type?: Maybe<Scalars['String']['output']>
+  /** file id */
+  uploadId?: Maybe<Scalars['String']['output']>
   /** file url */
   url: Scalars['String']['output']
 }
@@ -131,6 +130,8 @@ export type PostModel = {
   owner: OwnerModel
   /** post ownerId */
   ownerId: Scalars['Int']['output']
+  /** user ban status */
+  status: BanStatus
   /** post createdAt */
   updatedAt: Scalars['DateTime']['output']
   /** username */
@@ -258,7 +259,6 @@ export type UserPaginationModel = {
   /** users */
   users?: Maybe<Array<UserModel>>
 }
-
 export type UserPaymentsPaginationModel = {
   __typename?: 'UserPaymentsPaginationModel'
   /** user payments */
@@ -268,7 +268,6 @@ export type UserPaymentsPaginationModel = {
   pagesCount: Scalars['Int']['output']
   totalCount: Scalars['Int']['output']
 }
-
 export type UsersPaymentsModel = {
   __typename?: 'UsersPaymentsModel'
   /** user avatar */
@@ -290,7 +289,6 @@ export type UsersPaymentsModel = {
   /** username */
   username: Scalars['String']['output']
 }
-
 export type UsersPaymentsPaginationModel = {
   __typename?: 'UsersPaymentsPaginationModel'
   /** users payments */
