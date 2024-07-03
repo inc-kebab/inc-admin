@@ -17,16 +17,18 @@ export const GET_ALL_POSTS = gql`
     ) {
       items {
         id
-        updatedAt
         images {
           url
         }
-        avatarOwner
         ownerId
         description
         status
+        createdAt
+        updatedAt
+        avatarOwner
         username
       }
+      pageSize
     }
   }
 `

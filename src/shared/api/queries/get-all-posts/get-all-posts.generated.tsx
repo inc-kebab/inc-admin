@@ -5,11 +5,7 @@ import * as Types from '../../../types/apollo'
 const defaultOptions = {} as const
 
 export type GetAllPostsQueryVariables = Types.Exact<{
-  cursor?: Types.InputMaybe<Types.Scalars['String']['input']>
   pageSize?: Types.InputMaybe<Types.Scalars['Int']['input']>
-  searchTerm?: Types.InputMaybe<Types.Scalars['String']['input']>
-  sortBy?: Types.InputMaybe<Types.Scalars['String']['input']>
-  sortDirection?: Types.InputMaybe<Types.SortDirection>
 }>
 
 export type GetAllPostsQuery = {
@@ -19,6 +15,7 @@ export type GetAllPostsQuery = {
     items: Array<{
       __typename?: 'PostModel'
       avatarOwner?: null | string
+      createdAt: any
       description?: null | string
       id: number
       images?: Array<{ __typename?: 'ImageModel'; url: string }> | null
@@ -27,36 +24,27 @@ export type GetAllPostsQuery = {
       updatedAt: any
       username: string
     }>
+    pageSize: number
   }
 }
 
 export const GetAllPostsDocument = gql`
-  query GetAllPosts(
-    $pageSize: Int = 10
-    $sortBy: String = "createdAt"
-    $sortDirection: SortDirection = DESC
-    $searchTerm: String
-    $cursor: String
-  ) {
-    getAllPosts(
-      pageSize: $pageSize
-      sortBy: $sortBy
-      searchTerm: $searchTerm
-      sortDirection: $sortDirection
-      cursor: $cursor
-    ) {
+  query GetAllPosts($pageSize: Int) {
+    getAllPosts(pageSize: $pageSize) {
       items {
         id
-        updatedAt
         images {
           url
         }
-        avatarOwner
         ownerId
         description
         status
+        createdAt
+        updatedAt
+        avatarOwner
         username
       }
+      pageSize
     }
   }
 `
@@ -74,10 +62,6 @@ export const GetAllPostsDocument = gql`
  * const { data, loading, error } = useGetAllPostsQuery({
  *   variables: {
  *      pageSize: // value for 'pageSize'
- *      sortBy: // value for 'sortBy'
- *      sortDirection: // value for 'sortDirection'
- *      searchTerm: // value for 'searchTerm'
- *      cursor: // value for 'cursor'
  *   },
  * });
  */

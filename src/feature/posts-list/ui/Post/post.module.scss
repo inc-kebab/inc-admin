@@ -1,0 +1,60 @@
+.post {
+  display: flex;
+  flex-direction: column;
+  width: 234px;
+  height: 391px;
+}
+
+.banner {
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+
+.timeAgo {
+  margin-bottom: 3px;
+  color: var(--light-900);
+}
+
+.descriptionWrapper {
+  position: relative;
+  word-break: break-word;
+}
+
+.description {
+  overflow-y: auto;
+  max-height: 192px;
+}
+
+.showButton {
+  position: absolute;
+  right: 12px;
+  bottom: 0;
+
+  padding-left: 5px;
+
+  background-color: var(--dark-700);
+}
+
+.wrapper {
+  z-index: 1;
+  background-color: var(--dark-700);
+}
+
+.noImage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 234px;
+  height: 240px;
+
+  background-color: var(--dark-500);
+}
+
+.block {
+  cursor: pointer;
+}
+
+.banned {
+  color: var(--danger-500);
+}

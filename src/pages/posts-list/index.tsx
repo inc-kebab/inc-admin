@@ -1,6 +1,10 @@
 import { useEffect, useRef, useState } from 'react'
 
 import { useGetAllPostsQuery } from '@/shared/api/queries/get-all-posts/get-all-posts.generated'
+import { useBanUnbanUser } from '@/entities/user'
+import { ConfirmBanDialog } from '@/feature/ban-user'
+import { Post } from '@/feature/posts-list'
+import { ConfirmUnbanDialog } from '@/feature/unban-user'
 import WithAuth from '@/shared/helpers/hoc/WithAuth'
 import { useDebounce } from '@/shared/hooks'
 import { Page } from '@/shared/types/layout'
@@ -8,7 +12,7 @@ import { MainLayout } from '@/widgets/layout'
 import { TextField } from '@tazalov/kebab-ui/components'
 import Image from 'next/image'
 
-import s from './post-list.module.scss'
+import s from './PostsList.module.scss'
 
 const PostsListPage: Page = () => {
   const [searchTerm, setSearchTerm] = useState('')
@@ -24,6 +28,21 @@ const PostsListPage: Page = () => {
       sortBy: 'DESC',
     },
   })
+
+  const {
+    customReason,
+    handleBanUser,
+    handleChangeOpen,
+    handleChangeUserStatus,
+    handleUnbanUser,
+    loadingChangeStatus,
+    openBanDialog,
+    openUnbanDialog,
+    reason,
+    setCustomReason,
+    setReason,
+    userToModify,
+  } = useBanUnbanUser()
 
   useEffect(() => {
     if (data && data.getAllPosts) {
@@ -65,9 +84,38 @@ const PostsListPage: Page = () => {
     return () => observer.disconnect()
   }, [ref, loading, pageSize, debounceValue, fetchMore])
 
-  if (loading && posts.length === 0) {
-    return 'Loading...'
-  }
+
+  // return (
+  //   <>
+  //     <div className={s.container}>
+  //       {loading ? (
+  //         <div>LOADING...</div>
+  //       ) : (
+  //         data?.getAllPosts.items.map(post => (
+  //           <Post key={post.id} onChangeUserStatus={handleChangeUserStatus} post={post} />
+  //         ))
+  //       )}
+  //     </div>
+  //     <ConfirmUnbanDialog
+  //       disabled={loadingChangeStatus}
+  //       name={userToModify?.name || 'Not specified'}
+  //       onOpenChange={handleChangeOpen}
+  //       onUnban={handleUnbanUser}
+  //       open={openUnbanDialog}
+  //     />
+  //     <ConfirmBanDialog
+  //       customReason={customReason}
+  //       disabled={loadingChangeStatus}
+  //       name={userToModify?.name || 'Not specified'}
+  //       onBan={handleBanUser}
+  //       onOpenChange={handleChangeOpen}
+  //       open={openBanDialog}
+  //       reason={reason}
+  //       setCustomReason={setCustomReason}
+  //       setReason={setReason}
+  //     />
+  //   </>
+  // )
 
   return (
     <div>
@@ -78,20 +126,47 @@ const PostsListPage: Page = () => {
         type="search"
         value={searchTerm}
       />
-      <div className={s.posts}>
-        {posts.map((post: any, index) => (
-          <div className={s.post} key={`${post.id}-${index}`}>
-            {post?.images[0]?.url && (
-              <Image alt="post image" height={282} src={post?.images[0].url} width={234} />
-            )}
-            <div>
-              {/* <Image alt="user avatar" height={40} src={post?.avatarOwner} width={40} /> */}
-              <div>{post.username}</div>
-              <div className={s.postDesc}>{post.description}</div>
-            </div>
-          </div>
-        ))}
+      {/*<div className={s.posts}>*/}
+      {/*  {posts.map((post: any, index) => (*/}
+      {/*    <div className={s.post} key={`${post.id}-${index}`}>*/}
+      {/*      {post?.images[0]?.url && (*/}
+      {/*        <Image alt="post image" height={282} src={post?.images[0].url} width={234} />*/}
+      {/*      )}*/}
+      {/*      <div>*/}
+      {/*        /!* <Image alt="user avatar" height={40} src={post?.avatarOwner} width={40} /> *!/*/}
+      {/*        <div>{post.username}</div>*/}
+      {/*        <div className={s.postDesc}>{post.description}</div>*/}
+      {/*      </div>*/}
+      {/*    </div>*/}
+      {/*  ))}*/}
+      {/*</div>*/}
+      <div className={s.container}>
+        {loading ? (
+          <div>LOADING...</div>
+        ) : (
+          data?.getAllPosts.items.map(post => (
+            <Post key={post.id} onChangeUserStatus={handleChangeUserStatus} post={post} />
+          ))
+        )}
       </div>
+      <ConfirmUnbanDialog
+        disabled={loadingChangeStatus}
+        name={userToModify?.name || 'Not specified'}
+        onOpenChange={handleChangeOpen}
+        onUnban={handleUnbanUser}
+        open={openUnbanDialog}
+      />
+      <ConfirmBanDialog
+        customReason={customReason}
+        disabled={loadingChangeStatus}
+        name={userToModify?.name || 'Not specified'}
+        onBan={handleBanUser}
+        onOpenChange={handleChangeOpen}
+        open={openBanDialog}
+        reason={reason}
+        setCustomReason={setCustomReason}
+        setReason={setReason}
+      />
       <div ref={ref} style={{ height: 20, width: '100%' }}></div>
     </div>
   )

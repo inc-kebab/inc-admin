@@ -10,6 +10,8 @@ import 'react-toastify/dist/ReactToastify.css'
 import '@tazalov/kebab-ui/dist/style.css'
 import '@/app/styles/nprogress.scss'
 import '@/app/styles/index.scss'
+import 'slick-carousel/slick/slick.css'
+import 'slick-carousel/slick/slick-theme.css'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -34,4 +36,6 @@ export default App
  import '@tazalov/kebab-ui/dist/style.css'
  import '@/app/styles/nprogress.scss'
  import '@/app/styles/index.scss'
- */
+ import 'slick-carousel/slick/slick.css'
+ import 'slick-carousel/slick/slick-theme.css'
+*/

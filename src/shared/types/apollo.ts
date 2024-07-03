@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 export type Maybe<T> = T | null
 export type InputMaybe<T> = Maybe<T>
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] }
@@ -46,8 +47,6 @@ export enum BanStatus {
 
 export type ImageModel = {
   __typename?: 'ImageModel'
-  /** file created at date */
-  createdAt?: Maybe<Scalars['String']['output']>
   /** file type */
   type?: Maybe<Scalars['String']['output']>
   /** file id */
@@ -259,6 +258,7 @@ export type UserPaginationModel = {
   /** users */
   users?: Maybe<Array<UserModel>>
 }
+
 export type UserPaymentsPaginationModel = {
   __typename?: 'UserPaymentsPaginationModel'
   /** user payments */
@@ -268,6 +268,7 @@ export type UserPaymentsPaginationModel = {
   pagesCount: Scalars['Int']['output']
   totalCount: Scalars['Int']['output']
 }
+
 export type UsersPaymentsModel = {
   __typename?: 'UsersPaymentsModel'
   /** user avatar */
@@ -289,6 +290,7 @@ export type UsersPaymentsModel = {
   /** username */
   username: Scalars['String']['output']
 }
+
 export type UsersPaymentsPaginationModel = {
   __typename?: 'UsersPaymentsPaginationModel'
   /** users payments */
