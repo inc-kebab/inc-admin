@@ -5,13 +5,19 @@ import * as Types from '../../../types/apollo'
 const defaultOptions = {} as const
 
 export type GetAllPostsQueryVariables = Types.Exact<{
+  cursor?: Types.InputMaybe<Types.Scalars['String']['input']>
   pageSize?: Types.InputMaybe<Types.Scalars['Int']['input']>
+  searchTerm?: Types.InputMaybe<Types.Scalars['String']['input']>
+  sortBy?: Types.InputMaybe<Types.Scalars['String']['input']>
+  sortDirection?: Types.InputMaybe<Types.SortDirection>
 }>
 
 export type GetAllPostsQuery = {
   __typename?: 'Query'
   getAllPosts: {
     __typename?: 'PostsPaginationModel'
+    cursor: number
+    hasMore: boolean
     items: Array<{
       __typename?: 'PostModel'
       avatarOwner?: null | string
@@ -29,8 +35,20 @@ export type GetAllPostsQuery = {
 }
 
 export const GetAllPostsDocument = gql`
-  query GetAllPosts($pageSize: Int) {
-    getAllPosts(pageSize: $pageSize) {
+  query GetAllPosts(
+    $pageSize: Int = 10
+    $sortBy: String = "createdAt"
+    $sortDirection: SortDirection = DESC
+    $searchTerm: String
+    $cursor: String
+  ) {
+    getAllPosts(
+      pageSize: $pageSize
+      sortBy: $sortBy
+      searchTerm: $searchTerm
+      sortDirection: $sortDirection
+      cursor: $cursor
+    ) {
       items {
         id
         images {
@@ -45,6 +63,8 @@ export const GetAllPostsDocument = gql`
         username
       }
       pageSize
+      cursor
+      hasMore
     }
   }
 `
@@ -62,6 +82,10 @@ export const GetAllPostsDocument = gql`
  * const { data, loading, error } = useGetAllPostsQuery({
  *   variables: {
  *      pageSize: // value for 'pageSize'
+ *      sortBy: // value for 'sortBy'
+ *      sortDirection: // value for 'sortDirection'
+ *      searchTerm: // value for 'searchTerm'
+ *      cursor: // value for 'cursor'
  *   },
  * });
  */
