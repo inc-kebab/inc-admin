@@ -29,6 +29,8 @@ export const GET_ALL_POSTS = gql`
         username
       }
       pageSize
+      cursor
+      hasMore
     }
   }
 `
