@@ -22,7 +22,7 @@ const PostsListPage: Page = () => {
 
   const pageSize = 12
 
-  const { data, loading } = useGetAllPostsQuery({
+  const { data, fetchMore, loading } = useGetAllPostsQuery({
     variables: {
       cursor: currentCursor,
       pageSize: pageSize,
@@ -57,6 +57,19 @@ const PostsListPage: Page = () => {
       setPosts(prev => prev.concat(data.getAllPosts.items))
     }
   }, [data])
+
+  useEffect(() => {
+    setCurrentCursor('')
+    setPosts([])
+    fetchMore({
+      variables: {
+        cursor: '',
+        pageSize: pageSize,
+        searchTerm: debounceValue,
+        sortBy: 'DESC',
+      },
+    })
+  }, [debounceValue, fetchMore])
 
   return (
     <div>
