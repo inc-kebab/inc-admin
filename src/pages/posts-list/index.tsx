@@ -6,11 +6,14 @@ import { PostType } from '@/feature/posts-list'
 import { PostsList } from '@/feature/posts-list/ui/PostList/PostList'
 import { ConfirmUnbanDialog } from '@/feature/unban-user'
 import { useGetAllPostsQuery } from '@/shared/api/queries/get-all-posts/get-all-posts.generated'
+import { POST_ADDED } from '@/shared/api/queries/post-added/post-added'
+import { usePostAddedSubscription } from '@/shared/api/queries/post-added/post-added.generated'
 import WithAuth from '@/shared/helpers/hoc/WithAuth'
 import { useDebounce } from '@/shared/hooks'
 import { useInfinityScroll } from '@/shared/hooks/useInfinityScroll'
 import { Page } from '@/shared/types/layout'
 import { MainLayout } from '@/widgets/layout'
+import { useSubscription } from '@apollo/client'
 import { TextField } from '@tazalov/kebab-ui/components'
 
 const PostsListPage: Page = () => {
@@ -30,6 +33,17 @@ const PostsListPage: Page = () => {
       sortBy: 'DESC',
     },
   })
+
+  // const { data: newData } = usePostAddedSubscription()
+
+  const { data: subscription } = useSubscription(POST_ADDED, {
+    onData: ({ data }) => {
+      console.log(data)
+    },
+  })
+
+  // console.log('newData: ' + newData)
+  console.log('subscription: ' + subscription)
 
   const {
     customReason,

@@ -17,6 +17,7 @@
     "@hookform/resolvers": "^3.4.0",
     "@tazalov/kebab-ui": "^1.2.0",
     "graphql": "^16.8.1",
+    "graphql-ws": "^5.16.0",
     "next": "14.2.3",
     "nprogress": "^0.2.0",
     "react": "^18",
@@ -49,6 +50,6 @@
     "sass": "^1.77.1",
     "stylelint": "^16.5.0",
     "ts-node": "^10.9.2",
-    "typescript": "^5.4.0"
+    "typescript": "^5.4.5"
   }
 }
