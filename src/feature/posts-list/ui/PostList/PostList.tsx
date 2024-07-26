@@ -47,7 +47,7 @@ export const PostsList = forwardRef<HTMLDivElement, Props>(
           {Skeletons}
         </div>
         {!posts.length && !isFetching && (
-          <Typography className={s.notFound} asComponent="h1" textAlign="center" variant="h1">
+          <Typography asComponent="h1" className={s.notFound} textAlign="center" variant="h1">
             {t.page.postsList.notFoundPosts}
           </Typography>
         )}
