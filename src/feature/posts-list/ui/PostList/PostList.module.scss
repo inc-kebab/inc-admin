@@ -22,6 +22,10 @@
   display: none;
 }
 
+.notFound {
+  margin-top: 50px;
+}
+
 @include pc {
   .container {
     grid-template-columns: repeat(3, 1fr);

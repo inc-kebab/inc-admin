@@ -1,73 +1,48 @@
-import { gql } from '@apollo/client'
-import * as Apollo from '@apollo/client'
+import * as Types from '../../../types/apollo';
 
-import * as Types from '../../../types/apollo'
-const defaultOptions = {} as const
-
+import { gql } from '@apollo/client';
+import * as Apollo from '@apollo/client';
+const defaultOptions = {} as const;
 export type GetAllPostsQueryVariables = Types.Exact<{
-  cursor?: Types.InputMaybe<Types.Scalars['String']['input']>
-  pageSize?: Types.InputMaybe<Types.Scalars['Int']['input']>
-  searchTerm?: Types.InputMaybe<Types.Scalars['String']['input']>
-  sortBy?: Types.InputMaybe<Types.Scalars['String']['input']>
-  sortDirection?: Types.InputMaybe<Types.SortDirection>
-}>
+  pageSize?: Types.InputMaybe<Types.Scalars['Int']['input']>;
+  sortBy?: Types.InputMaybe<Types.Scalars['String']['input']>;
+  sortDirection?: Types.InputMaybe<Types.SortDirection>;
+  searchTerm?: Types.InputMaybe<Types.Scalars['String']['input']>;
+  cursor?: Types.InputMaybe<Types.Scalars['String']['input']>;
+}>;
 
-export type GetAllPostsQuery = {
-  __typename?: 'Query'
-  getAllPosts: {
-    __typename?: 'PostsPaginationModel'
-    cursor: number
-    hasMore: boolean
-    items: Array<{
-      __typename?: 'PostModel'
-      avatarOwner?: null | string
-      createdAt: any
-      description?: null | string
-      id: number
-      images?: Array<{ __typename?: 'ImageModel'; url: string }> | null
-      ownerId: number
-      status: Types.BanStatus
-      updatedAt: any
-      username: string
-    }>
-    pageSize: number
-  }
-}
+
+export type GetAllPostsQuery = { __typename?: 'Query', getAllPosts: { __typename?: 'PostsPaginationModel', pageSize: number, cursor: number, hasMore: boolean, items: Array<{ __typename?: 'PostModel', id: number, ownerId: number, description?: string | null, status: Types.BanStatus, createdAt: any, updatedAt: any, avatarOwner?: string | null, username: string, images?: Array<{ __typename?: 'ImageModel', url: string }> | null }> } };
+
 
 export const GetAllPostsDocument = gql`
-  query GetAllPosts(
-    $pageSize: Int = 10
-    $sortBy: String = "createdAt"
-    $sortDirection: SortDirection = DESC
-    $searchTerm: String
-    $cursor: String
+    query GetAllPosts($pageSize: Int = 10, $sortBy: String = "createdAt", $sortDirection: SortDirection = DESC, $searchTerm: String, $cursor: String) {
+  getAllPosts(
+    pageSize: $pageSize
+    sortBy: $sortBy
+    searchTerm: $searchTerm
+    sortDirection: $sortDirection
+    cursor: $cursor
   ) {
-    getAllPosts(
-      pageSize: $pageSize
-      sortBy: $sortBy
-      searchTerm: $searchTerm
-      sortDirection: $sortDirection
-      cursor: $cursor
-    ) {
-      items {
-        id
-        images {
-          url
-        }
-        ownerId
-        description
-        status
-        createdAt
-        updatedAt
-        avatarOwner
-        username
+    items {
+      id
+      images {
+        url
       }
-      pageSize
-      cursor
-      hasMore
+      ownerId
+      description
+      status
+      createdAt
+      updatedAt
+      avatarOwner
+      username
     }
+    pageSize
+    cursor
+    hasMore
   }
-`
+}
+    `;
 
 /**
  * __useGetAllPostsQuery__
@@ -89,34 +64,19 @@ export const GetAllPostsDocument = gql`
  *   },
  * });
  */
-export function useGetAllPostsQuery(
-  baseOptions?: Apollo.QueryHookOptions<GetAllPostsQuery, GetAllPostsQueryVariables>
-) {
-  const options = { ...defaultOptions, ...baseOptions }
-
-  return Apollo.useQuery<GetAllPostsQuery, GetAllPostsQueryVariables>(GetAllPostsDocument, options)
-}
-export function useGetAllPostsLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<GetAllPostsQuery, GetAllPostsQueryVariables>
-) {
-  const options = { ...defaultOptions, ...baseOptions }
-
-  return Apollo.useLazyQuery<GetAllPostsQuery, GetAllPostsQueryVariables>(
-    GetAllPostsDocument,
-    options
-  )
-}
-export function useGetAllPostsSuspenseQuery(
-  baseOptions?: Apollo.SuspenseQueryHookOptions<GetAllPostsQuery, GetAllPostsQueryVariables>
-) {
-  const options = { ...defaultOptions, ...baseOptions }
-
-  return Apollo.useSuspenseQuery<GetAllPostsQuery, GetAllPostsQueryVariables>(
-    GetAllPostsDocument,
-    options
-  )
-}
-export type GetAllPostsQueryHookResult = ReturnType<typeof useGetAllPostsQuery>
-export type GetAllPostsLazyQueryHookResult = ReturnType<typeof useGetAllPostsLazyQuery>
-export type GetAllPostsSuspenseQueryHookResult = ReturnType<typeof useGetAllPostsSuspenseQuery>
-export type GetAllPostsQueryResult = Apollo.QueryResult<GetAllPostsQuery, GetAllPostsQueryVariables>
+export function useGetAllPostsQuery(baseOptions?: Apollo.QueryHookOptions<GetAllPostsQuery, GetAllPostsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetAllPostsQuery, GetAllPostsQueryVariables>(GetAllPostsDocument, options);
+      }
+export function useGetAllPostsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetAllPostsQuery, GetAllPostsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetAllPostsQuery, GetAllPostsQueryVariables>(GetAllPostsDocument, options);
+        }
+export function useGetAllPostsSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetAllPostsQuery, GetAllPostsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<GetAllPostsQuery, GetAllPostsQueryVariables>(GetAllPostsDocument, options);
+        }
+export type GetAllPostsQueryHookResult = ReturnType<typeof useGetAllPostsQuery>;
+export type GetAllPostsLazyQueryHookResult = ReturnType<typeof useGetAllPostsLazyQuery>;
+export type GetAllPostsSuspenseQueryHookResult = ReturnType<typeof useGetAllPostsSuspenseQuery>;
+export type GetAllPostsQueryResult = Apollo.QueryResult<GetAllPostsQuery, GetAllPostsQueryVariables>;
