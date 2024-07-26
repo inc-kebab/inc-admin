@@ -42,6 +42,9 @@ export const en = {
     ru: 'Russian',
   },
   page: {
+    postsList: {
+      notFoundPosts: 'Not found posts',
+    },
     user: {
       payments: {
         amount: 'Amount, $',

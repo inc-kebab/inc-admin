@@ -1,6 +1,6 @@
 import { gql } from '@apollo/client'
 
-export const POST_ADDED = gql`
+export const POSTS_SUBSCRIPTION = gql`
   subscription postAdded {
     postAdded {
       id
@@ -11,10 +11,6 @@ export const POST_ADDED = gql`
       description
       createdAt
       updatedAt
-      owner {
-        id
-        firstname
-      }
       status
       avatarOwner
       username

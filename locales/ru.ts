@@ -44,6 +44,9 @@ export const ru: LocaleType = {
     ru: 'Русский',
   },
   page: {
+    postsList: {
+      notFoundPosts: 'Посты не найдены',
+    },
     user: {
       payments: {
         amount: 'Сумма, $',

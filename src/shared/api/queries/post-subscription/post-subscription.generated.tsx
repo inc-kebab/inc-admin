@@ -15,7 +15,6 @@ export type PostAddedSubscription = {
     description?: null | string
     id: number
     images?: Array<{ __typename?: 'ImageModel'; url: string }> | null
-    owner: { __typename?: 'OwnerModel'; firstname?: null | string; id: number }
     ownerId: number
     status: Types.BanStatus
     updatedAt: any
@@ -34,10 +33,6 @@ export const PostAddedDocument = gql`
       description
       createdAt
       updatedAt
-      owner {
-        id
-        firstname
-      }
       status
       avatarOwner
       username

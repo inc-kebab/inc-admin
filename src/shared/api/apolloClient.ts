@@ -1,15 +1,16 @@
 import { errorLink } from '@/shared/api/links/error'
 import { ApolloClient, InMemoryCache, split } from '@apollo/client'
-import { GraphQLWsLink } from '@apollo/client/link/subscriptions'
+import { WebSocketLink } from '@apollo/client/link/ws'
 import { getMainDefinition } from '@apollo/client/utilities'
-import { createClient } from 'graphql-ws'
+import { SubscriptionClient } from 'subscriptions-transport-ws'
 
 import { authLinkBasic } from './links/auth'
 import { httpLink } from './links/base'
 
-export const wsLink = new GraphQLWsLink(
-  createClient({
-    url: process.env.NEXT_PUBLIC_GQL!,
+export const wsLink = new WebSocketLink(
+  new SubscriptionClient(process.env.NEXT_PUBLIC_SUBSCRIPTIONS!, {
+    lazy: true,
+    reconnect: true,
   })
 )
 
