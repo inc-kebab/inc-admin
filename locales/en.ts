@@ -3,6 +3,8 @@ export const en = {
   button: {
     back: 'Back to Users List',
     no: 'No',
+    showLess: 'Show less',
+    showMore: 'Show more',
     signIn: 'Sign In',
     yes: 'Yes',
   },
@@ -40,6 +42,9 @@ export const en = {
     ru: 'Russian',
   },
   page: {
+    postsList: {
+      notFoundPosts: 'Not found posts',
+    },
     user: {
       payments: {
         amount: 'Amount, $',

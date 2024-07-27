@@ -1,0 +1,61 @@
+.slider {
+  position: relative;
+  width: 100%;
+  min-height: 100px;
+  max-height: 240px;
+}
+
+.image {
+  object-fit: cover;
+}
+
+.nextArrow {
+  position: absolute;
+  z-index: 100;
+  right: 14px;
+  color: var(--light-100);
+
+  &.hide {
+    display: none;
+  }
+
+  &:hover {
+    color: var(--primary-500);
+  }
+}
+
+.hide {
+  display: none;
+}
+
+.prevArrow {
+  position: absolute;
+  z-index: 100;
+  left: 14px;
+  color: var(--light-100);
+
+  &:hover {
+    color: var(--primary-500);
+  }
+}
+
+.appendDots {
+  padding: 0 10px 10px;
+}
+
+.customPaging {
+  display: flex;
+  justify-content: center;
+  padding: 5px 0;
+}
+
+.customDot {
+  width: 6px;
+  height: 6px;
+  background-color: var(--light-100);
+  border-radius: 50%;
+}
+
+.currentDot {
+  background-color: var(--primary-500);
+}

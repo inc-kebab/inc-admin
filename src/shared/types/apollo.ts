@@ -47,12 +47,10 @@ export enum BanStatus {
 
 export type ImageModel = {
   __typename?: 'ImageModel'
-  /** file createdAt */
-  createdAt: Scalars['String']['output']
-  /** file id */
-  id: Scalars['String']['output']
   /** file type */
-  type: Scalars['String']['output']
+  type?: Maybe<Scalars['String']['output']>
+  /** file id */
+  uploadId?: Maybe<Scalars['String']['output']>
   /** file url */
   url: Scalars['String']['output']
 }
@@ -131,6 +129,8 @@ export type PostModel = {
   owner: OwnerModel
   /** post ownerId */
   ownerId: Scalars['Int']['output']
+  /** user ban status */
+  status: BanStatus
   /** post createdAt */
   updatedAt: Scalars['DateTime']['output']
   /** username */

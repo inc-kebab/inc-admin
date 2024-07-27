@@ -1,6 +1,6 @@
 {
   "name": "inc-admin",
-  "version": "2.0.0",
+  "version": "2.3.0",
   "private": true,
   "scripts": {
     "codegen:w": "graphql-codegen --watch",
@@ -15,14 +15,17 @@
   "dependencies": {
     "@apollo/client": "^3.10.4",
     "@hookform/resolvers": "^3.4.0",
-    "@tazalov/kebab-ui": "^1.1.6",
+    "@tazalov/kebab-ui": "^1.2.0",
     "graphql": "^16.8.1",
     "next": "14.2.3",
     "nprogress": "^0.2.0",
     "react": "^18",
     "react-dom": "^18",
     "react-hook-form": "^7.51.4",
+    "react-slick": "^0.30.2",
     "react-toastify": "^10.0.5",
+    "slick-carousel": "^1.8.1",
+    "subscriptions-transport-ws": "^0.11.0",
     "zod": "^3.23.8"
   },
   "devDependencies": {
@@ -40,6 +43,7 @@
     "@types/nprogress": "^0.2.3",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@types/react-slick": "^0.23.13",
     "eslint": "^8",
     "eslint-config-next": "14.2.3",
     "husky": "^9.0.11",

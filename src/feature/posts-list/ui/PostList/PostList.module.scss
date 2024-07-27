@@ -1,0 +1,50 @@
+@import '@/app/styles/mixins';
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  padding-top: 36px;
+}
+
+.skeleton {
+  display: block;
+  width: 234px;
+  height: 319px;
+  margin: 0 auto;
+}
+
+.hide {
+  visibility: hidden;
+}
+
+.delete {
+  display: none;
+}
+
+.notFound {
+  margin-top: 50px;
+}
+
+@include pc {
+  .container {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+  }
+
+  .skeleton:not(:nth-last-of-type(1)) {
+    height: auto;
+  }
+}
+
+@include tablet {
+  .container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@include mobile-small {
+  .container {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}

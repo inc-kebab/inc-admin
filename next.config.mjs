@@ -1,13 +1,14 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
   i18n: {
-    locales: ["en", "ru"],
     defaultLocale: "en",
+    locales: ["en", "ru"],
   },
   images: {
     domains: ["storage.yandexcloud.net"],
   },
+  reactStrictMode: true,
 };
 
 export default nextConfig;
+ 
